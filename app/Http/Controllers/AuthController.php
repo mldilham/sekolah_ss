@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,6 +43,8 @@ class AuthController extends Controller
                 return redirect()->intended(route('admin.dashboard'));
             } elseif ($user->role === 'operator') {
                 return redirect()->intended(route('operator.dashboard'));
+            }else{
+                return redirect()->intended(route('siswa.dashboard'));
             }
         }
 
@@ -49,6 +52,27 @@ class AuthController extends Controller
         return back()->with('error', 'Login gagal, cek email atau password anda!');
     }
 
+    public function registerView()
+    {
+        return view('pages.auth.register');
+    }
+
+    public function register(Request $request)
+    {
+        $validation = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->role = 'siswa';
+        $user->saveOrFail();
+        return redirect('/')->with('success', 'Berhasil mendaftar akun.');
+    }
     // Logout
     public function logout(Request $request)
     {
