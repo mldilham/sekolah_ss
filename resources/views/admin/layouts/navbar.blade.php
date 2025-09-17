@@ -20,7 +20,7 @@
     </ul>
     <div class="d-flex">
         <a href="" class="btn btn-outline-danger rounded-pill">Sig In</a>
-        <a href="{{ route('auth.login') }}" class="btn btn-outline-secondary rounded-pill">Log In</a>
+        <a href="" class="btn btn-outline-secondary rounded-pill">Log In</a>
     </div>
     </div>
   </div>

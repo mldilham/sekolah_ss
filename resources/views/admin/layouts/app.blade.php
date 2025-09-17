@@ -9,21 +9,19 @@
 <style>
     body { font-family: 'Poppins', sans-serif; }
         .hero {
-        background: url('/images/hero.jpg') center/cover no-repeat;
+        /* background: url('/images/hero.jpg') center/cover no-repeat; */
         color: white;
         height: 70vh;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
-        }
+    }
 </style>
 </head>
-
-@include('layouts.navbar')
-
 <body>
 
+    @include('admin.layouts.sidebar')
 
 <main>
     @yield('content')
@@ -33,7 +31,7 @@
 
 {{-- Footer --}}
 
-@include('layouts.footer')
+@include('admin.layouts.footer')
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

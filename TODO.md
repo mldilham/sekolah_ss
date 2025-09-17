@@ -1,0 +1,2 @@
+- [x] Update resources/views/pages/auth/login.blade.php to display error messages from the session
+- [ ] Test the login process to verify if errors are now shown and login works
