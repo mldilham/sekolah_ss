@@ -19,6 +19,10 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/siswa', [AdminController::class, 'siswaView'])->name('admin.siswa');
     Route::get('/admin/siswa/create', [AdminController::class, 'create'])->name('admin.siswa.create');
+    Route::post('/admin/siswa/create', [AdminController::class, 'store'])->name('admin.siswa.store');
+    Route::get('/admin/siswa/edit/{id}', [AdminController::class, 'edit'])->name('admin.siswa.edit');
+    Route::post('/admin/siswa/edit/{id}', [AdminController::class, 'update'])->name('admin.siswa.update');
+    Route::delete('/admin/siswa/{id}', [AdminController::class, 'destroy'])->name('admin.siswa.destroy');
 });
 
 // Operator dashboard
