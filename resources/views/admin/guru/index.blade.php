@@ -6,8 +6,8 @@
     <div class="col-12">
         <div class="card shadow-sm">
             <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
-                <h5 class="mb-0">📋 Data Siswa</h5>
-                <a href="{{ route('admin.siswa.create') }}" class="btn btn-light btn-sm">
+                <h5 class="mb-0">📋 Data Guru</h5>
+                <a href="{{ route('admin.guru.create') }}" class="btn btn-light btn-sm">
                     <i class="fa-solid fa-plus-circle"></i> Tambah Data
                 </a>
             </div>
@@ -17,34 +17,36 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>No</th>
-                                <th>NISN</th>
-                                <th>Nama Siswa</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Tahun Masuk</th>
+                                <th>Nama Guru</th>
+                                <th>NIP</th>
+                                <th>Mapel</th>
+                                <th>Foto</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($siswa as $item)
+                            @foreach ($guru as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nisn }}</td>
-                                    <td>{{ $item->nama_siswa }}</td>
+                                    <td>{{ $item->nama_guru }}</td>
+                                    <td>{{ $item->nip }}</td>
+                                    <td>{{ $item->mapel }}</td>
                                     <td>
-                                        <span class="badge {{ $item->jenis_kelamin == 'Laki-laki' ? 'bg-primary' : 'bg-danger' }}">
-                                            {{ $item->jenis_kelamin }}
-                                        </span>
+                                        @if ($item->foto)
+                                            <img src="{{ asset('uploads/guru/'.$item->foto) }}" alt="Foto {{ $item->nama_guru }}" width="60px" class="img-thumbnail">
+                                        @else
+                                            <span class="text-muted">Tidak ada</span>
+                                        @endif
                                     </td>
-                                    <td>{{ $item->tahun_masuk }}</td>
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
-                                            <a href="{{ route('admin.siswa.edit', $item->id) }}"
+                                            <a href=""
                                                class="btn btn-sm btn-warning"
                                                data-bs-toggle="tooltip" title="Edit">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
 
-                                            <form action="{{ route('admin.siswa.destroy', $item->id) }}"
+                                            <form action=""
                                                   method="post"
                                                   onsubmit="return confirm('Yakin ingin menghapus?')">
                                                 @csrf

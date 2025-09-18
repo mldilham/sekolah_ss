@@ -1,28 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="#">KitaSchool</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
+<nav class="navbar d-flex justify-content-between align-items-center px-3" style="position: fixed; top: 0; left: 220px; right: 0; height: 56px; background-color: #fff; border-bottom: 1px solid #dee2e6; z-index: 1040;">
+
+    <button class="btn btn-outline-secondary d-flex align-items-center justify-content-center p-2" style="border-radius: 50%;">
+        <i class="fa-solid fa-magnifying-glass"></i>
     </button>
 
-    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item mx-3"><a class="nav-link" href="/profil">Profil</a></li>
-        <li class="nav-item mx-3"><a class="nav-link" href="/guru">Guru</a></li>
-        <li class="nav-item mx-3"><a class="nav-link" href="/siswa">Siswa</a></li>
-        <li class="nav-item mx-3"><a class="nav-link" href="/ekskul">Ekstrakurikuler</a></li>
-        <li class="nav-item mx-3"><a class="nav-link" href="/galeri">Galeri</a></li>
-        <li class="nav-item mx-3"><a class="nav-link" href="/berita">Berita</a></li>
-        <li class="nav-item mx-3"><a class="nav-link" href="/kontak">Kontak</a></li>
-        @auth
-          <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
-        @endauth
-    </ul>
-    <div class="d-flex">
-        <a href="" class="btn btn-outline-danger rounded-pill">Sig In</a>
-        <a href="" class="btn btn-outline-secondary rounded-pill">Log In</a>
+    <div class="dropdown">
+        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ auth()->user()->avatar ?? 'https://i.pravatar.cc/40' }}" alt="Profile" class="rounded-circle me-2" width="40" height="40">
+            <span class="fw-medium text-dark">{{ auth()->user()->name }}</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+            <li><a class="dropdown-item" href="">Profile</a></li>
+            <li>
+                <form action="{{ route('auth.logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="dropdown-item">Logout</button>
+                </form>
+            </li>
+        </ul>
     </div>
-    </div>
-  </div>
 </nav>
-

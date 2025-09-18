@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\AuthAdmin;
+use App\Models\Guru;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,12 +15,45 @@ class AdminController extends Controller
     {
         return view('admin.dashboard');
     }
+
     public function siswaView()
     {
         $siswa = Siswa::all();
         return view('admin.siswa.index', compact('siswa'));
     }
 
+    public function guruView()
+    {
+        $guru = Guru::all();
+        return view('admin.guru.index', compact('guru'));
+    }
+    public function createGuru()
+    {
+        return view('admin.guru.create');
+    }
+
+    public function storeGuru(Request $request)
+    {
+        $validations = $request->validate([
+            'nama_guru' => 'required|max:40',
+            'nip' => 'required|max:15',
+            'mapel' => 'required|max:40',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+        $fotoname = null;
+        if ($request->hasFile('foto')) {
+            $fotoname = time().'.'.$request->foto->extension();
+            $request->foto->move(public_path('uploads/guru'), $fotoname);
+        }
+        Guru::create([
+            'nama_guru' => $request->nama_guru,
+            'nip' => $request->nip,
+            'mapel' => $request->mapel,
+            'foto' => $fotoname,
+        ]);
+
+        return redirect()->route('admin.guru')->with('success', 'Berhasil Menambah data');
+    }
     public function create()
     {
 
