@@ -19,9 +19,18 @@ class DatabaseSeeder extends Seeder
         User::create([
             'id' => '1',
             'name' => 'Admin KitaSchool',
+            'username' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('123456'),
             'role' => 'admin',
+        ]);
+        User::create([
+            'id' => '2',
+            'name' => 'Operator KitaSchool',
+            'username' => 'Operator',
+            'email' => 'operator@gmail.com',
+            'password' => Hash::make('123456'),
+            'role' => 'operator',
         ]);
     }
 }

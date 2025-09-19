@@ -6,10 +6,10 @@
     <div class="col-12">
         <div class="card shadow-sm">
             <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
-                <h5 class="mb-0">📋 Data Guru</h5>
-                <a href="{{ route('admin.guru.create') }}" class="btn btn-light btn-sm">
+                <h5 class="mb-0">📋 Data User</h5>
+                {{-- <a href="{{ route('admin.user.create') }}" class="btn btn-light btn-sm">
                     <i class="fa-solid fa-plus-circle"></i> Tambah Data
-                </a>
+                </a> --}}
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -18,49 +18,49 @@
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
+                                <th>Username</th>
                                 <th>Email</th>
-                                <th>Password</th>
-                                <th class="text-center">Foto</th>
+                                <th>Role</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($guru as $item)
+                            @forelse ($users as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nama_guru }}</td>
-                                    <td>{{ $item->nip }}</td>
-                                    <td>{{ $item->mapel }}</td>
-                                    <td class="text-center">
-                                        @if ($item->foto)
-                                            <img src="{{ asset('uploads/guru/'.$item->foto) }}"
-                                                 alt="Foto {{ $item->nama_guru }}"
-                                                 width="60px" class="img-thumbnail">
-                                        @else
-                                            <span class="text-muted">Tidak ada</span>
-                                        @endif
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->username }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>
+                                        <span class="badge {{ $item->role == 'admin' ? 'bg-primary' : 'bg-success' }}">
+                                            {{ $item->role }}
+                                        </span>
                                     </td>
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
-                                            <a href="{{ route('admin.guru.edit', $item->id) }}"
+                                            <a href="{{ route('admin.user.edit', $item->id) }}"
                                                class="btn btn-sm btn-warning"
                                                data-bs-toggle="tooltip" title="Edit">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
 
-                                            <form action="{{ route('admin.guru.destroy', $item->id) }}"
+                                            <form action=""
                                                   method="post"
-                                                  onsubmit="return confirm('Yakin ingin menghapus?')">
+                                                  onsubmit="return confirm('Yakin ingin menghapus user ini?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Hapus">
-                                                    <i class="fa-solid fa-eraser"></i>
+                                                    <i class="fa-solid fa-trash"></i>
                                                 </button>
                                             </form>
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">Belum ada data user</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

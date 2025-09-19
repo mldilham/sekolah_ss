@@ -5,34 +5,29 @@
         <div class="card shadow-sm">
             <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
                 <h5 class="mb-0"> Tambah Data Guru</h5>
-                <a href="{{ route('admin.guru') }}" class="btn btn-light btn-sm">
+                <a href="{{ route('admin.user') }}" class="btn btn-light btn-sm">
                     <i class="fa-solid fa-arrow-left"></i> Kembali
                 </a>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.guru.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.siswa.store') }}" method="post">
                     @csrf
 
                     <div class="mb-3">
-                        <label for="nama_guru" class="form-label">Nama Guru</label>
-                        <input type="text" name="nama_guru" id="nama_guru" class="form-control" required>
+                        <label for="name" class="form-label">Nama Lengkap</label>
+                        <input type="text" name="name" id="name" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="nip" class="form-label">NIP</label>
-                        <input type="text" name="nip" id="nip" class="form-control" required>
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" name="email" id="email" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="mapel" class="form-label">Mata Pelajaran</label>
-                        <input type="text" name="mapel" id="mapel" class="form-control" required>
+                        <label for="password" class="form-label">Password</label>
+                        <input type="text" name="password" id="password" class="form-control" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="foto" class="form-label">Foto</label>
-                        <small class="text-muted">Kosongkan jika tidak ada foto</small>
-                        <input type="file" name="foto" id="foto" class="form-control" required>
-                    </div>
 
                     <div class="d-flex justify-content-end gap-2">
                         <button type="submit" class="btn btn-primary">

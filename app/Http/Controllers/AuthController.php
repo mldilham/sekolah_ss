@@ -29,7 +29,7 @@ class AuthController extends Controller
     {
         // Validasi input
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'username' => 'required',
             'password' => 'required|min:6',
         ]);
 
@@ -61,12 +61,14 @@ class AuthController extends Controller
     {
         $validation = $request->validate([
             'name' => 'required',
+            'username' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:6',
         ]);
 
         $user = new User();
         $user->name = $request->input('name');
+        $user->username = $request->input('username');
         $user->email = $request->input('email');
         $user->password = $request->input('password');
         $user->role = 'siswa';

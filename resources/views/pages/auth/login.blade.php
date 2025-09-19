@@ -25,9 +25,9 @@
                     <form action="{{ route('auth') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="inputEmail" class="form-label">Email Address</label>
-                            <input type="email" name="email" class="form-control" id="inputEmail"
-                                   placeholder="Enter your email" required>
+                            <label for="inputUsername" class="form-label">Username</label>
+                            <input type="username" name="username" class="form-control" id="inputUsername"
+                                   placeholder="Enter your username" required>
                         </div>
                         <div class="mb-3">
                             <label for="inputPassword" class="form-label">Password</label>

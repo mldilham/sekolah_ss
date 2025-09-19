@@ -18,16 +18,27 @@ Route::post('/register', [AuthController::class, 'register'])->name('auth.regist
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
+    Route::get('/admin/user', [AdminController::class, 'userView'])->name('admin.user');
+    Route::get('/admin/user/create', [AdminController::class, 'createView'])->name('admin.user.create');
+    Route::post('/admin/user/create', [AdminController::class, 'storeView'])->name('admin.user.store');
+    Route::get('/admin/user/edit/{id}', [AdminController::class, 'editView'])->name('admin.user.edit');
+    Route::put('/admin/user/edit/{id}', [AdminController::class, 'updateView'])->name('admin.user.update');
+    // Route::delete('/admin/user/{id}', [AdminController::class, 'destroyView'])->name('admin.siswa.destroy');
+
+
     Route::get('/admin/siswa', [AdminController::class, 'siswaView'])->name('admin.siswa');
-    Route::get('/admin/siswa/create', [AdminController::class, 'create'])->name('admin.siswa.create');
-    Route::post('/admin/siswa/create', [AdminController::class, 'store'])->name('admin.siswa.store');
-    Route::get('/admin/siswa/edit/{id}', [AdminController::class, 'edit'])->name('admin.siswa.edit');
-    Route::put('/admin/siswa/edit/{id}', [AdminController::class, 'update'])->name('admin.siswa.update');
-    Route::delete('/admin/siswa/{id}', [AdminController::class, 'destroy'])->name('admin.siswa.destroy');
+    Route::get('/admin/siswa/create', [AdminController::class, 'createSiswa'])->name('admin.siswa.create');
+    Route::post('/admin/siswa/create', [AdminController::class, 'storeSiswa'])->name('admin.siswa.store');
+    Route::get('/admin/siswa/edit/{id}', [AdminController::class, 'editSiswa'])->name('admin.siswa.edit');
+    Route::put('/admin/siswa/edit/{id}', [AdminController::class, 'updateSiswa'])->name('admin.siswa.update');
+    Route::delete('/admin/siswa/{id}', [AdminController::class, 'destroySiswa'])->name('admin.siswa.destroy');
 
     Route::get('/admin/guru', [AdminController::class, 'guruView'])->name('admin.guru');
     Route::get('/admin/guru/create', [AdminController::class, 'createGuru'])->name('admin.guru.create');
     Route::post('/admin/guru/create', [AdminController::class, 'storeGuru'])->name('admin.guru.store');
+    Route::get('/admin/guru/edit/{id}', [AdminController::class, 'editGuru'])->name('admin.guru.edit');
+    Route::put('/admin/guru/edit/{id}', [AdminController::class, 'updateGuru'])->name('admin.guru.update');
+    Route::delete('/admin/guru/{id}', [AdminController::class, 'destroyGuru'])->name('admin.guru.destroy');
 });
 
 // Operator dashboard

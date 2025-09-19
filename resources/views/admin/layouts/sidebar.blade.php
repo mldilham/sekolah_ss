@@ -2,6 +2,7 @@
     $menus = [
         'admin' => [
             (object) ['title' => 'Dashboard', 'path' => 'admin.dashboard', 'icon' => 'fa-solid fa-gauge'],
+            (object) ['title' => 'User', 'path' => 'admin.user', 'icon' => 'fa-solid fa-user'],
             (object) ['title' => 'Siswa', 'path' => 'admin.siswa', 'icon' => 'fa-solid fa-user-graduate'],
             (object) ['title' => 'Guru', 'path' => 'admin.guru', 'icon' => 'fa-solid fa-user-tie'],
         ],
