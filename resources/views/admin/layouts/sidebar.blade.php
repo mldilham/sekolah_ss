@@ -4,8 +4,9 @@
             (object) ['title' => 'Dashboard', 'path' => 'admin.dashboard', 'icon' => 'fa-solid fa-gauge'],
             (object) ['title' => 'User', 'path' => 'admin.user', 'icon' => 'fa-solid fa-user'],
             (object) ['title' => 'Siswa', 'path' => 'admin.siswa', 'icon' => 'fa-solid fa-user-graduate'],
-            (object) ['title' => 'Guru', 'path' => 'admin.guru', 'icon' => 'fa-solid fa-user-tie'],
+            (object) ['title' => 'Guru', 'path' => 'admin.guru', 'icon' => 'fa-solid fa-chalkboard-user'],
             (object) ['title' => 'Galeri', 'path' => 'admin.galeri', 'icon' => ' fa-regular fa-images'],
+            (object) ['title' => 'Berita', 'path' => 'admin.berita', 'icon' => ' fa-regular fa-newspaper'],
         ],
         'operator' => [
             (object) ['title' => 'Dashboard', 'path' => 'operator.dashboard', 'icon' => 'fa-solid fa-gauge'],

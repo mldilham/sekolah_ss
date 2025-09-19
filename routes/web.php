@@ -23,7 +23,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/user/create', [AdminController::class, 'storeView'])->name('admin.user.store');
     Route::get('/admin/user/edit/{id}', [AdminController::class, 'editView'])->name('admin.user.edit');
     Route::put('/admin/user/edit/{id}', [AdminController::class, 'updateView'])->name('admin.user.update');
-    Route::delete('/admin/user/{id}', [AdminController::class, 'destroyView'])->name('admin.siswa.destroy');
+    Route::delete('/admin/user/{id}', [AdminController::class, 'destroyView'])->name('admin.user.destroy');
 
 
     Route::get('/admin/siswa', [AdminController::class, 'siswaView'])->name('admin.siswa');
@@ -46,6 +46,13 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/galeri/edit/{id}', [AdminController::class, 'editGaleri'])->name('admin.galeri.edit');
     Route::put('/admin/galeri/edit/{id}', [AdminController::class, 'updateGaleri'])->name('admin.galeri.update');
     Route::delete('/admin/galeri/{id}', [AdminController::class, 'destroyGaleri'])->name('admin.galeri.destroy');
+
+    Route::get('/admin/berita', [AdminController::class, 'beritaView'])->name('admin.berita');
+    Route::get('/admin/berita/create', [AdminController::class, 'createBerita'])->name('admin.berita.create');
+    Route::post('/admin/berita/create', [AdminController::class, 'storeBerita'])->name('admin.berita.store');
+    Route::get('/admin/berita/edit/{id}', [AdminController::class, 'editBerita'])->name('admin.berita.edit');
+    Route::put('/admin/berita/edit/{id}', [AdminController::class, 'updateBerita'])->name('admin.berita.update');
+    Route::delete('/admin/berita/{id}', [AdminController::class, 'destroyBerita'])->name('admin.berita.destroy');
 });
 
 // Operator dashboard

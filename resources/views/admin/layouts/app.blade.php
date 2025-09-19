@@ -84,7 +84,6 @@
 </style>
 </head>
 <body>
-    @include('admin.layouts.navbar')
     <div class="d-flex">
 
         @include('admin.layouts.sidebar')

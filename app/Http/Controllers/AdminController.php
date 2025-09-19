@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\AuthAdmin;
+use App\Models\Berita;
 use App\Models\Galeri;
 use App\Models\Guru;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -39,6 +41,12 @@ class AdminController extends Controller
     {
         $galeri = Galeri::all();
         return view('admin.galeri.index', compact('galeri'));
+    }
+
+    public function beritaView()
+    {
+        $berita = Berita::all();
+        return view('admin.berita.index', compact('berita'));
     }
 
 
@@ -92,9 +100,9 @@ class AdminController extends Controller
 
     }
 
-    public function updateGuru(Request $request, string $id)
+ public function updateGuru(Request $request, string $id)
     {
-        $validations = $request->validate([
+        $request->validate([
             'nama_guru' => 'required|max:40',
             'nip'       => 'required|max:15',
             'mapel'     => 'required|max:40',
@@ -102,7 +110,7 @@ class AdminController extends Controller
         ]);
 
         $guru = Guru::findOrFail($id);
-        $fotoname = $guru->foto; // default: foto lama
+        $fotoname = $guru->foto; // default pakai foto lama
 
         if ($request->hasFile('foto')) {
             // hapus foto lama kalo ada
@@ -125,6 +133,7 @@ class AdminController extends Controller
 
         return redirect()->route('admin.guru')->with('success','Data berhasil diperbarui.');
     }
+
 
 
 
@@ -253,18 +262,139 @@ class AdminController extends Controller
         return view('admin.galeri.create');
     }
 
-    public function storeGaleri()
+    public function storeGaleri(Request $request)
     {
+        $validations = $request->validate([
+            'judul' => 'required|max:50',
+            'keterangan' => 'nullable|string',
+            'file' => 'nullable|file|mimes:jpg,jpeg,png,mp4|max:20480',
+            'kategori' => 'required|in:foto,video',
+            'tanggal' => 'required|date',
+        ]);
 
+        $filename = time().'.'.$request->file->getClientOriginalName();
+        $request->file->move(public_path('uploads/file/'),$filename);
+
+        Galeri::create([
+            'judul' => $request->judul,
+            'keterangan' => $request->keterangan,
+            'file' => $filename,
+            'kategori' => $request->kategori,
+            'tanggal' => $request->tanggal,
+        ]);
+        return redirect()->route('admin.galeri')->with('success', 'Galeri berhasil ditambahkan!');
     }
 
-    public function editGaleri()
-    {
 
+    public function editGaleri(string $id)
+    {
+        $galeri = Galeri::findorfail($id);
+        return view('admin.galeri.edit',compact('galeri'));
     }
 
-    public function updateGaleri()
+    public function updateGaleri(Request $request, string $id)
     {
-        
+        $validations = $request->validate([
+            'judul' => 'required|max:50',
+            'keterangan' => 'nullable|string',
+            'file' => 'nullable|file|mimes:jpg,jpeg,png,mp4|max:20480',
+            'kategori' => 'required|in:foto,video',
+            'tanggal' => 'required|date',
+        ]);
+
+        $galeri = Galeri::findorfail($id);
+        $filename = $galeri->file;
+        // hapus file/video lama kalo ada
+        if ($request->hasFile('file')) {
+            if ($filename && file_exists(public_path('uploads/file/'.$filename))) {
+                unlink(public_path('uploads/file/'.$filename));
+            }
+
+            // simpan file/video baru baru
+            $filename = time().'.'.$request->file->extension();
+            $request->file->move(public_path('uploads/file'), $filename);
+        }
+
+        $galeri->update([
+            'judul' => $request->judul,
+            'keterangan' => $request->keterangan,
+            'file' => $filename,
+            'kategori' => $request->kategori,
+            'tanggal' => $request->tanggal,
+        ]);
+
+        return redirect()->route('admin.galeri')->with('success','Berhasil Mengupdate data.');
+    }
+
+    public function destroyGaleri(string $id)
+    {
+        $galeri = Galeri::findorfail($id);
+        $galeri->delete();
+
+        return redirect()->route('admin.galeri')->with('success','Berhasil menghapus data');
+    }
+
+
+    //BERITA
+    public function createBerita()
+    {
+        return view('admin.berita.create');
+    }
+
+    public function storeBerita(Request $request)
+    {
+        $validations = $request->validate([
+            'judul' => 'required|max:50',
+            'isi' => 'required|string',
+            'tanggal' => 'required|date',
+            'gambar' => 'nullable|file|mimes:jpg,jpeg,png,mp4|max:5120',
+        ]);
+
+        $filename = null;
+        if ($request->hasFile('gambar')) {
+            $filename = time() . '_' . $request->file('gambar')->getClientOriginalName();
+            $request->file('gambar')->move(public_path('uploads/berita/'), $filename);
+        }
+        Berita::create([
+            'judul' => $request->judul,
+            'isi' => $request->isi,
+            'tanggal' => $request->tanggal,
+            'gambar' => $filename,
+            'id_user' => Auth::user()->id_user,
+        ]);
+
+        return redirect()->route('admin.berita')->with('success', 'Berita berhasil ditambahkan!');
+    }
+
+    public function editBerita(string $id)
+    {
+        $berita = Berita::findorfail($id);
+        return view('admin.berita.edit', compact('berita'));
+    }
+
+    public function updateBerita(Request $request, string $id)
+    {
+        $validations = $request->validate([
+            'judul' => 'required|max:50',
+            'isi' => 'required|string',
+            'tanggal' => 'required|date',
+            'gambar' => 'nullable|file|mimes:jpg,jpeg,png,mp4|max:5120',
+        ]);
+
+        $berita = Berita::findorfail($id);
+        $fotoname = $berita->gambar;
+        if ($request->hasFile('gambar')) {
+            if ($fotoname->gambar && file_exists(public_path('uploads/berita/'.$fotoname))) {
+                unlink(public_path('uploads/berita/').$fotoname);
+            }
+
+            $fotoname = time().'.'.$request->gambar->extension();
+            $request->gambar->move(public_path('uploads/berita/'), $fotoname);
+        }
+    }
+
+    public function destroyBerita(string $id)
+    {
+
     }
 }
