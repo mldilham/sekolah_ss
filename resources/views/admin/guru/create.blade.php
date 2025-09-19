@@ -30,7 +30,6 @@
 
                     <div class="mb-3">
                         <label for="foto" class="form-label">Foto</label>
-                        <small class="text-muted">Kosongkan jika tidak ada foto</small>
                         <input type="file" name="foto" id="foto" class="form-control" required>
                     </div>
 

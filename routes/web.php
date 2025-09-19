@@ -23,7 +23,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/user/create', [AdminController::class, 'storeView'])->name('admin.user.store');
     Route::get('/admin/user/edit/{id}', [AdminController::class, 'editView'])->name('admin.user.edit');
     Route::put('/admin/user/edit/{id}', [AdminController::class, 'updateView'])->name('admin.user.update');
-    // Route::delete('/admin/user/{id}', [AdminController::class, 'destroyView'])->name('admin.siswa.destroy');
+    Route::delete('/admin/user/{id}', [AdminController::class, 'destroyView'])->name('admin.siswa.destroy');
 
 
     Route::get('/admin/siswa', [AdminController::class, 'siswaView'])->name('admin.siswa');
@@ -39,6 +39,13 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/guru/edit/{id}', [AdminController::class, 'editGuru'])->name('admin.guru.edit');
     Route::put('/admin/guru/edit/{id}', [AdminController::class, 'updateGuru'])->name('admin.guru.update');
     Route::delete('/admin/guru/{id}', [AdminController::class, 'destroyGuru'])->name('admin.guru.destroy');
+
+    Route::get('/admin/galeri', [AdminController::class, 'galeriView'])->name('admin.galeri');
+    Route::get('/admin/galeri/create', [AdminController::class, 'createGaleri'])->name('admin.galeri.create');
+    Route::post('/admin/galeri/create', [AdminController::class, 'storeGaleri'])->name('admin.galeri.store');
+    Route::get('/admin/galeri/edit/{id}', [AdminController::class, 'editGaleri'])->name('admin.galeri.edit');
+    Route::put('/admin/galeri/edit/{id}', [AdminController::class, 'updateGaleri'])->name('admin.galeri.update');
+    Route::delete('/admin/galeri/{id}', [AdminController::class, 'destroyGaleri'])->name('admin.galeri.destroy');
 });
 
 // Operator dashboard

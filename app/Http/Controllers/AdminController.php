@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\AuthAdmin;
+use App\Models\Galeri;
 use App\Models\Guru;
 use App\Models\Siswa;
 use App\Models\User;
@@ -34,7 +35,18 @@ class AdminController extends Controller
         return view('admin.guru.index', compact('guru'));
     }
 
+    public function galeriView()
+    {
+        $galeri = Galeri::all();
+        return view('admin.galeri.index', compact('galeri'));
+    }
 
+
+
+
+
+
+    //GURU
 
     public function createGuru()
     {
@@ -116,7 +128,7 @@ class AdminController extends Controller
 
 
 
-
+    //SISWA
     public function createSiswa()
     {
 
@@ -187,7 +199,7 @@ class AdminController extends Controller
 
 
 
-
+    //USER
     public function createView()
     {
         return view('admin.user.create');
@@ -226,8 +238,33 @@ class AdminController extends Controller
 
     }
 
-    public function destroyView()
+    public function destroyView(string $id)
+    {
+        $users = User::FindOrFail($id);
+        $users->delete();
+
+         return redirect()->route('admin.user')->with('success', 'Data berhasil dihapus.');
+    }
+
+
+    //GALERI
+    public function createGaleri()
+    {
+        return view('admin.galeri.create');
+    }
+
+    public function storeGaleri()
     {
 
+    }
+
+    public function editGaleri()
+    {
+
+    }
+
+    public function updateGaleri()
+    {
+        
     }
 }

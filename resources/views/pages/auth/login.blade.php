@@ -38,9 +38,9 @@
                     </form>
 
                     <hr>
-                    <div class="text-center">
+                    {{-- <div class="text-center">
                         <a href="{{ route('register.show') }}">Create an Account!</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
