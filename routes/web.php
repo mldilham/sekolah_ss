@@ -61,11 +61,11 @@ Route::middleware(['admin'])->group(function () {
     Route::put('/admin/ekskul/edit/{id}', [AdminController::class, 'updateEkskul'])->name('admin.ekskul.update');
     Route::delete('/admin/ekskul/{id}', [AdminController::class, 'destroyEkskul'])->name('admin.ekskul.destroy');
 
-    // Route::get('/admin/profile', [AdminController::class, 'profileView'])->name('admin.profile');
+    Route::get('/admin/profile', [AdminController::class, 'profileView'])->name('admin.profile');
     // // Route::get('/admin/profile/create', [AdminController::class, 'createProfile'])->name('admin.profile.create');
     // // Route::post('/admin/profile/create', [AdminController::class, 'storeProfile'])->name('admin.profile.store');
-    // Route::get('/admin/profile/edit/{id}', [AdminController::class, 'editProfile'])->name('admin.profile.edit');
-    // Route::put('/admin/profile/edit/{id}', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
+    Route::get('/admin/profile/edit/', [AdminController::class, 'editProfile'])->name('admin.profile.edit');
+    Route::put('/admin/profile/edit/', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
     // Route::delete('/admin/profile/{id}', [AdminController::class, 'destroyProfile'])->name('admin.profile.destroy');
 });
 

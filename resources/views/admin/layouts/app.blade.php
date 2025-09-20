@@ -94,8 +94,6 @@
         </main>
     </div>
 
-    @include('admin.layouts.footer')
-
 </body>
 </html>
 

@@ -1,118 +1,130 @@
 @extends('admin.layouts.app')
-
-@section('title', 'Dashboard')
-
 @section('content')
-<div class="container my-4">
-    <h2 class="mb-4">Dashboard</h2>
+@php
+    $stats = [
+        ['label'=>'Siswa','count'=>$siswaCount,'icon'=>'fa-users','color'=>'#4e73df'],
+        ['label'=>'Guru','count'=>$guruCount,'icon'=>'fa-user-tie','color'=>'#1cc88a'],
+        ['label'=>'Berita','count'=>$beritaCount,'icon'=>'fa-newspaper','color'=>'#f6c23e'],
+        ['label'=>'Galeri','count'=>$galeriCount,'icon'=>'fa-images','color'=>'#e74a3b'],
+        ['label'=>'Ekskul','count'=>$ekskulCount,'icon'=>'fa-futbol','color'=>'#36b9cc'],
+    ];
+@endphp
+<div class="container-md">
+    <h2 class="mb-5 text-primary fw-bold ">Dashboard</h2>
 
-    {{-- Statistik --}}
-    <div class="row g-4">
-        <div class="col-md-2">
-            <div class="card shadow-sm text-center">
-                <div class="card-body">
-                    <i class="fa-solid fa-users fa-2x text-primary mb-2"></i>
-                    <h6>Siswa</h6>
-                    <p class="h4">{{ $siswaCount }}</p>
+    {{-- Statistik tetap di atas --}}
+    <div class="row  justify-content-between mb-4">
+        @foreach($stats as $stat)
+        <div class="col-xl-2 col-lg-3 col-md-4 col-6 d-flex">
+            <div class="card shadow-sm border-0" style="width: 200px;">
+                <div class="card-body d-flex flex-column align-items-center gap-2 p-3">
+                    <div class="icon bg-light rounded-circle d-flex align-items-center justify-content-center"
+                         style="width:60px; height:60px; color: {{ $stat['color'] }};">
+                        <i class="fa-solid {{ $stat['icon'] }} fa-lg"></i>
+                    </div>
+                    <h6 class="text-secondary mb-1 text-center">{{ $stat['label'] }}</h6>
+                    <p class="h5 fw-bold mb-0 text-center">{{ $stat['count'] }}</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="card shadow-sm text-center">
-                <div class="card-body">
-                    <i class="fa-solid fa-user-tie fa-2x text-success mb-2"></i>
-                    <h6>Guru</h6>
-                    <p class="h4">{{ $guruCount }}</p>
-                </div>
+        @endforeach
+    </div>
+
+    {{-- Layout dua kolom: kiri (Berita+Galeri), kanan (Profil Sekolah) --}}
+    <div class="row g-3">
+    {{-- Berita dan Galeri --}}
+    <div class="col-lg-6 d-flex flex-column gap-3">
+        {{-- Berita Terbaru --}}
+        <div class="card shadow-sm border-0 flex-grow-1">
+            <div class="card-header bg-primary text-white fw-bold">Berita Terbaru</div>
+            <div class="card-body">
+                @forelse($latestNews as $news)
+                    <div class="mb-3 pb-2 border-bottom">
+                        <h6 class="text-primary fw-bold mb-1">{{ $news->judul }}</h6>
+                        <small class="text-muted">{{ $news->tanggal }}</small>
+                        <p class="mb-0 text-truncate">{{ Str::limit($news->isi, 100) }}</p>
+                    </div>
+                @empty
+                    <p class="text-muted">Belum ada berita.</p>
+                @endforelse
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="card shadow-sm text-center">
-                <div class="card-body">
-                    <i class="fa-solid fa-newspaper fa-2x text-warning mb-2"></i>
-                    <h6>Berita</h6>
-                    <p class="h4">{{ $beritaCount }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card shadow-sm text-center">
-                <div class="card-body">
-                    <i class="fa-solid fa-images fa-2x text-danger mb-2"></i>
-                    <h6>Galeri</h6>
-                    <p class="h4">{{ $galeriCount }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card shadow-sm text-center">
-                <div class="card-body">
-                    <i class="fa-solid fa-futbol fa-2x text-info mb-2"></i>
-                    <h6>Ekskul</h6>
-                    <p class="h4">{{ $ekskulCount }}</p>
+
+        {{-- Galeri Terbaru --}}
+        <div class="card shadow-sm border-0 flex-grow-1">
+            <div class="card-header bg-primary text-white fw-bold">Galeri Terbaru</div>
+            <div class="card-body">
+                <div class="row g-2">
+                    @forelse($latestGaleri as $galeri)
+                        <div class="col-4">
+                            <div class="rounded shadow-sm overflow-hidden" style="height:100px;">
+                                <img src="{{ asset('uploads/file/' . $galeri->file) }}"
+                                     alt="{{ $galeri->judul }}" class="img-fluid h-100 w-100 object-fit-cover">
+                            </div>
+                        </div>
+                    @empty
+                        <p class="text-muted">Belum ada galeri</p>
+                    @endforelse
                 </div>
             </div>
         </div>
     </div>
 
     {{-- Profil Sekolah --}}
-    {{-- @if($profile)
-    <div class="card shadow-sm mt-5">
-        <div class="card-header bg-primary text-white">Profil Sekolah</div>
-        <div class="card-body">
-            <div class="row align-items-center">
-                <div class="col-md-2 text-center">
-                    <img src="{{ asset('storage/' . $profile->logo) }}"
-                         alt="Logo Sekolah" class="img-fluid mb-2" style="max-height:80px;">
-                </div>
-                <div class="col-md-10">
-                    <h4>{{ $profile->nama_sekolah }}</h4>
-                    <p class="mb-0"><strong>Kepala Sekolah:</strong> {{ $profile->kepala_sekolah }}</p>
-                    <p class="mb-0"><strong>Alamat:</strong> {{ $profile->alamat }}</p>
-                    <p class="mb-0"><strong>Kontak:</strong> {{ $profile->kontak }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endif --}}
+    <div class="col-lg-6 d-flex">
+        <div class="card shadow-sm border-0 flex-fill">
+            <div class="card-header bg-primary text-white fw-bold">Profil Sekolah</div>
+            <div class="card-body d-flex align-items-center gap-3">
+                {{-- Logo --}}
+                <img src="{{ asset('storage/' . ($profile->logo ?? 'default-logo.png')) }}"
+                     alt="Logo Sekolah" class="img-fluid rounded"
+                     style="width:265px; height:265px; object-fit:cover;">
 
-    <div class="row mt-5">
-        {{-- Berita Terbaru --}}
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-header bg-success text-white">Berita Terbaru</div>
-                <div class="card-body">
-                    @forelse($latestNews as $news)
-                        <div class="mb-3 border-bottom pb-2">
-                            <h6 class="mb-1">{{ $news->judul }}</h6>
-                            <small class="text-muted">{{ $news->tanggal }}</small>
-                            <p class="mb-0">{{ Str::limit($news->isi, 80) }}</p>
-                        </div>
-                    @empty
-                        <p class="text-muted">Belum ada berita.</p>
-                    @endforelse
-                </div>
-            </div>
-        </div>
+                {{-- Info --}}
+                <div class="flex-grow-1">
+                    <h3 class="text-center fw-bold text-primary mb-4">
+                                {{ $profile->nama_sekolah ?? 'Belum ada nama sekolah' }}
+                            </h3>
 
-        {{-- Galeri Terbaru --}}
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-header bg-warning text-dark">Galeri Terbaru</div>
-                <div class="card-body">
-                    <div class="row g-2">
-                        @forelse($latestGaleri as $galeri)
-                            <div class="col-4">
-                                <img src="{{ asset('storage/' . $galeri->file) }}"
-                                     alt="{{ $galeri->judul }}" class="img-fluid rounded shadow-sm">
-                            </div>
-                        @empty
-                            <p class="text-muted">Belum ada galeri.</p>
-                        @endforelse
-                    </div>
+                            <p>
+                                <i class="fa-solid fa-id-card me-2 text-secondary"></i>
+                                <strong>NPSN:</strong> {{ $profile->npsn ?? '-' }}
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-location-dot me-2 text-secondary"></i>
+                                <strong>Alamat:</strong> {{ $profile->alamat ?? '-' }}
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-phone me-2 text-secondary"></i>
+                                <strong>Kontak:</strong> {{ $profile->kontak ?? '-' }}
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-calendar me-2 text-secondary"></i>
+                                <strong>Tahun Berdiri:</strong> {{ $profile->tahun_berdiri ?? '-' }}
+                            </p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+</div>
+
+<style>
+    .card-body .icon i {
+        font-size: 1.6rem;
+    }
+
+    .card-header {
+        border-radius: 0.35rem 0.35rem 0 0;
+    }
+
+    .text-truncate {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>
+
 @endsection

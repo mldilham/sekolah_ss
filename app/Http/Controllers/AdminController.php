@@ -25,7 +25,7 @@ class AdminController extends Controller
             'beritaCount'  => Berita::count(),
             'galeriCount'  => Galeri::count(),
             'ekskulCount'  => Ekstrakulikuler::count(),
-            // 'profile'      => ProfilSekolah::first(),
+            'profile'      => Profile::first(),
             'latestNews'   => Berita::latest()->take(5)->get(),
             'latestGaleri' => Galeri::latest()->take(6)->get(),
         ]);
@@ -67,11 +67,11 @@ class AdminController extends Controller
         return view('admin.ekskul.index', compact('ekskul'));
     }
 
-    // public function profileView()
-    // {
-    //     $profile = Profile::all();
-    //     return view('admin.profile.index', compact('profile'));
-    // }
+    public function profileView()
+    {
+        $profile = Profile::first();
+        return view('admin.profile.index', compact('profile'));
+    }
 
 
 
@@ -532,6 +532,14 @@ class AdminController extends Controller
         $ekskul = Ekstrakulikuler::findorfail($id);
         $ekskul->delete();
         return redirect()->route('admin.ekskul')->with('success', 'Data ekskul berhasil dihapus!');
+    }
+
+
+    //PROFILE SEKOLAH
+    public function editProfile()
+    {
+        $profile = Profile::first();
+        return view('admin.profile.edit', compact('profile'));
     }
 
 }

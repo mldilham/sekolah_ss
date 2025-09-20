@@ -31,5 +31,20 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123456'),
             'role' => 'operator',
         ]);
+        Profile::create([
+            'nama_sekolah'   => 'SMA Negeri 1 Contoh',
+            'kepala_sekolah' => 'Drs. Budi Santoso',
+            'foto'           => 'logo.png', // bisa diganti dengan file default
+            'logo'           => 'foto_sekolah1.jpg', // bisa diganti dengan file default
+            'npsn'           => '12345678',
+            'alamat'         => 'Jl. Pendidikan No. 45, Jakarta',
+            'kontak'         => '081234567890',
+            'visi_misi'      => 'Visi: Menjadi sekolah unggul.
+ Misi: Meningkatkan kualitas pembelajaran, membentuk karakter siswa, dan mengembangkan potensi.',
+            'tahun_berdiri'  => 1990,
+            'deskripsi'      => 'Sekolah ini berfokus pada pengembangan akademik dan non-akademik siswa agar siap menghadapi tantangan global.',
+            'created_at'     => now(),
+            'updated_at'     => now(),
+        ]);
     }
 }

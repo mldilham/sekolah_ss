@@ -121,9 +121,9 @@
                 </div>
 
                 <!-- Footer -->
-                {{-- <div class="card-footer text-center bg-light">
-                    <small class="text-muted">Total Galeri: {{ count($berita) }}</small>
-                </div> --}}
+                <div class="card-footer text-center bg-light">
+                    <small class="text-muted">Total Esktrakulikuler: {{ count($ekskul) }}</small>
+                </div>
             </div>
         </div>
     </div>
