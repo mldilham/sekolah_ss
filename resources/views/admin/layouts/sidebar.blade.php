@@ -7,6 +7,7 @@
             (object) ['title' => 'Guru', 'path' => 'admin.guru', 'icon' => 'fa-solid fa-chalkboard-user'],
             (object) ['title' => 'Galeri', 'path' => 'admin.galeri', 'icon' => ' fa-regular fa-images'],
             (object) ['title' => 'Berita', 'path' => 'admin.berita', 'icon' => ' fa-regular fa-newspaper'],
+            (object) ['title' => 'Ekstrakulikuler', 'path' => 'admin.ekskul', 'icon' => 'fa-solid fa-laptop-code'],
         ],
         'operator' => [
             (object) ['title' => 'Dashboard', 'path' => 'operator.dashboard', 'icon' => 'fa-solid fa-gauge'],

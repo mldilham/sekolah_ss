@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Middleware\AuthAdmin;
 use App\Models\Berita;
+use App\Models\Ekstrakulikuler;
 use App\Models\Galeri;
 use App\Models\Guru;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 
 class AdminController extends Controller
 {
@@ -47,6 +49,12 @@ class AdminController extends Controller
     {
         $berita = Berita::all();
         return view('admin.berita.index', compact('berita'));
+    }
+
+    public function ekskulView()
+    {
+        $ekskul = Ekstrakulikuler::all();
+        return view('admin.ekskul.index', compact('ekskul'));
     }
 
 
@@ -374,6 +382,7 @@ class AdminController extends Controller
 
     public function updateBerita(Request $request, string $id)
     {
+        // Validasi input
         $validations = $request->validate([
             'judul' => 'required|max:50',
             'isi' => 'required|string',
@@ -381,20 +390,133 @@ class AdminController extends Controller
             'gambar' => 'nullable|file|mimes:jpg,jpeg,png,mp4|max:5120',
         ]);
 
-        $berita = Berita::findorfail($id);
-        $fotoname = $berita->gambar;
+        // Ambil berita dari database
+        $berita = Berita::findOrFail($id);
+
+        // Simpan nama file lama
+        $oldFile = $berita->gambar;
+
+        // Jika ada file baru diupload
         if ($request->hasFile('gambar')) {
-            if ($fotoname->gambar && file_exists(public_path('uploads/berita/'.$fotoname))) {
-                unlink(public_path('uploads/berita/').$fotoname);
+            // Hapus file lama jika ada
+            if ($oldFile && file_exists(public_path('uploads/berita/' . $oldFile))) {
+                unlink(public_path('uploads/berita/' . $oldFile));
             }
 
-            $fotoname = time().'.'.$request->gambar->extension();
-            $request->gambar->move(public_path('uploads/berita/'), $fotoname);
+            // Simpan file baru
+            $newFileName = time() . '.' . $request->gambar->extension();
+            $request->gambar->move(public_path('uploads/berita/'), $newFileName);
+
+            $berita->gambar = $newFileName;
         }
+
+        // Update data lain
+        $berita->judul = $request->judul;
+        $berita->isi = $request->isi;
+        $berita->tanggal = $request->tanggal;
+
+        // Simpan perubahan ke database
+        $berita->save();
+
+        return redirect()->route('admin.berita')->with('success', 'Berita berhasil diperbarui!');
     }
 
     public function destroyBerita(string $id)
     {
-
+        $berita = Berita::findorfail($id);
+        $berita->delete();
+        return redirect()->route('admin.berita')->with('success', 'Berhasil menghapus data.');
     }
+
+
+
+
+
+    //EKSKUL
+
+    public function createEkskul()
+    {
+        return view('admin.ekskul.create');
+    }
+
+    public function storeEkskul(Request $request)
+    {
+        $validations = $request->validate([
+            'nama_ekskul' => 'required|max:40',
+            'pembina' => 'required|max:40',
+            'jadwal_latihan' => 'required|max:40',
+            'deskripsi' => 'required|string',
+            'gambar' => 'nullable|file|mimes:jpg,jpeg,png|max:5480',
+        ]);
+
+        $filename = null;
+        if ($request->hasFile('gambar')) {
+            $filename = time() . '_' . $request->file('gambar')->getClientOriginalName();
+            $request->file('gambar')->move(public_path('uploads/ekskul/'), $filename);
+        }
+
+        Ekstrakulikuler::create([
+            'nama_ekskul' => $request->nama_ekskul,
+            'pembina' => $request->pembina,
+            'jadwal_latihan' => $request->jadwal_latihan,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => $filename,
+        ]);
+
+        return redirect()->route('admin.ekskul')->with('success','Berhasil menambah data.');
+    }
+
+    public function editEkskul( string $id)
+    {
+        $ekskul = Ekstrakulikuler::findorfail($id);
+        return view('admin.ekskul.edit', compact('ekskul'));
+    }
+
+    public function updateEkskul(Request $request, string $id)
+    {
+        $request->validate([
+            'nama_ekskul' => 'required|max:40',
+            'pembina' => 'required|max:40',
+            'jadwal_latihan' => 'required|max:40',
+            'deskripsi' => 'required|string',
+            'gambar' => 'nullable|file|mimes:jpg,jpeg,png|max:5480',
+        ]);
+
+        $ekskul = Ekstrakulikuler::findOrFail($id);
+
+        $oldFile = $ekskul->gambar;
+
+        if ($request->hasFile('gambar')) {
+            // Hapus file lama jika ada
+            if ($oldFile && file_exists(public_path('uploads/ekskul/' . $oldFile))) {
+                unlink(public_path('uploads/ekskul/' . $oldFile));
+            }
+
+            // Simpan file baru
+            $newFileName = time() . '_' . $request->gambar->getClientOriginalName();
+            $request->gambar->move(public_path('uploads/ekskul/'), $newFileName);
+
+            $ekskul->gambar = $newFileName;
+        }
+
+        // Update data lain
+        $ekskul->nama_ekskul = $request->nama_ekskul;
+        $ekskul->pembina = $request->pembina;
+        $ekskul->jadwal_latihan = $request->jadwal_latihan;
+        $ekskul->deskripsi = $request->deskripsi;
+
+        $ekskul->save();
+
+        return redirect()->route('admin.ekskul')->with('success', 'Data ekskul berhasil diperbarui!');
+    }
+
+
+    public function destroyEkskul(string $id)
+    {
+        $ekskul = Ekstrakulikuler::findorfail($id);
+        $ekskul->delete();
+        return redirect()->route('admin.ekskul')->with('success', 'Data ekskul berhasil dihapus!');
+    }
+
 }
+

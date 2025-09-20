@@ -53,6 +53,13 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/berita/edit/{id}', [AdminController::class, 'editBerita'])->name('admin.berita.edit');
     Route::put('/admin/berita/edit/{id}', [AdminController::class, 'updateBerita'])->name('admin.berita.update');
     Route::delete('/admin/berita/{id}', [AdminController::class, 'destroyBerita'])->name('admin.berita.destroy');
+
+    Route::get('/admin/ekskul', [AdminController::class, 'ekskulView'])->name('admin.ekskul');
+    Route::get('/admin/ekskul/create', [AdminController::class, 'createEkskul'])->name('admin.ekskul.create');
+    Route::post('/admin/ekskul/create', [AdminController::class, 'storeEkskul'])->name('admin.ekskul.store');
+    Route::get('/admin/ekskul/edit/{id}', [AdminController::class, 'editEkskul'])->name('admin.ekskul.edit');
+    Route::put('/admin/ekskul/edit/{id}', [AdminController::class, 'updateEkskul'])->name('admin.ekskul.update');
+    Route::delete('/admin/ekskul/{id}', [AdminController::class, 'destroyEkskul'])->name('admin.ekskul.destroy');
 });
 
 // Operator dashboard
