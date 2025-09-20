@@ -16,7 +16,7 @@ Route::get('/register', [AuthController::class, 'registerView'])->name('register
 Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
 // Admin dashboard
 Route::middleware(['admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
     Route::get('/admin/user', [AdminController::class, 'userView'])->name('admin.user');
     Route::get('/admin/user/create', [AdminController::class, 'createView'])->name('admin.user.create');
@@ -60,6 +60,13 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/ekskul/edit/{id}', [AdminController::class, 'editEkskul'])->name('admin.ekskul.edit');
     Route::put('/admin/ekskul/edit/{id}', [AdminController::class, 'updateEkskul'])->name('admin.ekskul.update');
     Route::delete('/admin/ekskul/{id}', [AdminController::class, 'destroyEkskul'])->name('admin.ekskul.destroy');
+
+    // Route::get('/admin/profile', [AdminController::class, 'profileView'])->name('admin.profile');
+    // // Route::get('/admin/profile/create', [AdminController::class, 'createProfile'])->name('admin.profile.create');
+    // // Route::post('/admin/profile/create', [AdminController::class, 'storeProfile'])->name('admin.profile.store');
+    // Route::get('/admin/profile/edit/{id}', [AdminController::class, 'editProfile'])->name('admin.profile.edit');
+    // Route::put('/admin/profile/edit/{id}', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
+    // Route::delete('/admin/profile/{id}', [AdminController::class, 'destroyProfile'])->name('admin.profile.destroy');
 });
 
 // Operator dashboard

@@ -7,6 +7,7 @@ use App\Models\Berita;
 use App\Models\Ekstrakulikuler;
 use App\Models\Galeri;
 use App\Models\Guru;
+use App\Models\Profile;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,9 +17,18 @@ use Illuminate\Support\Facades\Redis;
 class AdminController extends Controller
 {
     //
-    public function index()
+    public function dashboard()
     {
-        return view('admin.dashboard');
+        return view('admin.dashboard', [
+            'siswaCount'   => Siswa::count(),
+            'guruCount'    => Guru::count(),
+            'beritaCount'  => Berita::count(),
+            'galeriCount'  => Galeri::count(),
+            'ekskulCount'  => Ekstrakulikuler::count(),
+            // 'profile'      => ProfilSekolah::first(),
+            'latestNews'   => Berita::latest()->take(5)->get(),
+            'latestGaleri' => Galeri::latest()->take(6)->get(),
+        ]);
     }
 
     public function userView()
@@ -56,6 +66,12 @@ class AdminController extends Controller
         $ekskul = Ekstrakulikuler::all();
         return view('admin.ekskul.index', compact('ekskul'));
     }
+
+    // public function profileView()
+    // {
+    //     $profile = Profile::all();
+    //     return view('admin.profile.index', compact('profile'));
+    // }
 
 
 

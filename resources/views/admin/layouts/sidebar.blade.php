@@ -8,6 +8,7 @@
             (object) ['title' => 'Galeri', 'path' => 'admin.galeri', 'icon' => ' fa-regular fa-images'],
             (object) ['title' => 'Berita', 'path' => 'admin.berita', 'icon' => ' fa-regular fa-newspaper'],
             (object) ['title' => 'Ekstrakulikuler', 'path' => 'admin.ekskul', 'icon' => 'fa-solid fa-laptop-code'],
+            // (object) ['title' => 'Profile Sekolah', 'path' => 'admin.profile', 'icon' => 'fa-solid fa-id-card'],
         ],
         'operator' => [
             (object) ['title' => 'Dashboard', 'path' => 'operator.dashboard', 'icon' => 'fa-solid fa-gauge'],
