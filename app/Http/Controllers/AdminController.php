@@ -291,11 +291,7 @@ class AdminController extends Controller
     // ---------------- BERITA ----------------
     public function beritaView()
     {
-        if(Auth::user()->role === 'admin') {
-            $berita = Berita::with('user')->get();
-        } else {
-            $berita = Berita::with('user')->where('id_user', Auth::id())->get();
-        }
+        $berita = Berita::with('user')->get();
         return view('admin.berita.index', compact('berita'));
     }
 

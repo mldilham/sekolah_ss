@@ -87,7 +87,7 @@
                                                 <span class="text-muted">Tidak ada</span>
                                             @endif
                                         </td>
-                                        <td>{{ Auth::user()->id_user }}</td>
+                                        <td>{{ $item->user->id_user }}</td>
                                         <td>
                                             <div class="d-flex justify-content-center gap-2">
                                                 <a href="{{ route('operator.berita.edit', $item->id_berita) }}"

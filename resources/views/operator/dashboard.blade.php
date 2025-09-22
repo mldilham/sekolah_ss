@@ -15,15 +15,15 @@
     {{-- Statistik tetap di atas --}}
     <div class="row  justify-content-between mb-4">
         @foreach($stats as $stat)
-        <div class="col-xl-2 col-lg-3 col-md-4 col-6 d-flex">
-            <div class="card shadow-sm border-0" style="width: 200px;">
-                <div class="card-body d-flex flex-column align-items-center gap-2 p-3">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-12 d-flex">
+            <div class="card shadow-sm border-0 flex-grow-1" style="width: 250px;">
+                <div class="card-body d-flex align-items-center gap-3 p-3">
                     <div class="icon bg-light rounded-circle d-flex align-items-center justify-content-center"
                          style="width:60px; height:60px; color: {{ $stat['color'] }};">
                         <i class="fa-solid {{ $stat['icon'] }} fa-lg"></i>
                     </div>
-                    <h6 class="text-secondary mb-1 text-center">{{ $stat['label'] }}</h6>
-                    <p class="h5 fw-bold mb-0 text-center">{{ $stat['count'] }}</p>
+                    <h6 class="text-secondary mb-0 text-center ">{{ $stat['label'] }}</h6>
+                    <p class="h5 fw-bold mb-0 text-center ">{{ $stat['count'] }}</p>
                 </div>
             </div>
         </div>
@@ -67,13 +67,13 @@
                 @endforelse
             </div>
         </div>
-
-
+    </div>
+    <div class="col-lg-6 d-flex flex-column gap-3">
         {{-- Galeri Terbaru --}}
         <div class="card shadow-sm border-0 flex-grow-1">
             <div class="card-header bg-primary text-white fw-bold">Galeri Terbaru</div>
             <div class="card-body">
-                <div class="row g-2">
+                <div class="row g-2 d-flex">
                     @forelse($latestGaleri as $galeri)
                         <div class="col-4">
                             <div class="rounded shadow-sm overflow-hidden" style="height:100px;">

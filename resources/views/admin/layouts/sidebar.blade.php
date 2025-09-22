@@ -54,7 +54,7 @@
         <li class="nav-item px-3 mb-2">
             <form action="{{ route('auth.logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="btn btn-danger w-100 py-1 rounded" onclick="return confirm('Yakin ingin logout?')">
+                <button type="submit" class="btn btn-outline-danger w-100 py-1 rounded" onclick="return confirm('Yakin ingin logout?')">
                     <i class="fa-solid fa-right-from-bracket me-1"></i> Logout
                 </button>
             </form>

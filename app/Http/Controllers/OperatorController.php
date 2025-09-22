@@ -26,7 +26,7 @@ class OperatorController extends Controller
     // BERITA
     public function beritaView()
     {
-        $berita = Berita::where('id_user', Auth::id())->get();
+        $berita = Berita::with('user')->get();
         return view('operator.berita.index', compact('berita'));
     }
 
