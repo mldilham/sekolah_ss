@@ -1,4 +1,4 @@
-@php
+{{-- @php
     $menus = [
         'admin' => [
             (object) ['title' => 'Dashboard', 'path' => 'admin.dashboard', 'icon' => 'fa-solid fa-gauge'],
@@ -16,21 +16,18 @@
             (object) ['title' => 'Galeri', 'path' => 'operator.galeri', 'icon' => 'fa-regular fa-images'],
             (object) ['title' => 'Berita', 'path' => 'operator.berita', 'icon' => 'fa-regular fa-newspaper'],
             (object) ['title' => 'Ekstrakulikuler', 'path' => 'operator.ekskul', 'icon' => 'fa-solid fa-laptop-code'],
-            // (object) ['title' => 'Profile Sekolah', 'path' => 'operator.profile', 'icon' => 'fa-solid fa-id-card'],
         ],
     ];
 
     $role = auth()->user()->role ?? 'guest';
     $menuList = $menus[$role] ?? [];
-    $dashboardRoute = $role === 'operator' ? 'operator.dashboard' : 'admin.dashboard';
-
 @endphp
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
 <ul class="navbar-nav sidebar sidebar-dark accordion">
 
-    <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="{{ route('admin.dashboard') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="{{ route('operator.dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fa-solid fa-school"></i>
         </div>
@@ -129,4 +126,4 @@
     background-color: #c82333;
     border-color: #bd2130;
 }
-</style>
+</style> --}}

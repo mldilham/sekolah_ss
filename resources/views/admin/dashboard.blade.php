@@ -39,16 +39,35 @@
             <div class="card-header bg-primary text-white fw-bold">Berita Terbaru</div>
             <div class="card-body">
                 @forelse($latestNews as $news)
-                    <div class="mb-3 pb-2 border-bottom">
-                        <h6 class="text-primary fw-bold mb-1">{{ $news->judul }}</h6>
-                        <small class="text-muted">{{ $news->tanggal }}</small>
-                        <p class="mb-0 text-truncate">{{ Str::limit($news->isi, 100) }}</p>
+                    <div class="d-flex mb-3 pb-3 border-bottom">
+                        <!-- Foto Berita -->
+                        @if ($news->gambar)
+                            <img src="{{ asset('uploads/berita/'.$news->gambar) }}"
+                                alt="{{ $news->judul }}"
+                                class="rounded shadow-sm me-3"
+                                style="width:80px; height:80px; object-fit:cover;">
+                        @else
+                            <div class="d-flex justify-content-center align-items-center bg-light rounded shadow-sm me-3"
+                                style="width:80px; height:80px;">
+                                <i class="fa-solid fa-image text-muted"></i>
+                            </div>
+                        @endif
+
+                        <!-- Isi Berita -->
+                        <div class="flex-grow-1">
+                            <h6 class="text-primary fw-bold mb-1">{{ $news->judul }}</h6>
+                            <small class="text-muted d-block mb-1">
+                                <i class="fa-regular fa-calendar me-1"></i> {{ $news->tanggal }}
+                            </small>
+                            <p class="mb-0 text-truncate">{{ Str::limit($news->isi, 100) }}</p>
+                        </div>
                     </div>
                 @empty
                     <p class="text-muted">Belum ada berita.</p>
                 @endforelse
             </div>
         </div>
+
 
         {{-- Galeri Terbaru --}}
         <div class="card shadow-sm border-0 flex-grow-1">
@@ -76,7 +95,7 @@
             <div class="card-header bg-primary text-white fw-bold">Profil Sekolah</div>
             <div class="card-body d-flex align-items-center gap-3">
                 {{-- Logo --}}
-                <img src="{{ asset('storage/' . ($profile->logo ?? 'default-logo.png')) }}"
+                <img src="{{ asset('uploads/profile/' . ($profile->logo ?? 'default-logo.png')) }}"
                      alt="Logo Sekolah" class="img-fluid rounded"
                      style="width:265px; height:265px; object-fit:cover;">
 

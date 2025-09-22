@@ -71,8 +71,40 @@ Route::middleware(['admin'])->group(function () {
 
 // Operator dashboard
 Route::middleware(['operator'])->group(function () {
-    Route::get('/operator/dashboard', [OperatorController::class, 'index'])->name('operator.dashboard');
-    Route::get('/operator/siswa', [OperatorController::class, 'index'])->name('operator.siswa');
+    Route::get('/operator/dashboard', [OperatorController::class, 'dashboard'])->name('operator.dashboard');
+
+    // Berita
+    Route::get('/operator/berita', [OperatorController::class, 'beritaView'])->name('operator.berita');
+    Route::get('/operator/berita/create', [OperatorController::class, 'createBerita'])->name('operator.berita.create');
+    Route::post('/operator/berita/create', [OperatorController::class, 'storeBerita'])->name('operator.berita.store');
+    Route::get('/operator/berita/edit/{id}', [OperatorController::class, 'editBerita'])->name('operator.berita.edit');
+    Route::put('/operator/berita/edit/{id}', [OperatorController::class, 'updateBerita'])->name('operator.berita.update');
+    Route::delete('/operator/berita/{id}', [OperatorController::class, 'destroyBerita'])->name('operator.berita.destroy');
+
+    // Galeri
+    Route::get('/operator/galeri', [OperatorController::class, 'galeriView'])->name('operator.galeri');
+    Route::get('/operator/galeri/create', [OperatorController::class, 'createGaleri'])->name('operator.galeri.create');
+    Route::post('/operator/galeri/create', [OperatorController::class, 'storeGaleri'])->name('operator.galeri.store');
+    Route::get('/operator/galeri/edit/{id}', [OperatorController::class, 'editGaleri'])->name('operator.galeri.edit');
+    Route::put('/operator/galeri/edit/{id}', [OperatorController::class, 'updateGaleri'])->name('operator.galeri.update');
+    Route::delete('/operator/galeri/{id}', [OperatorController::class, 'destroyGaleri'])->name('operator.galeri.destroy');
+
+    // Ekskul
+    Route::get('/operator/ekskul', [OperatorController::class, 'ekskulView'])->name('operator.ekskul');
+    Route::get('/operator/ekskul/create', [OperatorController::class, 'createEkskul'])->name('operator.ekskul.create');
+    Route::post('/operator/ekskul/create', [OperatorController::class, 'storeEkskul'])->name('operator.ekskul.store');
+    Route::get('/operator/ekskul/edit/{id}', [OperatorController::class, 'editEkskul'])->name('operator.ekskul.edit');
+    Route::put('/operator/ekskul/edit/{id}', [OperatorController::class, 'updateEkskul'])->name('operator.ekskul.update');
+    Route::delete('/operator/ekskul/{id}', [OperatorController::class, 'destroyEkskul'])->name('operator.ekskul.destroy');
+
+    // Siswa
+    Route::get('/operator/siswa', [OperatorController::class, 'siswaView'])->name('operator.siswa');
+    Route::get('/operator/siswa/create', [OperatorController::class, 'createSiswa'])->name('operator.siswa.create');
+    Route::post('/operator/siswa/create', [OperatorController::class, 'storeSiswa'])->name('operator.siswa.store');
+    Route::get('/operator/siswa/edit/{id}', [OperatorController::class, 'editSiswa'])->name('operator.siswa.edit');
+    Route::put('/operator/siswa/edit/{id}', [OperatorController::class, 'updateSiswa'])->name('operator.siswa.update');
+    Route::delete('/operator/siswa/{id}', [OperatorController::class, 'destroySiswa'])->name('operator.siswa.destroy');
 });
+
 
 Route::get('/siswa',[SiswaController::class,'index'])->name('siswa.dashboard');

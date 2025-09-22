@@ -9,15 +9,22 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthOperator
 {
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            if (Auth::user()->role == 'operator') {
-                return $next($request);
-            }
-            return redirect('/'); // user bukan operator
+        if (!Auth::check()) {
+            return redirect('/auth/login'); // user belum login
         }
 
-        return redirect('/auth/login'); // user belum login
+        if (Auth::user()->role === 'operator') {
+            return $next($request); // user operator, boleh lanjut
+        }
+
+        // user login tapi bukan operator
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.dashboard'); // arahkan sesuai role
+        }
+
+        Auth::logout();
+        return redirect('/auth/login')->with('error','Role tidak valid');
     }
 }

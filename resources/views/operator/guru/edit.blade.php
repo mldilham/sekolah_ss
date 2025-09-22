@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('operator.layouts.app')
 @section('content')
 
 <style>
@@ -36,56 +36,58 @@
                 <!-- Header -->
                 <div class="card-header card-header-custom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 fw-bold">
-                        <i class="fa-solid fa-newspaper me-2"></i> Edit Berita
+                        <i class="fa-solid fa-user-pen me-2"></i> Edit Data Guru
                     </h5>
-                    <a href="{{ route('admin.berita') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
+                    <a href="{{ route('operator.guru') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
                         <i class="fa-solid fa-arrow-left"></i> Kembali
                     </a>
                 </div>
 
                 <!-- Body -->
                 <div class="card-body">
-                    <form action="{{ route('admin.berita.update', $berita->id) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('operator.guru.update', $guru->id_guru) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
                         <div class="mb-3">
-                            <label for="judul" class="form-label">Judul</label>
-                            <input type="text" name="judul" id="judul"
-                                   value="{{ old('judul', $berita->judul) }}"
+                            <label for="nama_guru" class="form-label">Nama Guru</label>
+                            <input type="text" name="nama_guru" id="nama_guru"
+                                   value="{{ old('nama_guru',$guru->nama_guru) }}"
                                    class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="isi" class="form-label">Isi</label>
-                            <textarea name="isi" id="isi" rows="5" class="form-control" required>{{ old('isi', $berita->isi) }}</textarea>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="tanggal" class="form-label">Tanggal</label>
-                            <input type="date" name="tanggal" id="tanggal"
-                                   value="{{ old('tanggal', $berita->tanggal) }}"
+                            <label for="nip" class="form-label">NIP</label>
+                            <input type="text" name="nip" id="nip"
+                                   value="{{ old('nip',$guru->nip) }}"
                                    class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Gambar Sebelumnya</label><br>
-                            @if ($berita->gambar)
-                                <img src="{{ asset('uploads/berita/'.$berita->gambar) }}"
-                                     alt="Foto {{ $berita->judul }}"
+                            <label for="mapel" class="form-label">Mata Pelajaran</label>
+                            <input type="text" name="mapel" id="mapel"
+                                   value="{{ old('mapel',$guru->mapel) }}"
+                                   class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Foto Sebelumnya</label><br>
+                            @if ($guru->foto)
+                                <img src="{{ asset('uploads/guru/'.$guru->foto) }}"
+                                     alt="Foto {{ $guru->nama_guru }}"
                                      class="img-thumbnail mb-2" width="120">
                             @else
-                                <p class="text-muted">Belum ada gambar</p>
+                                <p class="text-muted">Belum ada foto</p>
                             @endif
                         </div>
 
                         <div class="mb-3">
-                            <label for="gambar" class="form-label">Ganti Gambar</label>
-                            <input type="file" name="gambar" id="gambar" class="form-control">
+                            <label for="foto" class="form-label">Ganti Foto</label>
+                            <input type="file" name="foto" id="foto" class="form-control">
                             <div class="d-flex justify-content-between mt-2">
-                                <small class="text-muted">Kosongkan jika tidak ingin mengganti gambar</small>
+                                <small class="text-muted">Kosongkan jika tidak ingin mengganti foto</small>
                                 <small class="text-muted">
-                                    Format diperbolehkan: <span class="text-danger">JPG, JPEG, PNG</span> (maks. 5MB)
+                                    Format diperbolehkan: <span class="text-danger">JPG, JPEG, PNG</span> (maks. 2MB)
                                 </small>
                             </div>
                         </div>
@@ -94,7 +96,7 @@
                             <button type="submit" class="btn btn-primary btn-action">
                                 <i class="fa-solid fa-save"></i> Simpan
                             </button>
-                            <a href="{{ route('admin.berita') }}" class="btn btn-danger btn-action">
+                            <a href="{{ route('operator.guru') }}" class="btn btn-danger btn-action">
                                 <i class="fa-solid fa-xmark"></i> Batal
                             </a>
                         </div>

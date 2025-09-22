@@ -52,29 +52,29 @@ class AuthController extends Controller
         return back()->with('error', 'Login gagal, cek email atau password anda!');
     }
 
-    public function registerView()
-    {
-        return view('pages.auth.register');
-    }
+    // public function registerView()
+    // {
+    //     return view('pages.auth.register');
+    // }
 
-    public function register(Request $request)
-    {
-        $validation = $request->validate([
-            'name' => 'required',
-            'username' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-        ]);
+    // public function register(Request $request)
+    // {
+    //     $validation = $request->validate([
+    //         'name' => 'required',
+    //         'username' => 'required',
+    //         'email' => 'required|email',
+    //         'password' => 'required|min:6',
+    //     ]);
 
-        $user = new User();
-        $user->name = $request->input('name');
-        $user->username = $request->input('username');
-        $user->email = $request->input('email');
-        $user->password = $request->input('password');
-        $user->role = 'siswa';
-        $user->saveOrFail();
-        return redirect('/')->with('success', 'Berhasil mendaftar akun.');
-    }
+    //     $user = new User();
+    //     $user->name = $request->input('name');
+    //     $user->username = $request->input('username');
+    //     $user->email = $request->input('email');
+    //     $user->password = $request->input('password');
+    //     $user->role = 'siswa';
+    //     $user->saveOrFail();
+    //     return redirect('/')->with('success', 'Berhasil mendaftar akun.');
+    // }
     // Logout
     public function logout(Request $request)
     {

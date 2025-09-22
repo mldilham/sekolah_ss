@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('operator.layouts.app')
 @section('content')
 
 <style>
@@ -36,43 +36,53 @@
                 <!-- Header -->
                 <div class="card-header card-header-custom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 fw-bold">
-                        <i class="fa-solid fa-newspaper me-2"></i> Edit Berita
+                        <i class="fa-solid fa-user-pen me-2"></i> Edit Data Guru
                     </h5>
-                    <a href="{{ route('admin.berita') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
+                    <a href="{{ route('operator.ekskul') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
                         <i class="fa-solid fa-arrow-left"></i> Kembali
                     </a>
                 </div>
 
                 <!-- Body -->
                 <div class="card-body">
-                    <form action="{{ route('admin.berita.update', $berita->id) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('operator.ekskul.update', $ekskul->id_ekskul) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
                         <div class="mb-3">
-                            <label for="judul" class="form-label">Judul</label>
-                            <input type="text" name="judul" id="judul"
-                                   value="{{ old('judul', $berita->judul) }}"
+                            <label for="nama_ekskul" class="form-label">Nama Ekskul</label>
+                            <input type="text" name="nama_ekskul" id="nama_ekskul"
+                                   value="{{ old('nama_ekskul',$ekskul->nama_ekskul) }}"
                                    class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="isi" class="form-label">Isi</label>
-                            <textarea name="isi" id="isi" rows="5" class="form-control" required>{{ old('isi', $berita->isi) }}</textarea>
+                            <label for="pembina" class="form-label">Pembina</label>
+                            <input type="text" name="pembina" id="pembina"
+                                   value="{{ old('pembina',$ekskul->pembina) }}"
+                                   class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="tanggal" class="form-label">Tanggal</label>
-                            <input type="date" name="tanggal" id="tanggal"
-                                   value="{{ old('tanggal', $berita->tanggal) }}"
+                            <label for="jadwal_latihan" class="form-label">Jadwal_latihan</label>
+                            <input type="text" name="jadwal_latihan" id="jadwal_latihan"
+                                   value="{{ old('jadwal_latihan',$ekskul->jadwal_latihan) }}"
                                    class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="deskripsi" class="form-label">Deskripsi</label>
+                            <textarea  name="deskripsi" id="deskripsi"
+                                   value="{{ old('deskripsi') }}"
+                                   class="form-control" required>
+                            </textarea>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Gambar Sebelumnya</label><br>
-                            @if ($berita->gambar)
-                                <img src="{{ asset('uploads/berita/'.$berita->gambar) }}"
-                                     alt="Foto {{ $berita->judul }}"
+                            @if ($ekskul->gambar)
+                                <img src="{{ asset('uploads/ekskul/'.$ekskul->gambar) }}"
+                                     alt="Foto {{ $ekskul->judul }}"
                                      class="img-thumbnail mb-2" width="120">
                             @else
                                 <p class="text-muted">Belum ada gambar</p>
@@ -85,7 +95,7 @@
                             <div class="d-flex justify-content-between mt-2">
                                 <small class="text-muted">Kosongkan jika tidak ingin mengganti gambar</small>
                                 <small class="text-muted">
-                                    Format diperbolehkan: <span class="text-danger">JPG, JPEG, PNG</span> (maks. 5MB)
+                                    Format diperbolehkan: <span class="text-danger">JPG, JPEG, PNG</span> (maks. 2MB)
                                 </small>
                             </div>
                         </div>
@@ -94,7 +104,7 @@
                             <button type="submit" class="btn btn-primary btn-action">
                                 <i class="fa-solid fa-save"></i> Simpan
                             </button>
-                            <a href="{{ route('admin.berita') }}" class="btn btn-danger btn-action">
+                            <a href="{{ route('operator.ekskul') }}" class="btn btn-danger btn-action">
                                 <i class="fa-solid fa-xmark"></i> Batal
                             </a>
                         </div>

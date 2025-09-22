@@ -1,8 +1,7 @@
-@extends('admin.layouts.app')
+@extends('operator.layouts.app')
 @section('content')
 
 <style>
-    /* Styling custom */
     .card-custom {
         border: none;
         border-radius: 12px;
@@ -37,10 +36,9 @@
         transform: scale(1.1);
     }
 
-    .badge-role {
-        padding: 6px 12px;
-        font-size: 12px;
-        border-radius: 30px;
+    .img-thumbnail {
+        border-radius: 8px;
+        object-fit: cover;
     }
 </style>
 
@@ -51,10 +49,10 @@
                 <!-- Header -->
                 <div class="card-header card-header-custom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 fw-bold">
-                        <i class="fa-solid fa-user-graduate me-2"></i> Data Siswa
+                        <i class="fa-solid fa-images me-2"></i> Data Galeri
                     </h5>
-                    <a href="{{ route('admin.siswa.create') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
-                        <i class="fa-solid fa-plus"></i> Tambah Siswa
+                    <a href="{{ route('operator.galeri.create') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
+                        <i class="fa-solid fa-plus"></i> Tambah Galeri
                     </a>
                 </div>
 
@@ -65,34 +63,47 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>NISN</th>
-                                    <th>Nama Siswa</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Tahun Masuk</th>
+                                    <th>Judul</th>
+                                    <th>Keterangan</th>
+                                    <th>Kategori</th>
+                                    <th>File</th>
+                                    <th>Tanggal</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($siswa as $item)
+                                @forelse ($galeri as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->nisn }}</td>
-                                        <td class="fw-semibold">{{ $item->nama_siswa }}</td>
+                                        <td class="fw-semibold">{{ $item->judul }}</td>
+                                        <td>{{ $item->keterangan ?? '-' }}</td>
                                         <td>
-                                            <span class="badge-role {{ $item->jenis_kelamin == 'Laki-laki' ? 'bg-primary text-white' : 'bg-danger text-white' }}">
-                                                {{ $item->jenis_kelamin }}
+                                            <span class="badge {{ $item->kategori == 'foto' ? 'bg-success' : 'bg-info' }}">
+                                                {{ ucfirst($item->kategori) }}
                                             </span>
                                         </td>
-                                        <td>{{ $item->tahun_masuk }}</td>
+                                        <td>
+                                            @if ($item->kategori == 'foto')
+                                                <img src="{{ asset('uploads/file/'. $item->file) }}"
+                                                     alt="foto {{ $item->judul }}"
+                                                     width="80" height="60"
+                                                     class="img-thumbnail shadow-sm">
+                                            @else
+                                                <video width="120" height="80" class="rounded shadow-sm" controls>
+                                                    <source src="{{ asset('uploads/file/'. $item->file) }}" type="video/mp4">
+                                                </video>
+                                            @endif
+                                        </td>
+                                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
                                         <td>
                                             <div class="d-flex justify-content-center gap-2">
-                                                <a href="{{ route('admin.siswa.edit', $item->id_siswa) }}"
+                                                <a href="{{ route('operator.galeri.edit', $item->id_galeri) }}"
                                                    class="btn btn-sm btn-warning btn-action text-white"
                                                    data-bs-toggle="tooltip" title="Edit">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
-                                                <form action="{{ route('admin.siswa.destroy', $item->id_siswa) }}" method="post"
-                                                      onsubmit="return confirm('Yakin ingin menghapus?')">
+                                                <form action="{{ route('operator.galeri.destroy', $item->id_galeri) }}" method="post"
+                                                      onsubmit="return confirm('Yakin ingin menghapus data galeri ini?')">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
@@ -106,8 +117,8 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6" class="text-center text-muted py-3">
-                                            <i class="fa-solid fa-circle-info"></i> Belum ada data siswa
+                                        <td colspan="7" class="text-center text-muted py-3">
+                                            <i class="fa-solid fa-circle-info"></i> Belum ada data galeri
                                         </td>
                                     </tr>
                                 @endforelse
@@ -118,7 +129,7 @@
 
                 <!-- Footer -->
                 <div class="card-footer text-center bg-light">
-                    <small class="text-muted">Total Siswa: {{ count($siswa) }}</small>
+                    <small class="text-muted">Total Galeri: {{ count($galeri) }}</small>
                 </div>
             </div>
         </div>

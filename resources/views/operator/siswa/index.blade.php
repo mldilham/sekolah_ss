@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('operator.layouts.app')
 @section('content')
 
 <style>
@@ -53,7 +53,7 @@
                     <h5 class="mb-0 fw-bold">
                         <i class="fa-solid fa-user-graduate me-2"></i> Data Siswa
                     </h5>
-                    <a href="{{ route('admin.siswa.create') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
+                    <a href="{{ route('operator.siswa.create') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
                         <i class="fa-solid fa-plus"></i> Tambah Siswa
                     </a>
                 </div>
@@ -86,12 +86,12 @@
                                         <td>{{ $item->tahun_masuk }}</td>
                                         <td>
                                             <div class="d-flex justify-content-center gap-2">
-                                                <a href="{{ route('admin.siswa.edit', $item->id_siswa) }}"
+                                                <a href="{{ route('operator.siswa.edit', $item->id_siswa) }}"
                                                    class="btn btn-sm btn-warning btn-action text-white"
                                                    data-bs-toggle="tooltip" title="Edit">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
-                                                <form action="{{ route('admin.siswa.destroy', $item->id_siswa) }}" method="post"
+                                                <form action="{{ route('operator.siswa.destroy', $item->id_siswa) }}" method="post"
                                                       onsubmit="return confirm('Yakin ingin menghapus?')">
                                                     @csrf
                                                     @method('DELETE')
