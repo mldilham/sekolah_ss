@@ -24,8 +24,10 @@ class AdminController extends Controller
             'galeriCount'  => Galeri::count(),
             'ekskulCount'  => Ekstrakulikuler::count(),
             'profile'      => Profile::first(),
-            'latestNews'   => Berita::latest()->take(5)->get(),
-            'latestGaleri' => Galeri::latest()->take(6)->get(),
+            'latestNews'   => Berita::latest()->take(3)->get(),
+            'latestGaleri' => Galeri::latest()->take(3)->get(),
+            'latestGuru'   => Guru::latest()->take(3)->get(),
+            'latestEkskul' => Ekstrakulikuler::latest()->take(3)->get(),
         ]);
     }
 

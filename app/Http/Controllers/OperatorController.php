@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use App\Models\Ekstrakulikuler;
 use App\Models\Galeri;
+use App\Models\Guru;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,14 +14,7 @@ class OperatorController extends Controller
 {
     public function dashboard()
     {
-        return view('operator.dashboard', [
-            'siswaCount'   => Siswa::count(),
-            'beritaCount'  => Berita::count(),
-            'galeriCount'  => Galeri::count(),
-            'ekskulCount'  => Ekstrakulikuler::count(),
-            'latestNews'   => Berita::where('id_user', Auth::id())->take(5)->get(),
-            'latestGaleri' => Galeri::latest()->take(6)->get(),
-        ]);
+        return view('operator.dashboard');
     }
 
     // BERITA

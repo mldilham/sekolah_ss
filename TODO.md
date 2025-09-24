@@ -21,3 +21,4 @@
 - Hero section menggunakan gradient background
 - Cards memiliki hover effect
 - Footer dinamis berdasarkan data profile sekolah
+php 
