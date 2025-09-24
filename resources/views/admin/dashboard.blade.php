@@ -30,102 +30,56 @@
         @endforeach
     </div>
 
-    {{-- Layout dua kolom: kiri (Berita+Galeri), kanan (Profil Sekolah) --}}
-    <div class="row g-3">
-    {{-- Berita dan Galeri --}}
-    <div class="col-lg-6 d-flex flex-column gap-3">
-        {{-- Berita Terbaru --}}
-        <div class="card shadow-sm border-0 flex-grow-1">
-            <div class="card-header bg-primary text-white fw-bold">Berita Terbaru</div>
-            <div class="card-body">
-                @forelse($latestNews as $news)
-                    <div class="d-flex mb-3 pb-3 border-bottom">
-                        <!-- Foto Berita -->
-                        @if ($news->gambar)
-                            <img src="{{ asset('uploads/berita/'.$news->gambar) }}"
-                                alt="{{ $news->judul }}"
-                                class="rounded shadow-sm me-3"
-                                style="width:80px; height:80px; object-fit:cover;">
-                        @else
-                            <div class="d-flex justify-content-center align-items-center bg-light rounded shadow-sm me-3"
-                                style="width:80px; height:80px;">
-                                <i class="fa-solid fa-image text-muted"></i>
-                            </div>
-                        @endif
 
-                        <!-- Isi Berita -->
-                        <div class="flex-grow-1">
-                            <h6 class="text-primary fw-bold mb-1">{{ $news->judul }}</h6>
-                            <small class="text-muted d-block mb-1">
-                                <i class="fa-regular fa-calendar me-1"></i> {{ $news->tanggal }}
-                            </small>
-                            <p class="mb-0 text-truncate">{{ Str::limit($news->isi, 100) }}</p>
-                        </div>
+ {{-- Berita Terbaru --}}
+    <div class="card shadow-sm border-0 mt-4">
+        <div class="card-header bg-primary text-white">
+            Berita Terbaru
+        </div>
+        <div class="card-body">
+            @forelse($latestNews as $news)
+                <div class="d-flex mb-3 border-bottom pb-2">
+                    @if ($news->gambar)
+                        <img src="{{ asset('uploads/berita/'.$news->gambar) }}"
+                             class="rounded me-3"
+                             style="width: 100px; height: 70px; object-fit: cover;">
+                    @endif
+                    <div>
+                        <h6 class="mb-1">{{ $news->judul }}</h6>
+                        <small class="text-muted">{{ $news->tanggal }}</small>
+                        <p class="mb-0">{{ Str::limit($news->isi, 80) }}</p>
                     </div>
-                @empty
-                    <p class="text-muted">Belum ada berita.</p>
-                @endforelse
-            </div>
-        </div>
-
-
-        {{-- Galeri Terbaru --}}
-        <div class="card shadow-sm border-0 flex-grow-1">
-            <div class="card-header bg-primary text-white fw-bold">Galeri Terbaru</div>
-            <div class="card-body">
-                <div class="row g-2">
-                    @forelse($latestGaleri as $galeri)
-                        <div class="col-4">
-                            <div class="rounded shadow-sm overflow-hidden" style="height:100px;">
-                                <img src="{{ asset('uploads/file/' . $galeri->file) }}"
-                                     alt="{{ $galeri->judul }}" class="img-fluid h-100 w-100 object-fit-cover">
-                            </div>
-                        </div>
-                    @empty
-                        <p class="text-muted">Belum ada galeri</p>
-                    @endforelse
                 </div>
-            </div>
+            @empty
+                <p class="text-muted">Belum ada berita.</p>
+            @endforelse
         </div>
     </div>
 
-    {{-- Profil Sekolah --}}
-    <div class="col-lg-6 d-flex">
-        <div class="card shadow-sm border-0 flex-fill">
-            <div class="card-header bg-primary text-white fw-bold">Profil Sekolah</div>
-            <div class="card-body d-flex align-items-center gap-3">
-                {{-- Logo --}}
-                <img src="{{ asset('uploads/profile/' . ($profile->logo ?? 'default-logo.png')) }}"
-                     alt="Logo Sekolah" class="img-fluid rounded"
-                     style="width:265px; height:265px; object-fit:cover;">
-
-                {{-- Info --}}
-                <div class="flex-grow-1">
-                    <h3 class="text-center fw-bold text-primary mb-4">
-                                {{ $profile->nama_sekolah ?? 'Belum ada nama sekolah' }}
-                            </h3>
-
-                            <p>
-                                <i class="fa-solid fa-id-card me-2 text-secondary"></i>
-                                <strong>NPSN:</strong> {{ $profile->npsn ?? '-' }}
-                            </p>
-                            <p>
-                                <i class="fa-solid fa-location-dot me-2 text-secondary"></i>
-                                <strong>Alamat:</strong> {{ $profile->alamat ?? '-' }}
-                            </p>
-                            <p>
-                                <i class="fa-solid fa-phone me-2 text-secondary"></i>
-                                <strong>Kontak:</strong> {{ $profile->kontak ?? '-' }}
-                            </p>
-                            <p>
-                                <i class="fa-solid fa-calendar me-2 text-secondary"></i>
-                                <strong>Tahun Berdiri:</strong> {{ $profile->tahun_berdiri ?? '-' }}
-                            </p>
+    {{-- Galeri Terbaru --}}
+    <div class="card shadow-sm border-0 mt-4">
+        <div class="card-header bg-success text-white">
+            Galeri Terbaru
+        </div>
+        <div class="card-body d-flex flex-wrap">
+            @forelse($latestGaleri as $galeri)
+                <div class="me-3 mb-3 text-center">
+                    @if ($galeri->kategori == 'foto')
+                        <img src="{{ asset('uploads/file/'.$galeri->file) }}"
+                             class="rounded shadow-sm"
+                             style="width:120px; height:80px; object-fit:cover;">
+                    @else
+                        <video width="120" height="80" controls>
+                            <source src="{{ asset('uploads/file/'.$galeri->file) }}" type="video/mp4">
+                        </video>
+                    @endif
+                    <p class="mt-1 small">{{ $galeri->judul }}</p>
                 </div>
-            </div>
+            @empty
+                <p class="text-muted">Belum ada galeri.</p>
+            @endforelse
         </div>
     </div>
-</div>
 
 </div>
 

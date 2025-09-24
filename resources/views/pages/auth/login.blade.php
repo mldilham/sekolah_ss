@@ -74,7 +74,7 @@
     <div class="overlay"></div>
 
     <!-- Tombol Kembali -->
-    <a href="{{ url()->previous() }}" class="btn btn-back">
+    <a href="{{ asset('/') }}" class="btn btn-back">
         <i class="fas fa-arrow-left"></i>
     </a>
     <!-- Login Card -->

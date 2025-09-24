@@ -3,131 +3,76 @@
 @section('title', 'Profil Sekolah')
 
 @section('content')
+<div class="container-fluid">
+    <h1 class="mb-4">Profil Sekolah</h1>
 
-<style>
-    .card-custom {
-        border: none;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            @if($profile)
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <h6>Logo</h6>
+                        @if($profile->logo)
+                            <img src="{{ asset('uploads/profile/'.$profile->logo) }}"
+                                 alt="Logo" class="img-fluid mb-3"
+                                 style="max-height:120px;">
+                        @else
+                            <p class="text-muted">Belum ada logo</p>
+                        @endif
 
-    .card-header-custom {
-        background: linear-gradient(135deg, #4e73df, #224abe);
-        color: white;
-        padding: 15px 20px;
-    }
-
-    .img-thumbnail {
-        border-radius: 8px;
-        object-fit: cover;
-    }
-</style>
-
-<div class="container-fluid py-3">
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <div class="card card-custom">
-                <!-- Header -->
-                <div class="card-header card-header-custom text-center">
-                    <h5 class="mb-0 fw-bold">
-                        <i class="fa-solid fa-school me-2"></i> Profil Sekolah
-                    </h5>
-                </div>
-
-                <!-- Body -->
-                <div class="card-body bg-white p-5">
-                    <div class="row g-5 align-items-center">
-
-                        <!-- Kolom Kiri: Logo & Info Sekolah -->
-                        <div class="col-md-6 border-end">
-                            <!-- Logo Sekolah -->
-                            <div class="text-center mb-4">
-                                @if($profile && $profile->logo)
-                                    <img src="{{ asset('uploads/profile/'.$profile->logo) }}"
-                                         alt="Logo Sekolah"
-                                         class="img-thumbnail shadow-sm"
-                                         style="max-height:130px; background:#fff; padding:10px;">
-                                @else
-                                    <div class="d-flex justify-content-center align-items-center bg-light rounded-circle border shadow-sm"
-                                         style="width:130px; height:130px; margin:0 auto;">
-                                        <i class="fa-solid fa-image text-muted fa-2x"></i>
-                                    </div>
-                                    <p class="text-muted mt-2">Belum ada logo</p>
-                                @endif
-                            </div>
-
-                            <h3 class="text-center fw-bold text-primary mb-4">
-                                {{ $profile->nama_sekolah ?? 'Belum ada nama sekolah' }}
-                            </h3>
-
-                            <p>
-                                <i class="fa-solid fa-id-card me-2 text-secondary"></i>
-                                <strong>NPSN:</strong> {{ $profile->npsn ?? '-' }}
-                            </p>
-                            <p>
-                                <i class="fa-solid fa-location-dot me-2 text-secondary"></i>
-                                <strong>Alamat:</strong> {{ $profile->alamat ?? '-' }}
-                            </p>
-                            <p>
-                                <i class="fa-solid fa-phone me-2 text-secondary"></i>
-                                <strong>Kontak:</strong> {{ $profile->kontak ?? '-' }}
-                            </p>
-                            <p>
-                                <i class="fa-solid fa-calendar me-2 text-secondary"></i>
-                                <strong>Tahun Berdiri:</strong> {{ $profile->tahun_berdiri ?? '-' }}
-                            </p>
-                        </div>
-
-                        <!-- Kolom Kanan: Kepala Sekolah -->
-                        <div class="col-md-6 text-center">
-                            @if($profile && $profile->foto)
-                                <img src="{{ asset('uploads/profile/'.$profile->foto) }}"
-                                     alt="Kepala Sekolah"
-                                     class="img-thumbnail shadow-sm mb-3"
-                                     style="max-height:250px;">
-                            @else
-                                <div class="d-flex justify-content-center align-items-center bg-light rounded-3 border shadow-sm mb-3"
-                                     style="width:180px; height:250px; margin:0 auto;">
-                                    <i class="fa-solid fa-user text-muted fa-2x"></i>
-                                </div>
-                                <p class="text-muted">Belum ada foto kepala sekolah</p>
-                            @endif
-
-                            <h5 class="fw-bold mt-3">
-                                <i class="fa-solid fa-user-tie me-2"></i>
-                                {{ $profile->kepala_sekolah ?? 'Kepala Sekolah' }}
-                            </h5>
-                        </div>
+                        <h6>Foto Sekolah</h6>
+                        @if($profile->foto)
+                            <img src="{{ asset('uploads/profile/'.$profile->foto) }}"
+                                 alt="Foto Sekolah" class="img-fluid mb-3"
+                                 style="max-height:120px;">
+                        @else
+                            <p class="text-muted">Belum ada foto</p>
+                        @endif
                     </div>
+                    <div class="col-md-9">
+                        <table class="table table-borderless">
+                            <tr>
+                                <th>Nama Sekolah</th>
+                                <td>{{ $profile->nama_sekolah }}</td>
+                            </tr>
+                            <tr>
+                                <th>Kepala Sekolah</th>
+                                <td>{{ $profile->kepala_sekolah }}</td>
+                            </tr>
+                            <tr>
+                                <th>NPSN</th>
+                                <td>{{ $profile->npsn }}</td>
+                            </tr>
+                            <tr>
+                                <th>Tahun Berdiri</th>
+                                <td>{{ $profile->tahun_berdiri }}</td>
+                            </tr>
+                            <tr>
+                                <th>Kontak</th>
+                                <td>{{ $profile->kontak }}</td>
+                            </tr>
+                            <tr>
+                                <th>Alamat</th>
+                                <td>{{ $profile->alamat }}</td>
+                            </tr>
+                            <tr>
+                                <th>Visi & Misi</th>
+                                <td>{{ $profile->visi_misi }}</td>
+                            </tr>
+                            <tr>
+                                <th>Deskripsi</th>
+                                <td>{{ $profile->deskripsi }}</td>
+                            </tr>
+                        </table>
 
-                    <!-- Visi Misi -->
-                    <div class="mt-5">
-                        <h5 class="fw-bold text-primary">
-                            <i class="fa-solid fa-bullseye me-2"></i> Visi & Misi
-                        </h5>
-                        <p class="text-muted">{{ $profile->visi_misi ?? 'Belum ada visi misi' }}</p>
-                    </div>
-
-                    <!-- Deskripsi -->
-                    <div class="mt-4">
-                        <h5 class="fw-bold text-primary">
-                            <i class="fa-solid fa-align-left me-2"></i> Deskripsi
-                        </h5>
-                        <p class="text-muted">{{ $profile->deskripsi ?? 'Belum ada deskripsi' }}</p>
+                        <a href="{{ route('admin.profile.edit') }}" class="btn btn-primary">Edit Profil</a>
                     </div>
                 </div>
-
-                <!-- Footer -->
-                <div class="card-footer text-center bg-light">
-                    <a href="{{ route('admin.profile.edit', $profile->id_profile ?? 1) }}"
-                       class="btn btn-warning px-4 rounded-pill shadow-sm">
-                        <i class="fa-solid fa-pen-to-square me-1"></i> Edit Profil
-                    </a>
-                </div>
-            </div>
+            @else
+                <p class="text-muted">Profil sekolah belum diisi.</p>
+                <a href="{{ route('admin.profile') }}" class="btn btn-success">Tambah Profil</a>
+            @endif
         </div>
     </div>
 </div>
-
 @endsection

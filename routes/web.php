@@ -7,6 +7,7 @@ use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Controller::class, 'home'])->name('home');
+Route::get('/profile', [Controller::class, 'profile'])->name('profile');
 
 // Login routes
 Route::get('/auth/login', [AuthController::class, 'login'])->name('auth.login');
