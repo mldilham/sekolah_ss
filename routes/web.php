@@ -3,11 +3,21 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\OperatorController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Controller::class, 'home'])->name('home');
+Route::get('/public', [Controller::class, 'public'])->name('public');
 Route::get('/profile', [Controller::class, 'profile'])->name('profile');
+
+// Public routes
+Route::get('/berita', [PublicController::class, 'berita'])->name('public.berita');
+Route::get('/galeri', [PublicController::class, 'galeri'])->name('public.galeri');
+Route::get('/guru', [PublicController::class, 'guru'])->name('public.guru');
+Route::get('/siswa', [PublicController::class, 'siswa'])->name('public.siswa');
+Route::get('/ekskul', [PublicController::class, 'ekskul'])->name('public.ekskul');
+Route::get('/profile-sekolah', [PublicController::class, 'profile'])->name('public.profile');
 
 // Login routes
 Route::get('/auth/login', [AuthController::class, 'login'])->name('auth.login');
@@ -106,6 +116,3 @@ Route::middleware(['operator'])->group(function () {
     Route::put('/operator/siswa/edit/{id}', [OperatorController::class, 'updateSiswa'])->name('operator.siswa.update');
     Route::delete('/operator/siswa/{id}', [OperatorController::class, 'destroySiswa'])->name('operator.siswa.destroy');
 });
-
-
-Route::get('/siswa',[SiswaController::class,'index'])->name('siswa.dashboard');

@@ -9,22 +9,22 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}#berita">Berita</a>
+                    <a class="nav-link" href="{{ route('public.berita') }}">Berita</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}#guru">Guru</a>
+                    <a class="nav-link" href="{{ route('public.guru') }}">Guru</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}#siswa">Siswa</a>
+                    <a class="nav-link" href="{{ route('public.siswa') }}">Siswa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}#galeri">Galeri</a>
+                    <a class="nav-link" href="{{ route('public.galeri') }}">Galeri</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}#ekskul">Ekstrakurikuler</a>
+                    <a class="nav-link" href="{{ route('public.ekskul') }}">Ekstrakurikuler</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('profile') }}">Profil Sekolah</a>
+                    <a class="nav-link" href="{{ route('public.profile') }}">Profil Sekolah</a>
                 </li>
             </ul>
             <a href="{{ route('auth.login') }}" class="btn btn-outline-light px-3 ms-2">Login</a>

@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     .navbar { transition: all 0.3s ease; }
     .navbar-transparent { background: transparent !important; }
     .navbar-scrolled {
@@ -46,7 +49,7 @@
 </head>
 <body>
     {{-- Navbar --}}
-    @include('layouts.navbar')
+    @include('public.layouts.navbar')
 
     {{-- Hero Section --}}
     @yield('hero')
@@ -57,34 +60,7 @@
     </main>
 
     {{-- Footer --}}
-    @include('layouts.footer')
+    @include('public.layouts.footer')
 
-    <script>
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                navbar.classList.add('navbar-scrolled');
-                navbar.classList.remove('navbar-transparent');
-            } else {
-                navbar.classList.add('navbar-transparent');
-                navbar.classList.remove('navbar-scrolled');
-            }
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

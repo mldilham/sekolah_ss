@@ -1,24 +1,16 @@
-# TODO - Layout Publik Sekolah
+# TODO: Recreate Landing Page Display
 
-## Selesai ✅
-- [x] Update Controller.php untuk mengambil semua data (Profile, Berita, Guru, Siswa, Galeri, Ekstrakulikuler)
-- [x] Buat home.blade.php dengan section komprehensif untuk semua konten database
-- [x] Update navbar.blade.php dengan navigasi yang proper
-- [x] Perbaiki routes/web.php untuk memisahkan home dan profile
-- [x] Update footer.blade.php dengan konten dinamis
-- [x] Update app.blade.php dengan styling yang lebih baik dan smooth scrolling
+## Tasks:
+- [ ] Update Controller::public() to send count of students and teachers instead of lists
+- [ ] Update resources/views/public/index.blade.php to display counts instead of detailed lists for teachers and students
+- [ ] Test the landing page to ensure correct display
 
-## Yang Perlu Ditest 🔄
-- [ ] Test tampilan halaman home dengan data dummy
-- [ ] Verifikasi semua section (Berita, Guru, Siswa, Galeri, Ekstrakulikuler) ditampilkan dengan benar
-- [ ] Test navigasi smooth scrolling
-- [ ] Test responsivitas di berbagai device
-- [ ] Test dengan data kosong untuk memastikan tidak ada error
+## Information Gathered:
+- Current landing page displays detailed lists of news, gallery, teachers, students, etc.
+- User wants to display only counts for students and teachers, keep news and gallery as is
+- No JavaScript usage required
 
-## Catatan
-- Layout publik sekarang menampilkan semua konten database kecuali users
-- Menggunakan Bootstrap 5 dan Font Awesome untuk styling
-- Hero section menggunakan gradient background
-- Cards memiliki hover effect
-- Footer dinamis berdasarkan data profile sekolah
-php 
+## Plan:
+- Modify Controller.php method public() to send $jumlah_siswa and $jumlah_guru
+- Modify view to show counts in teacher and student sections
+- Keep news and gallery sections unchanged
