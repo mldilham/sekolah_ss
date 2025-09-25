@@ -1,98 +1,90 @@
 @extends('public.layouts.app')
-@section('title', 'Berita - ' . ($profile->nama_sekolah ?? 'Sekolah'))
+@section('title', $beritas->judul . ' - ' . ($profile->nama_sekolah ?? 'Sekolah'))
 
 @section('content')
 
 <style>
     .card-custom {
         border: none;
-        border-radius: 12px;
+        border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
-
     .card-header-custom {
         background: linear-gradient(135deg, #4e73df, #224abe);
         color: white;
-        padding: 15px 20px;
+        padding: 20px;
+        text-align: center;
     }
-
-    .table thead th {
-        background-color: #f8f9fc;
-        font-weight: 600;
-        text-transform: uppercase;
-        font-size: 13px;
+    .card-header-custom h3 {
+        margin: 0;
+        font-weight: 700;
     }
-
-    .table-hover tbody tr:hover {
-        background-color: #f1f5ff;
-        transition: 0.2s ease-in-out;
+    .news-meta {
+        font-size: 0.9rem;
+        color: #6c757d;
+        margin-top: 10px;
     }
-
-    .img-thumbnail {
-        border-radius: 8px;
+    .news-meta i {
+        margin-right: 5px;
+        color: #224abe;
+    }
+    .news-image {
+        max-height: 420px;
         object-fit: cover;
+        width: 100%;
+        border-radius: 10px;
+    }
+    .card-body p {
+        text-align: justify;
+        line-height: 1.7;
+    }
+    .btn-back {
+        background: linear-gradient(135deg, #4e73df, #224abe);
+        color: #fff;
+        border-radius: 30px;
+        padding: 6px 18px;
+        font-size: 0.9rem;
+        transition: 0.3s;
+        text-decoration: none;
+    }
+    .btn-back:hover {
+        background: linear-gradient(135deg, #224abe, #4e73df);
+        color: #fff;
     }
 </style>
 
-<div class="container-fluid py-3">
-    <div class="row">
-        <div class="col-12">
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
             <div class="card card-custom">
                 <!-- Header -->
-                <div class="card-header card-header-custom">
-                    <h5 class="mb-0 fw-bold">
-                        <i class="fa-solid fa-newspaper me-2"></i> Berita Sekolah
-                    </h5>
-                </div>
-
-                <!-- Body -->
-                <div class="card-body bg-white">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle text-center">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Judul</th>
-                                    <th>Isi</th>
-                                    <th>Tanggal</th>
-                                    <th>Gambar</th>
-                                    <th>Penulis</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($beritas as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td class="fw-semibold">{{ $item->judul }}</td>
-                                        <td class="">{{ Str::limit($item->isi, 100) }}</td>
-                                        <td>{{ $item->tanggal ? date('d M Y', strtotime($item->tanggal)) : '' }}</td>
-                                        <td>
-                                            @if ($item->gambar)
-                                                <img src="{{ asset('uploads/berita/'. $item->gambar) }}"
-                                                     alt="foto {{ $item->judul }}" width="80" height="80"
-                                                     class="img-thumbnail shadow-sm">
-                                            @else
-                                                <span class="text-muted">Tidak ada</span>
-                                            @endif
-                                        </td>
-                                        <td>{{ $item->user->name ?? 'Unknown' }}</td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="6" class="text-center text-muted py-3">
-                                            <i class="fa-solid fa-circle-info"></i> Belum ada data berita
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
+                <div class="card-header-custom">
+                    <h3>{{ $beritas->judul }}</h3>
+                    <div class="news-meta">
+                        <span><i class="fa-solid fa-calendar"></i> {{ $beritas->created_at->format('d M Y') }}</span>
+                        &nbsp; | &nbsp;
+                        <span><i class="fa-solid fa-user"></i> {{ $beritas->user->name ?? 'Admin' }}</span>
                     </div>
                 </div>
 
-                <!-- Footer -->
-                <div class="card-footer text-center bg-light">
-                    <small class="text-muted">Total Berita: {{ count($beritas) }}</small>
+                <!-- Body -->
+                <div class="card-body p-4">
+                    @if($beritas->gambar)
+                        <div class="text-center mb-4">
+                            <img src="{{ asset('uploads/berita/'.$beritas->gambar) }}"
+                                 alt="{{ $beritas->judul }}"
+                                 class="news-image shadow-sm">
+                        </div>
+                    @endif
+
+                    <p>{!! nl2br(e($beritas->isi)) !!}</p>
+
+                    <div class="mt-4">
+                        <a href="{{ route('berita.index') }}" class="btn-back">
+                            <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Berita
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

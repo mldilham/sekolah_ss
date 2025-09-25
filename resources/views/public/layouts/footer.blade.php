@@ -1,35 +1,50 @@
-<footer class="bg-dark text-light py-5">
+<footer class="py-5" style="background: linear-gradient(135deg, #1e2140, #2c2f54); color: #fff;">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <h5><i class="fa fa-school me-2"></i>{{ $profile->nama_sekolah ?? 'Nama Sekolah' }}</h5>
-                <p>{{ $profile->deskripsi ?? 'Deskripsi sekolah' }}</p>
-                <p><i class="fa fa-calendar me-2"></i>Berdiri sejak {{ $profile->tahun_berdiri ?? 'Tahun' }}</p>
+        <div class="row gy-4">
+            <!-- Logo / Nama Sekolah -->
+            <div class="col-md-4">
+                <h4 class="fw-bold">{{ $profile->nama_sekolah ?? 'Nama Sekolah' }}</h4>
+                <p class="text-white-50 small">
+                    {{ Str::limit($profile->deskripsi ?? 'Deskripsi singkat sekolah.', 120) }}
+                </p>
             </div>
-            <div class="col-md-4 mb-4">
-                <h5>Kontak Kami</h5>
-                <p><i class="fa fa-map-marker-alt me-2"></i>{{ $profile->alamat ?? 'Alamat belum diisi' }}</p>
-                <p><i class="fa fa-phone me-2"></i>{{ $profile->kontak ?? 'Kontak belum diisi' }}</p>
-                <p><i class="fa fa-envelope me-2"></i>{{ $profile->email ?? 'Email belum diisi' }}</p>
-            </div>
-            <div class="col-md-4 mb-4">
-                <h5>Link Cepat</h5>
-                <ul class="list-unstyled">
-                    <li><a href="{{ route('home') }}#berita" class="text-light text-decoration-none">Berita</a></li>
-                    <li><a href="{{ route('home') }}#guru" class="text-light text-decoration-none">Guru</a></li>
-                    <li><a href="{{ route('home') }}#siswa" class="text-light text-decoration-none">Siswa</a></li>
-                    <li><a href="{{ route('home') }}#galeri" class="text-light text-decoration-none">Galeri</a></li>
-                    <li><a href="{{ route('home') }}#ekskul" class="text-light text-decoration-none">Ekstrakurikuler</a></li>
-                    <li><a href="{{ route('profile') }}" class="text-light text-decoration-none">Profil Lengkap</a></li>
+
+            <!-- Navigasi -->
+            <div class="col-md-4">
+                <h5 class="fw-semibold">Navigasi</h5>
+                <ul class="list-unstyled small">
+                    <li><a href="{{ url('/') }}" class="text-white-50 text-decoration-none">Beranda</a></li>
+                    <li><a href="#tentang-kami" class="text-white-50 text-decoration-none">Tentang Kami</a></li>
+                    <li><a href="#berita" class="text-white-50 text-decoration-none">Berita</a></li>
+                    <li><a href="#galeri" class="text-white-50 text-decoration-none">Galeri</a></li>
+                    <li><a href="#ekskul" class="text-white-50 text-decoration-none">Ekstrakurikuler</a></li>
                 </ul>
             </div>
+
+            <!-- Kontak -->
+            <div class="col-md-4">
+                <h5 class="fw-semibold">Kontak</h5>
+                <p class="mb-1 small">
+                    <i class="fa fa-map-marker-alt me-2 text-primary"></i>
+                    {{ $profile->alamat ?? 'Alamat belum diisi' }}
+                </p>
+                <p class="mb-1 small">
+                    <i class="fa fa-phone me-2 text-primary"></i>
+                    {{ $profile->kontak ?? 'Kontak belum diisi' }}
+                </p>
+                <p class="mb-0 small">
+                    <i class="fa fa-envelope me-2 text-primary"></i>
+                    {{ $profile->email ?? 'Email belum diisi' }}
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="footer-bottom bg-secondary text-center py-3">
-        <div class="container">
-            © {{ date('Y') }} {{ $profile->nama_sekolah ?? 'Sekolah' }}. All Rights Reserved.
-            <br>
-            <small>Dikembangkan dengan Laravel</small>
+
+        <hr class="border-light my-4">
+
+        <!-- Copyright -->
+        <div class="text-center small text-white-50">
+            &copy; {{ date('Y') }} {{ $profile->nama_sekolah ?? 'Nama Sekolah' }}.
+            All Rights Reserved.
         </div>
     </div>
 </footer>
