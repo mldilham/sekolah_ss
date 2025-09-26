@@ -75,7 +75,7 @@
 {{-- Berita Section --}}
 <section id="berita" class="section">
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center  ">
             <div class="col-12">
                 <h2 class="text-center mb-5">Berita Terbaru</h2>
                 <div class="grid-cards">

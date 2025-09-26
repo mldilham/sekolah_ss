@@ -16,7 +16,15 @@ class PublicController extends Controller
     public function berita()
     {
         $beritas = Berita::all();
-        return view('public.berita.index', compact('beritas'));
+        $profile = Profile::first();
+        return view('public.berita.index', compact('beritas', 'profile'));
+    }
+
+    public function detailView(int $id)
+    {
+        $berita = Berita::with('user')->where('id_berita', $id)->firstOrFail();
+        $profile = Profile::first();
+        return view('public.berita.detail',compact('berita', 'profile'));
     }
 
     // ---------------- GALERI ----------------

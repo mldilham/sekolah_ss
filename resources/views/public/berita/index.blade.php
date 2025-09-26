@@ -1,93 +1,106 @@
 @extends('public.layouts.app')
-@section('title', $beritas->judul . ' - ' . ($profile->nama_sekolah ?? 'Sekolah'))
+@section('title', 'Berita - ' . ($profile->nama_sekolah ?? 'Sekolah'))
 
 @section('content')
 
 <style>
-    .card-custom {
+    .news-card {
         border: none;
         border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: #fff;
     }
-    .card-header-custom {
-        background: linear-gradient(135deg, #4e73df, #224abe);
-        color: white;
+    .news-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+    .news-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    .news-body {
         padding: 20px;
-        text-align: center;
     }
-    .card-header-custom h3 {
-        margin: 0;
+    .news-title {
+        font-size: 1.2rem;
         font-weight: 700;
+        color: #224abe;
+        margin-bottom: 10px;
+        transition: color 0.3s;
+    }
+    .news-title:hover {
+        color: #4e73df;
     }
     .news-meta {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         color: #6c757d;
-        margin-top: 10px;
+        margin-bottom: 12px;
     }
     .news-meta i {
         margin-right: 5px;
         color: #224abe;
     }
-    .news-image {
-        max-height: 420px;
-        object-fit: cover;
-        width: 100%;
-        border-radius: 10px;
-    }
-    .card-body p {
+    .news-text {
+        font-size: 0.95rem;
+        color: #333;
+        line-height: 1.6;
         text-align: justify;
-        line-height: 1.7;
     }
-    .btn-back {
+    .btn-read {
+        display: inline-block;
+        margin-top: 15px;
         background: linear-gradient(135deg, #4e73df, #224abe);
         color: #fff;
-        border-radius: 30px;
-        padding: 6px 18px;
-        font-size: 0.9rem;
+        border-radius: 25px;
+        padding: 6px 16px;
+        font-size: 0.85rem;
         transition: 0.3s;
         text-decoration: none;
     }
-    .btn-back:hover {
+    .btn-read:hover {
         background: linear-gradient(135deg, #224abe, #4e73df);
         color: #fff;
     }
 </style>
 
-<div class="container py-4">
-    <div class="row justify-content-center">
-        <div class="col-lg-9">
-            <div class="card card-custom">
-                <!-- Header -->
-                <div class="card-header-custom">
-                    <h3>{{ $beritas->judul }}</h3>
-                    <div class="news-meta">
-                        <span><i class="fa-solid fa-calendar"></i> {{ $beritas->created_at->format('d M Y') }}</span>
-                        &nbsp; | &nbsp;
-                        <span><i class="fa-solid fa-user"></i> {{ $beritas->user->name ?? 'Admin' }}</span>
-                    </div>
-                </div>
+<div class="container py-5">
+    <!-- Judul Halaman -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-primary">Berita Sekolah</h2>
+        <p class="text-muted">Kumpulan informasi terbaru dari {{ $profile->nama_sekolah ?? 'Sekolah' }}</p>
+    </div>
 
-                <!-- Body -->
-                <div class="card-body p-4">
-                    @if($beritas->gambar)
-                        <div class="text-center mb-4">
-                            <img src="{{ asset('uploads/berita/'.$beritas->gambar) }}"
-                                 alt="{{ $beritas->judul }}"
-                                 class="news-image shadow-sm">
-                        </div>
+    <div class="row g-4">
+        @forelse($beritas as $berita)
+            <div class="col-md-6 col-lg-4">
+                <div class="news-card">
+                    @if($berita->gambar)
+                        <img src="{{ asset('uploads/berita/'.$berita->gambar) }}"
+                             alt="{{ $berita->judul }}"
+                             class="news-image">
                     @endif
-
-                    <p>{!! nl2br(e($beritas->isi)) !!}</p>
-
-                    <div class="mt-4">
-                        <a href="{{ route('berita.index') }}" class="btn-back">
-                            <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Berita
+                    <div class="news-body">
+                        <a href="{{ route('public.berita.detail', $berita->id_berita) }}" class="news-title">
+                            {{ $berita->judul }}
+                        </a>
+                        <div class="news-meta">
+                            <i class="fa-solid fa-calendar"></i> {{ $berita->created_at->format('d M Y') }}
+                        </div>
+                        <p class="news-text">
+                            {!! nl2br(e(Str::limit($berita->isi, 120))) !!}
+                        </p>
+                        <a href="{{ route('public.berita.detail', $berita->id_berita) }}" class="btn-read">
+                            <i class="fa-solid fa-book-open"></i> Baca Selengkapnya
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
+        @empty
+            <p class="text-center text-muted">Belum ada berita.</p>
+        @endforelse
     </div>
 </div>
 

@@ -128,7 +128,7 @@
         opacity: 1;
     }
 
-    
+
     /* Responsive */
     @media (max-width: 991px) {
         .hamburger {
@@ -190,7 +190,7 @@
     @yield('hero')
 
     {{-- Content --}}
-    <main>
+    <main style="padding-top: 80px;">
         @yield('content')
     </main>
 

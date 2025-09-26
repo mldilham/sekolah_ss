@@ -13,6 +13,7 @@ Route::get('/profile', [Controller::class, 'profile'])->name('profile');
 
 // Public routes
 Route::get('/berita', [PublicController::class, 'berita'])->name('public.berita');
+Route::get('/berita/detail/{id}', [PublicController::class, 'detailView'])->name('public.berita.detail');
 Route::get('/galeri', [PublicController::class, 'galeri'])->name('public.galeri');
 Route::get('/guru', [PublicController::class, 'guru'])->name('public.guru');
 Route::get('/siswa', [PublicController::class, 'siswa'])->name('public.siswa');

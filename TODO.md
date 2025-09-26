@@ -1,3 +1,1 @@
-- [x] Edit navbar.blade.php: Replace Bootstrap collapse with CSS-only toggle using checkbox hack, add color class.
-- [x] Edit app.blade.php: Add CSS for navbar background color, mobile menu styles, and responsiveness.
-- [ ] Test responsiveness and colors by running the app.
+- [x] Edit resources/views/public/layouts/app.blade.php to add padding-top: 80px; to the <main> tag to fix navbar overlap on content pages like berita.
