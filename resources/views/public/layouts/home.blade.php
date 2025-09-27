@@ -106,8 +106,8 @@
                             <p class="text-muted flex-grow-1" style="font-size: 0.9rem;">
                                 {{ Str::limit(strip_tags($berita->isi), 120) }}
                             </p>
-                            <a href="{{ route('public.berita.detail', $berita->id_berita) }}" class="mt-auto gradient" style="font-size: 0.9rem;">
-                                read more
+                            <a href="{{ route('public.berita.detail', $berita->id_berita) }}" class="mt-auto hov" style="font-size: 0.9rem;">
+                                Read more >>
                             </a>
                         </div>
                     </div>
@@ -116,6 +116,9 @@
                 <p class="text-center text-muted">Belum ada berita.</p>
                 @endforelse
             </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ route('public.berita') }}" class="custom-tampilan">Tampilkan semua berita</a>
         </div>
     </section>
 
@@ -195,8 +198,8 @@
                                 {{ Str::limit(strip_tags($ekskul->deskripsi), 120) }}
                             </p>
                             <a href="{{ route('public.ekskul.detail', $ekskul->id_ekskul) }}"
-                            class="mt-auto gradient fw-semibold" style="font-size: 0.9rem;">
-                                READ MORE >>
+                            class="mt-auto hov fw-semibold" style="font-size: 0.9rem;">
+                                Read more >>
                             </a>
                         </div>
                     </div>

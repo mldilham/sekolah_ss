@@ -36,8 +36,8 @@
                 {{ Str::limit(strip_tags($berita->isi), 200) }}
             </p>
             <a href="{{ route('public.berita.detail', $berita->id_berita) }}"
-               class="gradient fw-semibold text-decoration-none">
-                READ MORE >>
+               class="hov fw-semibold text-decoration-none">
+                Read more >>
             </a>
         </div>
     </div>

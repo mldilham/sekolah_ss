@@ -36,8 +36,8 @@
                         {{ Str::limit(strip_tags($ekskul->deskripsi), 120) }}
                     </p>
                     <a href="{{ route('public.ekskul.detail', $ekskul->id_ekskul) }}"
-                       class="mt-auto gradient fw-semibold" style="font-size: 0.9rem;">
-                        READ MORE >>
+                       class="hov mt-auto  fw-semibold" style="font-size: 0.9rem;">
+                        Read more >>
                     </a>
                 </div>
             </div>

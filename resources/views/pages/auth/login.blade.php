@@ -8,90 +8,139 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1e2140, #2c2f54);
       min-height: 100vh;
+      margin: 0;
       display: flex;
       flex-direction: column;
-    }
-    .login-wrapper {
-      flex: 1;
-      display: flex;
-      justify-content: center;
+      background: linear-gradient(135deg, #1e2140, #2c2f54);
       align-items: center;
-      padding: 2rem 1rem;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
     }
-    .card-login {
-      max-width: 420px;
-      width: 100%;
-      border: none;
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-    .card-header-login {
-      background: linear-gradient(135deg, #1e2140, #2c2f54);
-      color: #fff;
-      text-align: center;
-      padding: 2rem 1.5rem;
-    }
-    .card-header-login h3 {
-      font-weight: 700;
-      margin-bottom: .5rem;
-    }
-    .btn-login {
-      background: linear-gradient(135deg, #1e2140, #2c2f54);
-      color: #fff;
-      font-weight: 600;
-      border-radius: 50px;
-      padding: 0.6rem;
-      transition: 0.3s;
-    }
-    .btn-login:hover {
-      background: linear-gradient(135deg, #2c2f54, #1e2140);
-    }
-    .btn-back {
+
+    /* Tombol back */
+    .back-icon {
       position: absolute;
       top: 20px;
       left: 20px;
-      background: rgba(255,255,255,0.9);
+      color: #fff;
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 10;
+    }
+    .back-icon:hover {
+      color: #ddd;
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 420px;
+      padding: 2rem;
+    }
+
+    .card-login {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border-radius: 1rem;
       border: none;
-      border-radius: 30px;
-      padding: 0.4rem 1rem;
-      font-weight: 600;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      text-decoration: none;
-      color: #1e2140;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      color: #fff;
+      transition: transform 0.3s;
+    }
+
+    .card-login:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-header-login {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: transparent;
+    }
+
+    .card-header-login h3 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .card-header-login p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.95rem;
+    }
+
+    .form-control {
+      border-radius: 50px;
+      padding: 0.8rem 1rem;
+      border: none;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
       transition: 0.3s;
     }
-    .btn-back:hover {
-      background: #fff;
-    }
-    footer {
-      background: #1e2140;
+
+    .form-control:focus {
+      background: rgba(255,255,255,0.25);
       color: #fff;
-      text-align: center;
-      padding: 1rem;
+      box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.3);
+      outline: none;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .btn-login {
+      background: linear-gradient(135deg, #28a745, #218838);
+      color: #fff;
+      font-weight: 600;
+      border-radius: 50px;
+      padding: 0.65rem;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .btn-login:hover {
+      background: linear-gradient(135deg, #218838, #28a745);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    }
+
+    footer {
+      margin-top: 2rem;
+      color: #fff;
       font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .alert-danger {
+      background: rgba(255,0,0,0.2);
+      color: #fff;
+      border: none;
     }
   </style>
 </head>
 <body>
 
   <!-- Tombol Kembali -->
-  <a href="{{ url('/') }}" class="btn-back">
-    <i class="fas fa-arrow-left"></i> Kembali
+  <a href="{{ url('/') }}">
+      <i class="fas fa-arrow-left back-icon" ></i>
   </a>
 
   <!-- Login Form -->
   <div class="login-wrapper">
-    <div class="card card-login">
+    <div class="card card-login p-4">
       <div class="card-header-login">
         <h3>Login</h3>
-        <p class="mb-0">Masuk ke akun Anda</p>
+        <p>Masuk ke akun Anda</p>
       </div>
-      <div class="card-body p-4">
+      <div class="card-body">
         @if(session('error'))
           <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
@@ -117,6 +166,5 @@
     &copy; {{ date('Y') }} KitaSchool. All Rights Reserved.
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

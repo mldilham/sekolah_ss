@@ -5,7 +5,7 @@
             <div class="col-md-4">
                 <h4 class="fw-bold">{{ $profile->nama_sekolah ?? 'Nama Sekolah' }}</h4>
                 <p class="text-white-50 small">
-                    {{ Str::limit($profile->deskripsi ?? 'Deskripsi singkat sekolah.', 120) }}
+                    {{ Str::limit($profile->deskripsi ?? 'Deskripsi singkat sekolah.', 200) }}
                 </p>
             </div>
 

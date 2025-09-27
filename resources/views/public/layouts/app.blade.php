@@ -141,6 +141,22 @@
         object-fit: cover;
     }
 
+    .custom-tampilan {
+        display: inline-block;
+        padding: 10px 20px;
+        color: #FAB12F;
+        text-decoration: none;
+        border-radius: 2px;
+        border: 2px solid #FEB21A; /* outline biru */
+        transition: all 0.3s ease;
+    }
+
+    .custom-tampilan:hover {
+        color: white; /* teks berubah biru */
+        background-color: #FAB12F; /* background putih */
+        border: 2px solid #FAB12F; /* outline biru */
+    }
+
     /* Overlay tanggal */
     .tanggal-overlay {
         position: absolute;
@@ -171,6 +187,17 @@
         -webkit-text-fill-color: transparent;
     }
 
+    .hov {
+        background: linear-gradient(135deg, #1e2140, #2c2f54);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .hov:hover {
+        background: linear-gradient(135deg, #A7AAE1, #696FC7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
     /* Responsive */
     @media (max-width: 991px) {
