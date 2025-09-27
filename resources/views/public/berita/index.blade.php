@@ -3,7 +3,7 @@
 
 @section('content')
 
-<style>
+{{-- <style>
     .news-card {
         border: none;
         border-radius: 15px;
@@ -64,44 +64,43 @@
         background: linear-gradient(135deg, #224abe, #4e73df);
         color: #fff;
     }
-</style>
+</style> --}}
 
 <div class="container py-5">
-    <!-- Judul Halaman -->
-    <div class="text-center mb-5">
-        <h2 class="fw-bold text-primary">Berita Sekolah</h2>
-        <p class="text-muted">Kumpulan informasi terbaru dari {{ $profile->nama_sekolah ?? 'Sekolah' }}</p>
-    </div>
+        <div class="text-center mb-5 gradient">
+            <h2 class="fw-bold text-primary">Berita Terbaru</h2>
+            <p class="text-muted">Update informasi terkini dari sekolah kami</p>
+        </div>
 
-    <div class="row g-4">
-        @forelse($beritas as $berita)
-            <div class="col-md-6 col-lg-4">
-                <div class="news-card">
+        <div class="row g-4">
+            @forelse($beritas as $berita)
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card shadow-sm border-0 h-100 berita-card">
                     @if($berita->gambar)
                         <img src="{{ asset('uploads/berita/'.$berita->gambar) }}"
                              alt="{{ $berita->judul }}"
-                             class="news-image">
+                             class="berita-img">
                     @endif
-                    <div class="news-body">
-                        <a href="{{ route('public.berita.detail', $berita->id_berita) }}" class="news-title">
-                            {{ $berita->judul }}
-                        </a>
-                        <div class="news-meta">
-                            <i class="fa-solid fa-calendar"></i> {{ $berita->created_at->format('d M Y') }}
-                        </div>
-                        <p class="news-text">
-                            {!! nl2br(e(Str::limit($berita->isi, 120))) !!}
+                    <div class="p-3 d-flex flex-column">
+                        <small class="text-muted mb-2">
+                            {{ $berita->tanggal ? date('d M Y', strtotime($berita->tanggal)) : '' }}
+                        </small>
+                        <h5 class="fw-semibold mb-2">
+                            {{ Str::limit($berita->judul, 60) }}
+                        </h5>
+                        <p class="text-muted flex-grow-1" style="font-size: 0.9rem;">
+                            {{ Str::limit(strip_tags($berita->isi), 120) }}
                         </p>
-                        <a href="{{ route('public.berita.detail', $berita->id_berita) }}" class="btn-read">
-                            <i class="fa-solid fa-book-open"></i> Baca Selengkapnya
+                        <a href="{{ route('public.berita.detail', $berita->id_berita) }}" class="gradient mt-auto" style="font-size: 0.9rem;">
+                            read more
                         </a>
                     </div>
                 </div>
             </div>
-        @empty
+            @empty
             <p class="text-center text-muted">Belum ada berita.</p>
-        @endforelse
+            @endforelse
+        </div>
     </div>
-</div>
 
 @endsection

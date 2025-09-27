@@ -13,11 +13,12 @@ Route::get('/profile', [Controller::class, 'profile'])->name('profile');
 
 // Public routes
 Route::get('/berita', [PublicController::class, 'berita'])->name('public.berita');
-Route::get('/berita/detail/{id}', [PublicController::class, 'detailView'])->name('public.berita.detail');
+Route::get('/berita/detail/{id}', [PublicController::class, 'detailBerita'])->name('public.berita.detail');
 Route::get('/galeri', [PublicController::class, 'galeri'])->name('public.galeri');
 Route::get('/guru', [PublicController::class, 'guru'])->name('public.guru');
 Route::get('/siswa', [PublicController::class, 'siswa'])->name('public.siswa');
 Route::get('/ekskul', [PublicController::class, 'ekskul'])->name('public.ekskul');
+Route::get('/ekskul/detail/{id}', [PublicController::class, 'detailEkskul'])->name('public.ekskul.detail');
 Route::get('/profile-sekolah', [PublicController::class, 'profile'])->name('public.profile');
 
 // Login routes

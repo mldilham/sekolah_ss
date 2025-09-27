@@ -66,7 +66,7 @@
   <div class="container-fluid">
     <a class="navbar-brand d-flex align-items-center" href="#">
       <img src="{{ asset('asset/upinipin.jpg') }}" alt="Logo" />
-      <span class="ms-2">SDN Banjarsari</span>
+      <span class="ms-2"></span>
     </a>
 
     <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">

@@ -77,7 +77,6 @@
         color: #1e3a8a;
     }
 
-    /* Hamburger Menu */
     .nav-toggle-checkbox {
         display: none;
     }
@@ -95,7 +94,6 @@
         transition: 0.3s;
     }
 
-    /* Mobile Menu */
     .navbar-menu {
         display: flex;
         align-items: center;
@@ -127,6 +125,33 @@
     #galeri .card:hover .overlay {
         opacity: 1;
     }
+    .berita-card {
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .berita-card a{
+        text-decoration: none;
+    }
+
+    .berita-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .berita-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .gradient {
+        background: linear-gradient(135deg, #1e2140, #2c2f54);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
 
 
     /* Responsive */

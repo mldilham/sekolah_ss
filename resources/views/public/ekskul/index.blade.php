@@ -35,68 +35,35 @@
     }
 </style>
 
-<div class="container-fluid py-3">
-    <div class="row">
-        <div class="col-12">
-            <div class="card card-custom">
-                <!-- Header -->
-                <div class="card-header card-header-custom">
-                    <h5 class="mb-0 fw-bold">
-                        <i class="fa-solid fa-images me-2"></i> Data Ekstrakurikuler
-                    </h5>
-                </div>
+<section id="ekskul" class="py-5">
+        <div class="container">
+            <h2 class="text-center fw-bold text-primary mb-4 gradient">Ekstrakurikuler</h2>
+            <p class="text-center text-muted mb-5 gradient">Berbagai kegiatan untuk mengembangkan bakat siswa</p>
 
-                <!-- Body -->
-                <div class="card-body bg-white">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle text-center">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama Ekskul</th>
-                                    <th>Pembina</th>
-                                    <th>Jadwal Latihan</th>
-                                    <th>Deskripsi</th>
-                                    <th>Gambar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($ekskuls as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td class="fw-semibold">{{ $item->nama_ekskul }}</td>
-                                        <td>{{ $item->pembina }}</td>
-                                        <td>{{ $item->jadwal_latihan }}</td>
-                                        <td>{{ $item->deskripsi }}</td>
-                                        <td>
-                                            @if ($item->gambar)
-                                                <img src="{{ asset('uploads/ekskul/'. $item->gambar) }}"
-                                                     alt="foto {{ $item->nama_ekskul }}" width="80" height="80"
-                                                     class="img-thumbnail shadow-sm">
-                                            @else
-                                                <span class="text-muted">Tidak ada</span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="6" class="text-center text-muted py-3">
-                                            <i class="fa-solid fa-circle-info"></i> Belum ada data ekstrakurikuler
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
+            <div class="row g-4 justify-content-center">
+                @forelse($ekskuls as $ekskul)
+                <div class="col-md-4 ">
+                    <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
+                        <img src="{{ asset('uploads/ekskul/'.$ekskul->gambar) }}"
+                             alt="{{ $ekskul->nama_ekskul }}"
+                             class="card-img-top"
+                             style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="fw-bold text-primary gradient">{{ $ekskul->nama_ekskul }}</h5>
+                            <p class="text-muted flex-grow-1">
+                                {{ Str::limit($ekskul->deskripsi, 100) }}
+                            </p>
+                            <a href="{{ route('public.ekskul.detail', $ekskul->id_ekskul) }}" class=" gradient" style="font-size: 0.9rem;">
+                                    read more
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Footer -->
-                <div class="card-footer text-center bg-light">
-                    <small class="text-muted">Total Ekstrakurikuler: {{ count($ekskuls) }}</small>
-                </div>
+                @empty
+                <p class="text-center text-muted">Belum ada ekstrakurikuler.</p>
+                @endforelse
             </div>
         </div>
-    </div>
-</div>
+    </section>
 
 @endsection

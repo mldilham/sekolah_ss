@@ -78,7 +78,7 @@
                                         <td class="fw-semibold">{{ $item->nama_ekskul }}</td>
                                         <td class="">{{ $item->pembina }}</td>
                                         <td class="">{{ $item->jadwal_latihan }}</td>
-                                        <td class="">{{ $item->deskripsi }}</td>
+                                        <td>{{ Str::limit(strip_tags($item->deskripsi), 50) }}</td>
                                         <td>
                                             @if ($item->gambar)
                                                 <img src="{{ asset('uploads/ekskul/'. $item->gambar) }}"

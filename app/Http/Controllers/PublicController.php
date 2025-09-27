@@ -20,7 +20,7 @@ class PublicController extends Controller
         return view('public.berita.index', compact('beritas', 'profile'));
     }
 
-    public function detailView(int $id)
+    public function detailBerita(string $id)
     {
         $berita = Berita::with('user')->where('id_berita', $id)->firstOrFail();
         $profile = Profile::first();
@@ -53,6 +53,13 @@ class PublicController extends Controller
     {
         $ekskuls = Ekstrakulikuler::all();
         return view('public.ekskul.index', compact('ekskuls'));
+    }
+
+    public function detailEkskul(string $id)
+    {
+        $ekskul = Ekstrakulikuler::findorfail($id);
+        $profile = Profile::first();
+        return view('public.ekskul.detail',compact('ekskul', 'profile'));
     }
 
     // ---------------- PROFILE SEKOLAH ----------------

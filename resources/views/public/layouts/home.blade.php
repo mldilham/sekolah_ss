@@ -3,13 +3,12 @@
 @section('title', 'Beranda - ' . ($profile->nama_sekolah))
 
 @section('hero')
-<section class="hero d-flex align-items-center"
-         style="background: linear-gradient(135deg, #1e2140, #2c2f54); min-height: 75vh; color: white;">
+<section class="hero d-flex align-items-center">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-7">
                 <h1 class="display-4 fw-bold">{{ $profile->nama_sekolah }}</h1>
-                <p class="lead">{{ $profile->deskripsi }}</p>
+                <p class="lead">{{ $profile->deskripsi ? Str::limit($profile->deskripsi, 350) : 'Belum ada deskripsi tentang sekolah.' }}</p>
                 <a href="#berita" class="btn btn-light btn-lg rounded-pill fw-semibold">Jelajahi</a>
             </div>
         </div>
@@ -22,80 +21,95 @@
 
     {{-- Tentang Kami --}}
     @if($profile)
-    <section id="tentang-kami" class="py-5 bg-light">
+    <section id="tentang-kami" class="py-5">
         <div class="container">
-            <div class="row align-items-center g-4">
-                <div class="col-md-5">
-                    <div class="shadow rounded-4 overflow-hidden">
+            <h1 class="fw-bold text-dark mb-5 text-center gradient" style="font-size: 2rem;"><span class="text-primary">Tentang Kami</span></h1>
+            <div class="row align-items-center g-5">
+                <!-- FOTO SEKOLAH -->
+                <div class="col-lg-5">
+                    <div class="position-relative rounded-4 overflow-hidden shadow-lg">
                         <img src="{{ asset('uploads/profile/'.$profile->foto) }}"
-                             alt="Foto Sekolah"
-                             class="img-fluid w-100"
-                             style="object-fit: cover; height: 320px;">
+                            alt="Foto Sekolah"
+                            class="img-fluid w-100"
+                            style="object-fit: cover; height: 350px;">
+                        <div class="position-absolute top-0 start-0 w-100 h-100"
+                            style="background: linear-gradient(to bottom right, rgba(0,0,0,0.25), rgba(0,0,0,0.05));">
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-7">
-                    <h2 class="fw-bold text-primary mb-3">Tentang Kami</h2>
-                    <p class="text-muted" style="text-align: justify;">
-                        {{ $profile->deskripsi ?? 'Belum ada deskripsi tentang sekolah.' }}
+
+                <!-- DESKRIPSI -->
+                <div class="col-lg-7">
+                    <p class="text-muted lh-lg" style="text-align: justify;">
+                        {{ $profile->deskripsi ? Str::limit($profile->deskripsi, 450) : 'Belum ada deskripsi tentang sekolah.' }}
                     </p>
 
-                    <div class="row mt-4 text-center">
-                        <div class="col-md-4">
-                            <div class="p-3 bg-white shadow-sm rounded-3 h-100">
-                                <i class="fa fa-map-marker-alt fa-2x text-primary mb-2"></i>
-                                <p class="fw-semibold mb-1">Alamat</p>
+                    <div class="row mt-4 g-3">
+                        <div class="col-12 col-md-4">
+                            <div class="rounded-4 p-3 shadow-sm bg-white h-100 text-center">
+                                <div class="mb-2 gradient">
+                                    <i class="fa-solid fa-location-dot fa-xl text-primary"></i>
+                                </div>
+                                <p class="fw-semibold mb-0">Alamat</p>
                                 <small class="text-muted">{{ $profile->alamat ?? '-' }}</small>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="p-3 bg-white shadow-sm rounded-3 h-100">
-                                <i class="fa fa-phone fa-2x text-primary mb-2"></i>
-                                <p class="fw-semibold mb-1">Kontak</p>
+                        <div class="col-12 col-md-4">
+                            <div class="rounded-4 p-3 shadow-sm bg-white h-100 text-center">
+                                <div class="mb-2 gradient">
+                                    <i class="fa-solid fa-phone-volume fa-xl text-primary"></i>
+                                </div>
+                                <p class="fw-semibold mb-0">Kontak</p>
                                 <small class="text-muted">{{ $profile->kontak ?? '-' }}</small>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="p-3 bg-white shadow-sm rounded-3 h-100">
-                                <i class="fa fa-calendar fa-2x text-primary mb-2"></i>
-                                <p class="fw-semibold mb-1">Berdiri</p>
+                        <div class="col-12 col-md-4">
+                            <div class="rounded-4 p-3 shadow-sm bg-white h-100 text-center">
+                                <div class="mb-2 gradient">
+                                    <i class="fa-solid fa-building-columns fa-xl text-primary"></i>
+                                </div>
+                                <p class="fw-semibold mb-0">Berdiri</p>
                                 <small class="text-muted">{{ $profile->tahun_berdiri ?? '-' }}</small>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
     @endif
 
+
     {{-- Berita --}}
-    <section id="berita" class="py-5">
+    <section id="berita" class="py-5" style="background: linear-gradient(135deg, #1e2140, #2c2f54);">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="fw-bold text-primary"> Berita Terbaru</h2>
-                <p class="text-muted">Update informasi terkini dari sekolah kami</p>
+                <h2 class="fw-bold text-white">Berita Terbaru</h2>
+                <p class="text-white">Update informasi terkini dari sekolah kami</p>
             </div>
 
-            <div class="row g-4">
-                @forelse($beritas as $berita)
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 shadow border-0 rounded-4 overflow-hidden">
+            <div class="row g-4 justify-content-center">
+                @forelse($beritas->take(3) as $berita)
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="card shadow-sm border-0 h-100 berita-card">
                         @if($berita->gambar)
-                        <img src="{{ asset('uploads/berita/'.$berita->gambar) }}"
-                             alt="{{ $berita->judul }}"
-                             class="card-img-top"
-                             style="object-fit: cover; height: 220px;">
+                            <img src="{{ asset('uploads/berita/'.$berita->gambar) }}"
+                                alt="{{ $berita->judul }}"
+                                class="berita-img">
                         @endif
-                        <div class="card-body d-flex flex-column">
-                            <span class="badge bg-primary mb-2">
+                        <div class="p-3 d-flex flex-column">
+                            <small class="text-muted mb-2">
                                 {{ $berita->tanggal ? date('d M Y', strtotime($berita->tanggal)) : '' }}
-                            </span>
-                            <h5 class="fw-bold">{{ $berita->judul }}</h5>
-                            <p class="text-muted flex-grow-1">
+                            </small>
+                            <h5 class="fw-semibold mb-2">
+                                {{ Str::limit($berita->judul, 60) }}
+                            </h5>
+                            <p class="text-muted flex-grow-1" style="font-size: 0.9rem;">
                                 {{ Str::limit(strip_tags($berita->isi), 120) }}
                             </p>
-                            <a href="" class="btn btn-outline-primary btn-sm rounded-pill mt-auto">
-                                Baca Selengkapnya →
+                            <a href="{{ route('public.berita.detail', $berita->id_berita) }}" class="mt-auto gradient" style="font-size: 0.9rem;">
+                                read more
                             </a>
                         </div>
                     </div>
@@ -108,31 +122,31 @@
     </section>
 
     {{-- Statistik --}}
-    <section id="statistik" class="py-5 text-white"
-             style="background: linear-gradient(135deg, #1e2140, #2c2f54);">
+    <section id="statistik" class="py-5 text-white">
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-6 mb-4">
-                    <i class="fas fa-user-graduate fa-3x mb-3"></i>
-                    <h2 class="fw-bold">{{ $siswas->count() }}</h2>
-                    <p>Siswa</p>
+                    <i class="fas fa-user-graduate fa-3x mb-3 gradient"></i>
+                    <h2 class="fw-bold gradient">{{ $siswas->count() }}</h2>
+                    <p class="gradient">Siswa</p>
                 </div>
                 <div class="col-md-6">
-                    <i class="fas fa-chalkboard-teacher fa-3x mb-3"></i>
-                    <h2 class="fw-bold">{{ $gurus->count() }}</h2>
-                    <p>Tenaga Pendidik</p>
+                    <i class="fas fa-chalkboard-teacher fa-3x mb-3 gradient"></i>
+                    <h2 class="fw-bold gradient">{{ $gurus->count() }}</h2>
+                    <p class="gradient">Tenaga Pendidik</p>
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- Galeri --}}
-    <section id="galeri" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center fw-bold text-primary mb-4">Galeri</h2>
-            <p class="text-center text-muted mb-5">Dokumentasi kegiatan & momen terbaik</p>
 
-            <div class="row g-3">
+    {{-- Galeri --}}
+    <section id="galeri" class="py-5 bg-light" style="background: linear-gradient(135deg, #1e2140, #2c2f54);">
+        <div class="container">
+            <h2 class="text-center fw-bold text-primary mb-4 text-white">Galeri</h2>
+            <p class="text-center mb-5 text-white">Dokumentasi kegiatan & momen terbaik</p>
+
+            <div class="row g-3 justify-content-center">
                 @forelse($galeris as $galeri)
                 <div class="col-sm-6 col-md-4 col-lg-3">
                     <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
@@ -155,22 +169,25 @@
     {{-- Ekstrakurikuler --}}
     <section id="ekskul" class="py-5">
         <div class="container">
-            <h2 class="text-center fw-bold text-primary mb-4">Ekstrakurikuler</h2>
-            <p class="text-center text-muted mb-5">Berbagai kegiatan untuk mengembangkan bakat siswa</p>
+            <h2 class="text-center fw-bold text-primary mb-4 gradient">Ekstrakurikuler</h2>
+            <p class="text-center text-muted mb-5 gradient">Berbagai kegiatan untuk mengembangkan bakat siswa</p>
 
-            <div class="row g-4">
+            <div class="row g-4 justify-content-center">
                 @forelse($ekstrakulis as $ekskul)
-                <div class="col-md-4">
+                <div class="col-md-4 ">
                     <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
                         <img src="{{ asset('uploads/ekskul/'.$ekskul->gambar) }}"
                              alt="{{ $ekskul->nama_ekskul }}"
                              class="card-img-top"
                              style="height: 200px; object-fit: cover;">
                         <div class="card-body d-flex flex-column">
-                            <h5 class="fw-bold text-primary">{{ $ekskul->nama_ekskul }}</h5>
+                            <h5 class="fw-bold text-primary gradient">{{ $ekskul->nama_ekskul }}</h5>
                             <p class="text-muted flex-grow-1">
                                 {{ Str::limit($ekskul->deskripsi, 100) }}
                             </p>
+                            <a href="{{ route('public.ekskul.detail', $ekskul->id_ekskul) }}" class=" gradient" style="font-size: 0.9rem;">
+                                    read more
+                            </a>
                         </div>
                     </div>
                 </div>
