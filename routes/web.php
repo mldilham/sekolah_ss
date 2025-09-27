@@ -20,6 +20,9 @@ Route::get('/siswa', [PublicController::class, 'siswa'])->name('public.siswa');
 Route::get('/ekskul', [PublicController::class, 'ekskul'])->name('public.ekskul');
 Route::get('/ekskul/detail/{id}', [PublicController::class, 'detailEkskul'])->name('public.ekskul.detail');
 Route::get('/profile-sekolah', [PublicController::class, 'profile'])->name('public.profile');
+Route::get('/profile/informasi', [PublicController::class, 'informasi'])->name('public.profile.informasi');
+Route::get('/profile/visi-misi', [PublicController::class, 'visiMisi'])->name('public.profile.visi-misi');
+Route::get('/profile/deskripsi', [PublicController::class, 'deskripsi'])->name('public.profile.deskripsi');
 
 // Login routes
 Route::get('/auth/login', [AuthController::class, 'login'])->name('auth.login');

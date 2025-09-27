@@ -15,7 +15,7 @@ class PublicController extends Controller
     // ---------------- BERITA ----------------
     public function berita()
     {
-        $beritas = Berita::all();
+        $beritas = Berita::orderBy('tanggal', 'desc')->paginate(3);
         $profile = Profile::first();
         return view('public.berita.index', compact('beritas', 'profile'));
     }
@@ -67,5 +67,23 @@ class PublicController extends Controller
     {
         $profile = Profile::first();
         return view('public.profile.index', compact('profile'));
+    }
+
+    public function informasi()
+    {
+        $profile = Profile::first();
+        return view('public.profile.informasi', compact('profile'));
+    }
+
+    public function visiMisi()
+    {
+        $profile = Profile::first();
+        return view('public.profile.visi-misi', compact('profile'));
+    }
+
+    public function deskripsi()
+    {
+        $profile = Profile::first();
+        return view('public.profile.deskripsi', compact('profile'));
     }
 }

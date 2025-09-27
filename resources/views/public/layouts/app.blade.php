@@ -6,6 +6,7 @@
   <title>@yield('title', 'Sekolah')</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
   <style>
     html {
       scroll-behavior: smooth;
@@ -112,9 +113,11 @@
     #galeri .card img {
     transition: transform 0.4s ease;
     }
+
     #galeri .card:hover img {
         transform: scale(1.1);
     }
+
     #galeri .overlay {
         position: absolute;
         inset: 0;
@@ -122,36 +125,51 @@
         opacity: 0;
         transition: 0.4s;
     }
+
     #galeri .card:hover .overlay {
         opacity: 1;
     }
+
     .berita-card {
-        border-radius: 15px;
         overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .berita-card a{
-        text-decoration: none;
-    }
-
-    .berita-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        border-radius: 12px;
     }
 
     .berita-img {
         width: 100%;
-        height: 200px;
+        height: 220px;
         object-fit: cover;
     }
+
+    /* Overlay tanggal */
+    .tanggal-overlay {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: rgba(0,0,0,0.7);
+        color: white;
+        padding: 0.4rem 0.6rem;
+        border-radius: 8px;
+        min-width: 50px;
+    }
+
+    .tanggal-overlay h5 {
+        font-size: 1rem;
+        line-height: 1rem;
+        margin: 0;
+    }
+
+    .tanggal-overlay small {
+        font-size: 0.7rem;
+        display: block;
+    }
+
 
     .gradient {
         background: linear-gradient(135deg, #1e2140, #2c2f54);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
-
 
 
     /* Responsive */
@@ -223,5 +241,12 @@
     @include('public.layouts.footer')
 
     {{-- <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4/dist/masonry.pkgd.min.js"></script> --}}
+    <!-- jQuery for Lightbox -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Lightbox2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

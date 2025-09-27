@@ -4,65 +4,67 @@
 @section('content')
 <div class="container py-5">
     @if($profile)
-        <div class="row">
-            <div class="col-md-3 text-center">
-                <h6>Logo</h6>
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="row g-0">
+            <!-- Bagian Foto Sekolah & Logo -->
+            <div class="col-md-4 bg-light text-center p-4">
+                <h6 class="text-primary fw-bold mb-3">Logo Sekolah</h6>
                 @if($profile->logo)
                     <img src="{{ asset('uploads/profile/'.$profile->logo) }}"
-                         alt="Logo" class="img-fluid mb-3"
-                         style="max-height:120px;">
+                         alt="Logo Sekolah"
+                         class="img-fluid mb-4 rounded"
+                         style="max-height:150px;">
                 @else
-                    <p class="text-muted">Belum ada logo</p>
+                    <div class="text-muted mb-4">Belum ada logo</div>
                 @endif
 
-                <h6>Foto Sekolah</h6>
+                <h6 class="text-primary fw-bold mb-3">Foto Sekolah</h6>
                 @if($profile->foto)
                     <img src="{{ asset('uploads/profile/'.$profile->foto) }}"
-                         alt="Foto Sekolah" class="img-fluid mb-3"
-                         style="max-height:120px;">
+                         alt="Foto Sekolah"
+                         class="img-fluid rounded"
+                         style="max-height:150px;">
                 @else
-                    <p class="text-muted">Belum ada foto</p>
+                    <div class="text-muted">Belum ada foto</div>
                 @endif
             </div>
-            <div class="col-md-9">
-                <table class="table table-borderless">
-                    <tr>
-                        <th>Nama Sekolah</th>
-                        <td>{{ $profile->nama_sekolah }}</td>
-                    </tr>
-                    <tr>
-                        <th>Kepala Sekolah</th>
-                        <td>{{ $profile->kepala_sekolah }}</td>
-                    </tr>
-                    <tr>
-                        <th>NPSN</th>
-                        <td>{{ $profile->npsn }}</td>
-                    </tr>
-                    <tr>
-                        <th>Tahun Berdiri</th>
-                        <td>{{ $profile->tahun_berdiri }}</td>
-                    </tr>
-                    <tr>
-                        <th>Kontak</th>
-                        <td>{{ $profile->kontak }}</td>
-                    </tr>
-                    <tr>
-                        <th>Alamat</th>
-                        <td>{{ $profile->alamat }}</td>
-                    </tr>
-                    <tr>
-                        <th>Visi & Misi</th>
-                        <td>{{ $profile->visi_misi }}</td>
-                    </tr>
-                    <tr>
-                        <th>Deskripsi</th>
-                        <td>{{ $profile->deskripsi }}</td>
-                    </tr>
-                </table>
+
+            <!-- Bagian Detail Profil -->
+            <div class="col-md-8 p-4" id="informasi">
+                <h3 class="fw-bold text-primary mb-4">{{ $profile->nama_sekolah }}</h3>
+                <div class="row mb-2">
+                    <div class="col-sm-5 text-muted fw-semibold">Kepala Sekolah</div>
+                    <div class="col-sm-7">{{ $profile->kepala_sekolah }}</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-5 text-muted fw-semibold">NPSN</div>
+                    <div class="col-sm-7">{{ $profile->npsn }}</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-5 text-muted fw-semibold">Tahun Berdiri</div>
+                    <div class="col-sm-7">{{ $profile->tahun_berdiri }}</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-5 text-muted fw-semibold">Kontak</div>
+                    <div class="col-sm-7">{{ $profile->kontak }}</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-5 text-muted fw-semibold">Alamat</div>
+                    <div class="col-sm-7">{{ $profile->alamat }}</div>
+                </div>
+                <div class="row mb-2" id="visi-misi">
+                    <div class="col-sm-5 text-muted fw-semibold">Visi & Misi</div>
+                    <div class="col-sm-7" style="text-align: justify;">{{ $profile->visi_misi }}</div>
+                </div>
+                <div class="row" id="deskripsi">
+                    <div class="col-sm-5 text-muted fw-semibold">Deskripsi</div>
+                    <div class="col-sm-7" style="text-align: justify;">{{ $profile->deskripsi }}</div>
+                </div>
             </div>
         </div>
+    </div>
     @else
-        <p class="text-muted">Profil sekolah belum diisi.</p>
+        <p class="text-center text-muted">Profil sekolah belum diisi.</p>
     @endif
 </div>
 @endsection

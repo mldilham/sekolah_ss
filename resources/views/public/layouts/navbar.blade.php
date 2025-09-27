@@ -93,8 +93,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('public.ekskul') }}">Ekstrakurikuler</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('public.profile') }}">Profil Sekolah</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profil Sekolah</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('public.profile.informasi') }}">Informasi Sekolah</a></li>
+                        <li><a class="dropdown-item" href="{{ route('public.profile.visi-misi') }}">Visi Misi</a></li>
+                        <li><a class="dropdown-item" href="{{ route('public.profile.deskripsi') }}">Deskripsi</a></li>
+                    </ul>
                 </li>
             </ul>
 
