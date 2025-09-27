@@ -7,9 +7,9 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-7">
-                <h1 class="display-4 fw-bold">{{ $profile->nama_sekolah }}</h1>
-                <p class="lead">{{ $profile->deskripsi ? Str::limit($profile->deskripsi, 350) : 'Belum ada deskripsi tentang sekolah.' }}</p>
-                <a href="#berita" class="btn btn-light btn-lg rounded-pill fw-semibold">Jelajahi</a>
+                <h1 class="display-4 fw-bold" data-aos="fade-down" data-aos-duration="1000">{{ $profile->nama_sekolah }}</h1>
+                <p class="lead" data-aos="fade-right" data-aos-duration="1000">{{ $profile->deskripsi ? Str::limit($profile->deskripsi, 350) : 'Belum ada deskripsi tentang sekolah.' }}</p>
+                <a href="#berita" class="btn btn-light btn-lg rounded-pill fw-semibold" data-aos="zoom-in" data-aos-duration="1000">Jelajahi</a>
             </div>
         </div>
     </div>
@@ -23,11 +23,11 @@
     @if($profile)
     <section id="tentang-kami" class="py-5">
         <div class="container">
-            <h1 class="fw-bold text-dark mb-5 text-center gradient" style="font-size: 2rem;"><span class="text-primary">Tentang Kami</span></h1>
+            <h1 class="fw-bold  mb-5 text-center gradient" style="font-size: 2rem;" data-aos="fade-down" data-aos-duration="1000"><span class="text-primary">Tentang Kami</span></h1>
             <div class="row align-items-center g-5">
                 <!-- FOTO SEKOLAH -->
                 <div class="col-lg-5">
-                    <div class="position-relative rounded-4 overflow-hidden shadow-lg">
+                    <div class="position-relative rounded-2 overflow-hidden shadow-lg" data-aos="zoom-in-right" data-aos-duration="1000">
                         <img src="{{ asset('uploads/profile/'.$profile->logo) }}"
                             alt="Logo Sekolah"
                             class="img-fluid w-100"
@@ -40,11 +40,11 @@
 
                 <!-- DESKRIPSI -->
                 <div class="col-lg-7">
-                    <p class="text-muted lh-lg" style="text-align: justify;">
+                    <p class="text-muted lh-lg" style="text-align: justify;" data-aos="fade-left" data-aos-duration="1000">
                         {{ $profile->deskripsi ? Str::limit($profile->deskripsi, 450) : 'Belum ada deskripsi tentang sekolah.' }}
                     </p>
 
-                    <div class="row mt-4 g-3">
+                    <div class="row mt-4 g-3" data-aos="zoom-in-left" data-aos-duration="1000">
                         <div class="col-12 col-md-4">
                             <div class="rounded-4 p-3 shadow-sm bg-white h-100 text-center">
                                 <div class="mb-2 gradient">
@@ -85,14 +85,14 @@
     <section id="berita" class="py-5" style="background: linear-gradient(135deg, #1e2140, #2c2f54);">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="fw-bold text-white">Berita Terbaru</h2>
-                <p class="text-white">Update informasi terkini dari sekolah kami</p>
+                <h2 class="fw-bold text-white" data-aos="fade-down" data-aos-duration="1000">Berita Terbaru</h2>
+                <p class="text-white" data-aos="fade-up" data-aos-duration="1000">Update informasi terkini dari sekolah kami</p>
             </div>
 
             <div class="row g-4 justify-content-center">
                 @forelse($beritas->take(3) as $berita)
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card shadow-sm border-0 h-100 berita-card">
+                    <div class="card shadow-sm border-0 h-100 berita-card" data-aos="zoom-in" data-aos-duration="1000">
                         @if($berita->gambar)
                             <img src="{{ asset('uploads/berita/'.$berita->gambar) }}"
                                 alt="{{ $berita->judul }}"
@@ -106,7 +106,8 @@
                             <p class="text-muted flex-grow-1" style="font-size: 0.9rem;">
                                 {{ Str::limit(strip_tags($berita->isi), 120) }}
                             </p>
-                            <a href="{{ route('public.berita.detail', $berita->id_berita) }}" class="mt-auto hov" style="font-size: 0.9rem;">
+                            <a href="{{ route('public.berita.detail', $berita->id_berita) }}" class="mt-auto hov"
+                               style="font-size: 0.9rem;">
                                 Read more >>
                             </a>
                         </div>
@@ -117,21 +118,21 @@
                 @endforelse
             </div>
         </div>
-        <div class="text-center mt-4">
+        <div class="text-center mt-4" data-aos="fade-up" data-aos-duration="1000">
             <a href="{{ route('public.berita') }}" class="custom-tampilan">Tampilkan semua berita</a>
         </div>
     </section>
 
     {{-- Statistik --}}
-    <section id="statistik" class="py-5 text-white">
+    <section id="statistik" class="py-5 text-white" >
         <div class="container">
             <div class="row text-center">
-                <div class="col-md-6 mb-4">
+                <div class="col-md-6 mb-4" data-aos="zoom-out-right" data-aos-duration="1000">
                     <i class="fas fa-user-graduate fa-3x mb-3 gradient"></i>
                     <h2 class="fw-bold gradient">{{ $siswas->count() }}</h2>
                     <p class="gradient">Siswa</p>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" data-aos="zoom-out-left" data-aos-duration="1000">
                     <i class="fas fa-chalkboard-teacher fa-3x mb-3 gradient"></i>
                     <h2 class="fw-bold gradient">{{ $gurus->count() }}</h2>
                     <p class="gradient">Tenaga Pendidik</p>
@@ -144,12 +145,12 @@
     {{-- Galeri --}}
     <section id="galeri" class="py-5 bg-light" style="background: linear-gradient(135deg, #1e2140, #2c2f54);">
         <div class="container">
-            <h2 class="text-center fw-bold text-primary mb-3 text-white">Galeri</h2>
-            <p class="text-center mb-5 text-white">Dokumentasi kegiatan & momen terbaik</p>
+            <h2 class="text-center fw-bold text-primary mb-3 text-white" data-aos="fade-down" data-aos-duration="1000">Galeri</h2>
+            <p class="text-center mb-5 text-white" data-aos="fade-up" data-aos-duration="1000">Dokumentasi kegiatan & momen terbaik</p>
 
             <div class="row g-3 justify-content-center">
                 @forelse($galeris as $galeri)
-                <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-duration="1000">
                     <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
                         <a href="{{ asset('uploads/file/'.$galeri->file) }}" data-lightbox="galeri" data-title="{{ $galeri->judul }}">
                             <img src="{{ asset('uploads/file/'.$galeri->file) }}"
@@ -172,15 +173,20 @@
     {{-- Ekstrakurikuler --}}
     <section id="ekskul" class="py-5">
         <div class="container">
-            <div class="text-center mb-5 gradient">
-                <h2 class="fw-bold text-white">Ekstrakurikuler</h2>
-                <p class="text-white">Berbagai kegiatan untuk mengembangkan bakat siswa</p>
+            <!-- Judul -->
+            <div class="text-center mb-5">
+                <h2 class="fw-bold" data-aos="fade-down" data-aos-duration="1000">Ekstrakurikuler</h2>
+                <p class="" data-aos="fade-up" data-aos-duration="1000">
+                    Berbagai kegiatan untuk mengembangkan bakat siswa
+                </p>
             </div>
 
+            <!-- Daftar Ekstrakurikuler -->
             <div class="row g-4 justify-content-center">
                 @forelse($ekstrakulis as $ekskul)
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-4 col-md-6 col-sm-12" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="100">
                     <div class="card shadow-sm border-0 h-100 d-flex flex-column">
+                        <!-- Gambar -->
                         <div class="position-relative">
                             @if($ekskul->gambar)
                             <img src="{{ asset('uploads/ekskul/'.$ekskul->gambar) }}"
@@ -190,11 +196,14 @@
                             @endif
                         </div>
 
-                        <div class="p-3 d-flex flex-column" style="background: rgba(255,255,255,0.95); border-radius: 0 0 12px 12px;">
-                            <h5 class="fw-semibold mb-2 text-primary gradient">
+                        <!-- Konten -->
+                        <div class="p-3 d-flex flex-column"
+                            style="background: rgba(255,255,255,0.95); border-radius: 0 0 12px 12px;">
+                            <h5 class="fw-semibold mb-2 gradient">
                                 {{ Str::limit($ekskul->nama_ekskul, 60) }}
                             </h5>
-                            <p class="text-muted flex-grow-1" style="font-size: 0.9rem; text-align: justify;">
+                            <p class="flex-grow-1"
+                            style="font-size: 0.9rem; text-align: justify; color: #6c757d;">
                                 {{ Str::limit(strip_tags($ekskul->deskripsi), 120) }}
                             </p>
                             <a href="{{ route('public.ekskul.detail', $ekskul->id_ekskul) }}"
@@ -210,7 +219,6 @@
             </div>
         </div>
     </section>
-
-
 </div>
 @endsection
+
