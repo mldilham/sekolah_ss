@@ -18,7 +18,7 @@ main {
 
 /* Navbar */
 .navbar {
-    background-color: #1e2140;
+    background: linear-gradient(135deg, #33A1E0, #2c2f54);
 }
 
 /* Logo & Nama Sekolah */

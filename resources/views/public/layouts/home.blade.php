@@ -23,14 +23,14 @@
     <section id="tentang-kami" class="py-5">
         <div class="container">
             <h1 class="fw-bold  mb-5 text-center gradient" style="font-size: 2rem;" data-aos="fade-down" data-aos-duration="1000"><span class="text-primary">Profile Sekolah</span></h1>
-            <hr style="width: 200px; height: 3px; background-color: #2c2f54; margin: -30px auto 30px auto; border: none; border-radius: 5px;" data-aos="fade-down" data-aos-duration="1000">
+            <hr style="width: 200px; height: 3px; background-color: #33A1E0; margin: -30px auto 30px auto; border: none; border-radius: 5px;" data-aos="fade-down" data-aos-duration="1000">
             <div class="row align-items-center g-5">
                 <!-- FOTO SEKOLAH -->
                 <div class="col-lg-5">
                     <div class="position-relative rounded-2 overflow-hidden shadow-lg" data-aos="fade-up" data-aos-duration="1000">
                         <img src="{{ asset('uploads/profile/'.$profile->logo) }}"
                             alt="Logo Sekolah"
-                            class="img-fluid w-100"
+                            class="img-fluid w-100 "
                             style="object-fit: cover; height: 350px;">
                         <div class="position-absolute top-0 start-0 w-100 h-100"
                             style="background: linear-gradient(to bottom right, rgba(0,0,0,0.25), rgba(0,0,0,0.05));">
@@ -80,13 +80,12 @@
     </section>
     @endif
 
-
     {{-- Berita --}}
-    <section id="berita" class="py-5" style="background: linear-gradient(135deg, #1e2140, #2c2f54);">
+    <section id="berita" class="py-5" style="background: linear-gradient(135deg, #33A1E0, #2c2f54);">
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="fw-bold text-white" data-aos="fade-down" data-aos-duration="1000">Berita Terbaru</h2>
-                <hr style="width: 200px; height: 3px; background-color: #E6D8C3; margin: 10px auto 30px auto; border: none; border-radius: 5px;" data-aos="fade-down" data-aos-duration="1000">
+                <hr style="width: 200px; height: 3px; background-color: white; margin: 10px auto 30px auto; border: none; border-radius: 5px;" data-aos="fade-down" data-aos-duration="1000">
             </div>
 
             <div class="row g-4 justify-content-center">
@@ -96,7 +95,8 @@
                         @if($berita->gambar)
                             <img src="{{ asset('uploads/berita/'.$berita->gambar) }}"
                                 alt="{{ $berita->judul }}"
-                                class="berita-img">
+                                class="w-100 berita-img"
+                                style="object-fit: cover; height: 250px;">
                         @endif
                         <div class="p-3 d-flex flex-column">
 
@@ -143,11 +143,11 @@
 
 
     {{-- Galeri --}}
-    <section id="galeri" class="py-5 bg-light" style="background: linear-gradient(135deg, #1e2140, #2c2f54);">
+    <section id="galeri" class="py-5 bg-light" style="background: linear-gradient(135deg, #33A1E0, #2c2f54);">
         <div class="container">
                 <div class="text-center mb-5">
                     <h2 class="fw-bold text-white" data-aos="fade-down" data-aos-duration="1000">Galeri</h2>
-                    <hr style="width: 80px; height: 3px; background-color: #E6D8C3; margin: 10px auto 30px auto; border: none; border-radius: 5px;" data-aos="fade-down" data-aos-duration="1000">
+                    <hr style="width: 80px; height: 3px; background-color: white; margin: 10px auto 30px auto; border: none; border-radius: 5px;" data-aos="fade-down" data-aos-duration="1000">
                 </div>
                 <div class="row g-3 justify-content-center">
                 @forelse($galeris as $galeri)
@@ -176,15 +176,15 @@
         <div class="container">
             <!-- Judul -->
             <div class="text-center mb-5">
-                <h2 class="fw-bold" data-aos="fade-down" data-aos-duration="1000">Ekstrakurikuler</h2>
-                <hr style="width: 210px; height: 3px; background-color: #2c2f54; margin: 10px auto 30px auto; border: none; border-radius: 5px;" data-aos="fade-down" data-aos-duration="1000">
+                <h2 class="fw-bold gradient" data-aos="fade-down" data-aos-duration="1000">Ekstrakurikuler</h2>
+                <hr style="width: 210px; height: 3px; background-color: #33A1E0; margin: 10px auto 30px auto; border: none; border-radius: 5px;" data-aos="fade-down" data-aos-duration="1000">
             </div>
 
             <!-- Daftar Ekstrakurikuler -->
             <div class="row g-4 justify-content-center">
                 @forelse($ekstrakulis as $ekskul)
                 <div class="col-lg-4 col-md-6 col-sm-12" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="100">
-                    <div class="card shadow-sm border-0 h-100 d-flex flex-column">
+                    <div class="card shadow-sm border-0 h-100 berita-card">
                         <!-- Gambar -->
                         <div class="position-relative">
                             @if($ekskul->gambar)
@@ -196,9 +196,8 @@
                         </div>
 
                         <!-- Konten -->
-                        <div class="p-3 d-flex flex-column"
-                            style="background: rgba(255,255,255,0.95); border-radius: 0 0 12px 12px;">
-                            <h5 class="fw-semibold mb-2 gradient">
+                        <div class="p-3 d-flex flex-column">
+                            <h5 class="fw-semibold mb-2">
                                 {{ Str::limit($ekskul->nama_ekskul, 60) }}
                             </h5>
                             <p class="flex-grow-1"

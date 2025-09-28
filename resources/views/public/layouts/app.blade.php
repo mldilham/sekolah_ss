@@ -44,6 +44,7 @@
     }
     .card {
         transition: transform 0.2s;
+        /* background: transparent !important; */
     }
     .card:hover {
         transform: translateY(-5px);
@@ -52,8 +53,9 @@
     .card .card-detail a{
         text-decoration: none;
     }
+
     footer {
-        background: linear-gradient(135deg, #1e2140, #2c2f54);
+        background: linear-gradient(135deg, #1C6EA4, #2c2f54);
         color: white;
         padding: 40px 0 20px;
     }
@@ -66,7 +68,7 @@
 
     /* Navbar Styles */
     .navbar-custom {
-        background: linear-gradient(135deg, #1e2140 0%, #2c2f54 100%);
+        background: linear-gradient(135deg, #33A1E0 0%, #2c2f54 100%);
         box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         transition: all 0.3s ease;
         z-index: 1030;
@@ -159,6 +161,18 @@
         object-fit: cover;
     }
 
+    .ekskul-card {
+        overflow: hidden;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.2) !important; /* Transparan */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .ekskul-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
     .custom-tampilan {
         display: inline-block;
         padding: 10px 20px;
@@ -200,7 +214,7 @@
 
 
     .gradient {
-        background: linear-gradient(135deg, #1e2140, #2c2f54);
+        background: linear-gradient(135deg, #33A1E0  , #2c2f54);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -216,9 +230,9 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
-
     /* Responsive */
-    @media (max-width: 991px) {
+    @media (max-width: 991px)
+    {
         .hamburger {
             display: flex;
         }
@@ -228,7 +242,7 @@
             right: -100%;
             width: 250px;
             height: calc(100vh - 60px);
-            background: linear-gradient(135deg, #1e2140 0%, #2c2f54 100%);
+            background: linear-gradient(135deg, #33A1E0 0%, #2c2f54 100%);
             flex-direction: column;
             align-items: flex-start;
             justify-content: flex-start;
@@ -236,38 +250,59 @@
             transition: right 0.3s ease;
             box-shadow: -2px 0 10px rgba(0,0,0,0.3);
             z-index: 1029;
-        .nav-toggle-checkbox:checked ~ .navbar-menu {
-            right: 0;
-        }
-        .navbar-nav {
-            flex-direction: column;
-            width: 100%;
-        }
-        .navbar-nav .nav-item {
-            width: 100%;
-            margin: 10px 0;
-        }
-        .navbar-nav .nav-link {
-            display: block;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .navbar-menu .btn {
-            margin-top: 20px;
-            width: 100%;
-        }
-        /* Hamburger animation */
-        .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-        .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(2) {
-            opacity: 0;
-        }
-        .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
+            .nav-toggle-checkbox:checked ~ .navbar-menu {
+                right: 0;
+            }
+            .navbar-nav {
+                flex-direction: column;
+                width: 100%;
+            }
+            .navbar-nav .nav-item {
+                width: 100%;
+                margin: 10px 0;
+            }
+            .navbar-nav .nav-link {
+                display: block;
+                padding: 10px 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            .navbar-menu .btn {
+                margin-top: 20px;
+                width: 100%;
+            }
+            /* Hamburger animation */
+            .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(2) {
+                opacity: 0;
+            }
+            .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
         }
     }
+
   </style>
+  <style>
+    #ekskul .card {
+        background: rgba(255, 255, 255, 0.15) !important;
+        border-radius: 10px !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
+        overflow: hidden !important;
+        transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    }
+
+    #ekskul .card:hover {
+        transform: translateY(-6px) scale(1.02) !important;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
+        background: rgba(255, 255, 255, 0.25) !important;
+    }
+
+    #ekskul .card .p-3 {
+        background: transparent !important;
+    }
+</style>
 </head>
 <body>
     {{-- Navbar --}}
