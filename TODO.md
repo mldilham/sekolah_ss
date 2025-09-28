@@ -1,7 +1,9 @@
-# TODO: Buat Halaman Terpisah untuk Dropdown Profil Sekolah
-
-- [x] Tambahkan method di PublicController: informasi, visiMisi, deskripsi.
-- [x] Buat view: public/profile/informasi.blade.php, visi-misi.blade.php, deskripsi.blade.php.
-- [x] Tambahkan route: public.profile.informasi, public.profile.visi-misi, public.profile.deskripsi.
-- [x] Update navbar.blade.php: Ubah link dropdown ke halaman terpisah.
-- [ ] Test halaman-halaman baru dan navigasi.
+- [x] Update resources/views/public/layouts/app.blade.php: Revert gradients and colors from beige (#E6D8C3, #C2A68C) to blue (#1e2140, #2c2f54).
+  - [x] Change hero overlay gradient to blue rgba.
+  - [x] Change footer background gradient to blue.
+  - [x] Change navbar-custom colors to white text on blue.
+  - [x] Change .gradient and .hov classes to blue gradient for text.
+  - [x] Change .custom-tampilan colors to blue.
+  - [x] Change .footer-bottom border to blue.
+- [x] Update resources/views/public/layouts/home.blade.php: Revert berita and galeri section backgrounds to blue, text to white, hr colors to beige.
+- [ ] Test the changes by running the application.

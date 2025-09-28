@@ -1,4 +1,4 @@
-<footer class="py-5" style="background: linear-gradient(135deg, #1e2140, #2c2f54); color: #fff;">
+<footer class="py-5" style="background-color: #1e2140; color: #fff;">
     <div class="container">
         <div class="row gy-4">
             <!-- Logo / Nama Sekolah -->
