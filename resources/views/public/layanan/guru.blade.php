@@ -8,6 +8,9 @@
         border-radius: 12px;
         overflow: hidden;
         position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     /* Wrapper gambar */
@@ -17,7 +20,7 @@
     }
 
     .guru-img {
-        object-fit: cover;
+        object-fit: contain;
         height: 250px;
         width: 100%;
         display: block;
@@ -68,9 +71,19 @@
         opacity: 1;
         pointer-events: auto;
     }
+
+    /* Tinggi nama agar rata dan tidak membuat card beda */
+    .guru-name-wrapper {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 8px;
+        text-align: center;
+    }
 </style>
 
-<div class="container py-5" style="max-width: 900px">
+<div class="container py-5">
     <!-- Header -->
     <div class="text-center mb-5 gradient" data-aos="fade-down" data-aos-duration="1000">
         <h2 class="fw-bold text-primary">Layanan Guru</h2>
@@ -81,7 +94,7 @@
     <div class="row g-4 justify-content-center">
         @forelse($gurus as $key => $guru)
         <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{{ $key * 150 }}">
-            <div class="card guru-card shadow-sm border-0 h-100">
+            <div class="card guru-card shadow-sm border-0">
                 <div class="img-wrapper">
                     @if($guru->foto)
                         <img src="{{ asset('uploads/guru/'.$guru->foto) }}"
@@ -98,7 +111,7 @@
                     </a>
                 </div>
 
-                <div class="text-center py-2">
+                <div class="guru-name-wrapper">
                     <h5 class="fw-semibold gradient mb-0">{{ $guru->nama_guru }}</h5>
                 </div>
             </div>
@@ -106,6 +119,9 @@
         @empty
         <p class="text-center text-muted" data-aos="fade-up">Belum ada data guru.</p>
         @endforelse
+    </div>
+    <div class="d-flex justify-content-center mt-4" data-aos="fade-up">
+        {{ $gurus->links('pagination::bootstrap-4') }}
     </div>
 </div>
 @endsection

@@ -3,7 +3,7 @@
 
 @section('content')
 
-<div class="container py-5" style="max-width: 900px">
+<div class="container py-5">
     <!-- Header -->
     <div class="text-center mb-5 gradient" data-aos="fade-down" data-aos-duration="1000">
         <h2 class="fw-bold text-primary">Ekstrakurikuler</h2>
@@ -12,7 +12,7 @@
 
     <!-- Card Ekstrakurikuler -->
     <div class="row g-4 justify-content-center">
-        @forelse($ekskuls->take(3) as $key => $ekskul)
+        @forelse($ekskuls as $key => $ekskul)
         <div class="col-lg-4 col-md-6 col-sm-12"
              data-aos="fade-up"
              data-aos-duration="800"

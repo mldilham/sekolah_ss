@@ -15,7 +15,9 @@ class PublicController extends Controller
     // ---------------- BERITA ----------------
     public function berita()
     {
-        $beritas = Berita::orderBy('tanggal', 'desc')->paginate(3);
+        $beritas = Berita::orderBy('tanggal', 'desc')
+                    ->paginate(2)
+                    ->onEachSide(2);
         $profile = Profile::first();
         return view('public.berita.index', compact('beritas', 'profile'));
     }
@@ -30,15 +32,17 @@ class PublicController extends Controller
     // ---------------- GALERI ----------------
     public function galeri()
     {
+        $profile = Profile::first();
         $galeris = Galeri::all();
-        return view('public.galeri.index', compact('galeris'));
+        return view('public.galeri.index', compact('galeris','profile'));
     }
 
     // ---------------- EKSKUL ----------------
     public function ekskul()
     {
         $ekskuls = Ekstrakulikuler::all();
-        return view('public.ekskul.index', compact('ekskuls'));
+        $profile = Profile::first();
+        return view('public.ekskul.index', compact('ekskuls','profile'));
     }
 
     public function detailEkskul(string $id)
@@ -76,8 +80,11 @@ class PublicController extends Controller
     // ---------------- GURU ----------------
     public function guru()
     {
-        $gurus = Guru::all();
-        return view('public.layanan.guru', compact('gurus'));
+        $gurus = Guru::orderBy('created_at', 'desc')
+                    ->paginate(3)
+                    ->onEachSide(2);
+        $profile = Profile::first();
+        return view('public.layanan.guru', compact('gurus','profile'));
     }
 
     public function detailGuru(string $id)
