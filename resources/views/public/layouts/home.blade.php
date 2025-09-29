@@ -101,9 +101,11 @@
                             <p class="text-light flex-grow-1" style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">
                                 {{ Str::limit(strip_tags($berita->isi), 120) }}
                             </p>
-                            <a href="{{ route('public.berita.detail', $berita->id_berita) }}" class="mt-auto hov fw-semibold" style="font-size: 0.9rem; color: white;">
-                                Read more >>
-                            </a>
+                            <div class="text-center mt-4" data-aos="fade-up" data-aos-duration="1000">
+                                <a href="{{ route('public.berita') }}" class="lihat-selengkapnya">
+                                    Lihat Selengkapnya
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,7 +115,9 @@
             </div>
 
             <div class="text-center mt-4" data-aos="fade-up" data-aos-duration="1000">
-                <a href="{{ route('public.berita') }}" class="custom-tampilan">Tampilkan semua berita</a>
+                <a href="{{ route('public.berita') }}" class="custom-tampilan">
+                    Tampilkan semua berita
+                </a>
             </div>
         </div>
     </section>
@@ -185,8 +189,9 @@
                             <p class="flex-grow-1" style="font-size: 0.9rem; text-align: justify; color: #6c757d;">
                                 {{ Str::limit(strip_tags($ekskul->deskripsi), 120) }}
                             </p>
-                            <a href="{{ route('public.ekskul.detail', $ekskul->id_ekskul) }}" class="mt-auto hov fw-semibold" style="font-size: 0.9rem;">
-                                Read more >>
+                            <a href="{{ route('public.ekskul.detail', $ekskul->id_ekskul) }}"
+                                class="mt-auto hov fw-semibold border-link-ekskul">
+                                Lihat selengkapnya
                             </a>
                         </div>
                     </div>

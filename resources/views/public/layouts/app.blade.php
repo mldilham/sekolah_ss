@@ -176,16 +176,16 @@
     .custom-tampilan {
         display: inline-block;
         padding: 10px 20px;
-        color: #C2A68C;
+        color: white;
         text-decoration: none;
-        border-radius: 2px;
-        border: 2px solid #E6D8C3;
+        border-radius: 8px;
+        border: 2px solid white;
         transition: all 0.3s ease;
     }
 
     .custom-tampilan:hover {
         color: white;
-        background-color: #C2A68C;
+        background: linear-gradient(135deg, #124170  , #26667F);
         border: 2px solid #E6D8C3;
     }
 
@@ -219,17 +219,79 @@
         -webkit-text-fill-color: transparent;
     }
 
-    .hov {
-        background: linear-gradient(135deg, #1e2140, #2c2f54);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    .border-link {
+        font-size: 0.9rem;
+        text-decoration: none;
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 2px solid;
+        border-image-slice: 1;
+        border-width: 2px;
+        border-image-source: linear-gradient(135deg, #1e2140, #2c2f54);
     }
 
-    .hov:hover {
-        background: linear-gradient(135deg, #2c2f54, #1e2140);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    .border-link:hover {
+        border-image-source: linear-gradient(135deg, #2c2f54, #1e2140);
     }
+
+    .border-link-ekskul {
+        font-size: 0.9rem;
+        text-decoration: none;
+        display: inline-block;
+        padding: 4px 8px; /* padding lebih kecil agar lebar sesuai kata */
+        border: 1px solid #33A1E0;
+        border-radius: 5px;
+        color: #33A1E0;
+        transition: all 0.3s ease;
+        width: fit-content;
+        }
+
+    .border-link-ekskul:hover {
+        background: linear-gradient(135deg, #2c2f54, #33A1E0);
+        color: white;
+        border-color: #ffffff;
+        /* box-shadow: 0 4px 12px rgba(0,0,0,0.25); */
+    }
+
+    .lihat-selengkapnya {
+        font-size: 0.95rem;
+        font-weight: 600;
+        padding: 8px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        border: 2px solid white;
+        transition: all 0.3s ease;
+    }
+
+    .lihat-selengkapnya:hover {
+        background: linear-gradient(135deg, #2c2f54, #33A1E0); /* hover background gradient */
+        color: white; /* teks tetap kontras */
+        border-color: #ffffff; /* bisa pakai gradient juga kalau mau */
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* efek hover */
+    }
+
+    .border-btn {
+        font-size: 0.95rem;
+        font-weight: 600;
+        padding: 8px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        border: 2px solid white; /* border putih */
+        transition: all 0.3s ease;
+    }
+
+    .border-btn:hover {
+        background: linear-gradient(135deg, #2c2f54, #33A1E0); /* background gradient saat hover */
+        color: white;
+        border-color: #ffffff; /* border tetap putih */
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* efek shadow */
+    }
+
     /* Responsive */
     @media (max-width: 991px)
     {
@@ -284,7 +346,7 @@
     }
 
   </style>
-  <style>
+  {{-- <style>
     #ekskul .card {
         background: rgba(255, 255, 255, 0.15) !important;
         border-radius: 10px !important;
@@ -302,7 +364,7 @@
     #ekskul .card .p-3 {
         background: transparent !important;
     }
-</style>
+</style> --}}
 </head>
 <body>
     {{-- Navbar --}}

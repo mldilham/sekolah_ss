@@ -37,10 +37,11 @@
             <p class="text-muted" style="text-align: justify;">
                 {{ Str::limit(strip_tags($berita->isi), 200) }}
             </p>
-            <a href="{{ route('public.berita.detail', $berita->id_berita) }}"
-               class="hov fw-semibold text-decoration-none" data-aos="fade-left" data-aos-duration="800">
-                Read more >>
-            </a>
+            <div class="text-center mt-4" data-aos="fade-up" data-aos-duration="1000">
+                <a href="{{ route('public.berita.detail', $berita->id_berita) }}" class="border-link-ekskul">
+                    Lihat Selengkapnya
+                </a>
+            </div>
         </div>
     </div>
     @empty
@@ -60,7 +61,7 @@
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
     AOS.init({
-        once: false, 
+        once: false,
         duration: 800,
         easing: 'ease-in-out',
     });

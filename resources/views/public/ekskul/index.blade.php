@@ -37,10 +37,8 @@
                         {{ Str::limit(strip_tags($ekskul->deskripsi), 120) }}
                     </p>
                     <a href="{{ route('public.ekskul.detail', $ekskul->id_ekskul) }}"
-                       class="hov mt-auto fw-semibold"
-                       style="font-size: 0.9rem;"
-                       data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-                        Read more >>
+                        class="mt-auto hov fw-semibold border-link-ekskul">
+                        Lihat selengkapnya
                     </a>
                 </div>
             </div>
