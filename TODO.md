@@ -1,9 +1,4 @@
-- [x] Update resources/views/public/layouts/app.blade.php: Revert gradients and colors from beige (#E6D8C3, #C2A68C) to blue (#1e2140, #2c2f54).
-  - [x] Change hero overlay gradient to blue rgba.
-  - [x] Change footer background gradient to blue.
-  - [x] Change navbar-custom colors to white text on blue.
-  - [x] Change .gradient and .hov classes to blue gradient for text.
-  - [x] Change .custom-tampilan colors to blue.
-  - [x] Change .footer-bottom border to blue.
-- [x] Update resources/views/public/layouts/home.blade.php: Revert berita and galeri section backgrounds to blue, text to white, hr colors to beige.
-- [ ] Test the changes by running the application.
+- [x] Add DataTables CSS link to siswa.blade.php
+- [x] Add id="siswa-table" to the table
+- [x] Remove card-footer
+- [x] Add DataTables JS links and initialization script

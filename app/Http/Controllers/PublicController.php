@@ -34,20 +34,6 @@ class PublicController extends Controller
         return view('public.galeri.index', compact('galeris'));
     }
 
-    // ---------------- GURU ----------------
-    public function guru()
-    {
-        $gurus = Guru::all();
-        return view('public.guru.index', compact('gurus'));
-    }
-
-    // ---------------- SISWA ----------------
-    public function siswa()
-    {
-        $siswas = Siswa::all();
-        return view('public.siswa.index', compact('siswas'));
-    }
-
     // ---------------- EKSKUL ----------------
     public function ekskul()
     {
@@ -63,11 +49,11 @@ class PublicController extends Controller
     }
 
     // ---------------- PROFILE SEKOLAH ----------------
-    public function profile()
-    {
-        $profile = Profile::first();
-        return view('public.profile.index', compact('profile'));
-    }
+    // public function profile()
+    // {
+    //     $profile = Profile::first();
+    //     return view('public.profile.index', compact('profile'));
+    // }
 
     public function informasi()
     {
@@ -85,5 +71,27 @@ class PublicController extends Controller
     {
         $profile = Profile::first();
         return view('public.profile.deskripsi', compact('profile'));
+    }
+
+    // ---------------- GURU ----------------
+    public function guru()
+    {
+        $gurus = Guru::all();
+        return view('public.layanan.guru', compact('gurus'));
+    }
+
+    public function detailGuru(string $id)
+    {
+        $guru = Guru::findOrFail($id);
+        $profile = Profile::first();
+        return view('public.layanan.detail', compact('guru', 'profile'));
+    }
+
+    // ---------------- SISWA ----------------
+    public function siswa()
+    {
+        $siswas = Siswa::all();
+        $profile = Profile::first();
+        return view('public.layanan.siswa', compact('profile','siswas'));
     }
 }

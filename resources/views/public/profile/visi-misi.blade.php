@@ -4,49 +4,64 @@
 
 @section('content')
 <div class="container py-5">
+
     @if($profile)
+    <!-- Header Visi & Misi -->
+    <div class="text-center mb-5" data-aos="fade-down" data-aos-duration="1000">
+        <h1 class="fw-bold mb-2" style="font-size: 2.5rem; background: linear-gradient(135deg,#33A1E0,#2c2f54); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            Visi & Misi {{ $profile->nama_sekolah }}
+        </h1>
+        <p class="text-muted fs-5">Informasi Visi dan Misi Sekolah</p>
+    </div>
+
+    <!-- Foto Sekolah -->
+    <div class="text-center mb-5" data-aos="zoom-in" data-aos-duration="1000">
+        @if($profile->foto)
+            <div class="shadow rounded overflow-hidden" style="max-height: 400px;">
+                <img src="{{ asset('uploads/profile/'.$profile->foto) }}"
+                     alt="Foto Sekolah"
+                     class="img-fluid w-100"
+                     style="object-fit: cover; max-height: 400px;">
+            </div>
+        @else
+            <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height: 300px; width: 100%;">
+                <i class="fas fa-building fa-5x text-muted"></i>
+            </div>
+        @endif
+    </div>
+
+    <!-- Konten Visi & Misi -->
     <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
-                <div class="bg-success text-white text-center py-4" style="background: linear-gradient(135deg, #1e2140, #2c2f54); color: #fff;">
-                    <h2 class="mb-2 fw-bold">Visi & Misi {{ $profile->nama_sekolah }}</h2>
-                    <p class="mb-0 opacity-75 fs-5">Informasi Visi dan Misi Sekolah</p>
+        <div class="col-md-10" data-aos="fade-up" data-aos-duration="1000">
+            <div class="p-4 rounded-4 shadow-sm text-center hover-shadow">
+                <div class="mb-4">
+                    <i class="fas fa-eye gradient fa-3x"></i>
                 </div>
-                <div class="card-body p-4">
-                    <div class="row g-4">
-                        <!-- Foto Sekolah -->
-                        <div class="col-md-12 text-center mb-4">
-                            @if($profile->foto)
-                                <img src="{{ asset('uploads/profile/'.$profile->foto) }}" alt="Foto Sekolah" class="img-fluid rounded shadow-sm" style="max-height: 350px; object-fit: cover; width: 100%;">
-                            @else
-                                <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height: 250px; width: 100%;">
-                                    <i class="fas fa-building fa-4x text-muted"></i>
-                                </div>
-                            @endif
-                        </div>
-
-                        <!-- Visi -->
-                        <div class="col-md-12">
-                            <div class="card border-0 shadow-sm rounded-3 p-3 h-100">
-                                <div class="d-flex justify-content-center mb-4">
-                                    <i class="fas fa-eye text-success me-2 gradient" style="font-size:30px"></i>
-                                    <h4 class="mb-0 fw-bold">Visi Dan Misi</h4>
-                                </div>
-                                <p class="mb-0 text-muted">{{ $profile->visi_misi ?? 'Belum diisi' }}</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+                <h4 class="fw-bold mb-3">Visi & Misi</h4>
+                <p class="text-muted mb-0">{{ $profile->visi_misi ?? 'Belum diisi' }}</p>
             </div>
         </div>
     </div>
 
     @else
-    <div class="text-center py-5">
+    <div class="text-center py-5" data-aos="fade-up" data-aos-duration="1000">
         <i class="fas fa-exclamation-triangle fa-3x text-muted mb-3"></i>
         <p class="text-muted fs-5">Informasi visi dan misi sekolah belum diisi.</p>
     </div>
     @endif
+
 </div>
+
+<style>
+.hover-shadow:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+.gradient {
+    background: linear-gradient(135deg,#33A1E0,#2c2f54);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+</style>
 @endsection

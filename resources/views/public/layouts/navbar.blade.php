@@ -62,7 +62,7 @@ main {
 <nav class="navbar navbar-expand-lg shadow fixed-top">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center" href="#">
-      <img src="{{ asset('asset/upinipin.jpg') }}" alt="Logo" />
+      <img src="{{ asset('asset/foto.png') }}" alt="Logo" />
       <span class="ms-2">{{ $profile->nama_sekolah ?? 'Nama Sekolah' }}</span>
     </a>
 
@@ -74,8 +74,13 @@ main {
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="/">Beranda</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('public.berita') }}">Berita</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('public.guru') }}">Guru</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('public.siswa') }}">Siswa</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Layanan</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ route('public.layanan.guru') }}">Tenaga Pendidik</a></li>
+            <li><a class="dropdown-item" href="{{ route('public.layanan.siswa') }}">Siswa</a></li>
+          </ul>
+        </li>
         <li class="nav-item"><a class="nav-link" href="{{ route('public.galeri') }}">Galeri</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('public.ekskul') }}">Ekstrakurikuler</a></li>
         <li class="nav-item dropdown">

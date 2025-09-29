@@ -15,11 +15,16 @@ Route::get('/profile', [Controller::class, 'profile'])->name('profile');
 Route::get('/berita', [PublicController::class, 'berita'])->name('public.berita');
 Route::get('/berita/detail/{id}', [PublicController::class, 'detailBerita'])->name('public.berita.detail');
 Route::get('/galeri', [PublicController::class, 'galeri'])->name('public.galeri');
-Route::get('/guru', [PublicController::class, 'guru'])->name('public.guru');
-Route::get('/siswa', [PublicController::class, 'siswa'])->name('public.siswa');
+
+// Route::get('/layanan', [PublicController::class, 'layanan'])->name('public.layanan');
+Route::get('/layanan/guru', [PublicController::class, 'guru'])->name('public.layanan.guru');
+Route::get('/layanan/guru/detail/{id}', [PublicController::class, 'detailGuru'])->name('public.layanan.guru.detail');
+Route::get('/layanan/siswa', [PublicController::class, 'siswa'])->name('public.layanan.siswa');
+
 Route::get('/ekskul', [PublicController::class, 'ekskul'])->name('public.ekskul');
 Route::get('/ekskul/detail/{id}', [PublicController::class, 'detailEkskul'])->name('public.ekskul.detail');
-Route::get('/profile-sekolah', [PublicController::class, 'profile'])->name('public.profile');
+
+// Route::get('/profile-sekolah', [PublicController::class, 'profile'])->name('public.profile');
 Route::get('/profile/informasi', [PublicController::class, 'informasi'])->name('public.profile.informasi');
 Route::get('/profile/visi-misi', [PublicController::class, 'visiMisi'])->name('public.profile.visi-misi');
 Route::get('/profile/deskripsi', [PublicController::class, 'deskripsi'])->name('public.profile.deskripsi');
