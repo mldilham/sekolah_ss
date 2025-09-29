@@ -155,7 +155,7 @@
                         <a href="{{ asset('uploads/file/'.$galeri->file) }}" data-lightbox="galeri" data-title="{{ $galeri->judul }}">
                             <img src="{{ asset('uploads/file/'.$galeri->file) }}" alt="{{ $galeri->judul }}" class="w-100" style="object-fit: cover; height: 250px;">
                         </a>
-                        <div class="p-2 bg-dark text-white small">
+                        <div class="p-2 bg-dark text-white small"  style="background: linear-gradient(135deg, #33A1E0, #2c2f54);">
                             {{ Str::limit($galeri->judul, 30) }}
                         </div>
                     </div>
