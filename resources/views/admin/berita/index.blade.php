@@ -1,18 +1,30 @@
 @extends('admin.layouts.app')
 @section('content')
 
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
 <style>
-    .card-custom {
-        border: none;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    .page-wrapper {
+        padding: 25px;
     }
 
-    .card-header-custom {
+    .page-content {
+        border: none;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .header-section {
         background: linear-gradient(135deg, #4e73df, #224abe);
+        padding: 18px 25px;
+        border: none;
         color: white;
+    }
+
+    .content-section {
         padding: 15px 20px;
+        background: white;
     }
 
     .table thead th {
@@ -40,45 +52,46 @@
         border-radius: 8px;
         object-fit: cover;
     }
+
+    .footer-section {
+        padding: 12px 15px;
+        background: #f8f9fa;
+    }
 </style>
 
-<div class="container-fluid py-3">
-    <div class="row">
-        <div class="col-12">
-            <div class="card card-custom">
-                <!-- Header -->
-                <div class="card-header card-header-custom d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0 fw-bold">
-                        <i class="fa-solid fa-images me-2"></i> Data Galeri
-                    </h5>
-                    <a href="{{ route('admin.berita.create') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
-                        <i class="fa-solid fa-plus"></i> Tambah Galeri
-                    </a>
-                </div>
+<div class="page-wrapper">
+    <div class="page-content">
+        <div class="header-section d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold">
+                <i class="fa-solid fa-newspaper me-2"></i> Data Berita
+            </h5>
+            <a href="{{ route('admin.berita.create') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
+                <i class="fa-solid fa-plus"></i> Tambah Berita
+            </a>
+        </div>
 
-                <!-- Body -->
-                <div class="card-body bg-white">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle text-center">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Judul</th>
-                                    <th>Isi</th>
-                                    <th>Tanggal</th>
-                                    <th>Gambar</th>
-                                    <th>ID_USER</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($berita as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td class="fw-semibold">{{ $item->judul }}</td>
-                                        <td class="">{{ $item->isi }}</td>
-                                        <td>{{ $item->tanggal }}</td>
-                                        <td>
+        <div class="content-section">
+            <div class="table-responsive">
+                <table id="beritaTable" class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Judul</th>
+                            <th>Isi</th>
+                            <th>Tanggal</th>
+                            <th>Gambar</th>
+                            <th>ID_USER</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($berita as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td class="fw-semibold">{{ $item->judul }}</td>
+                                <td class="">{{ Str::limit(strip_tags($item->isi),120) }}</td>
+                                <td>{{ $item->tanggal }}</td>
+                                <td>
                                             @if ($item->gambar)
                                                 <img src="{{ asset('uploads/berita/'. $item->gambar) }}"
                                                      alt="foto {{ old($item->judul) }}" width="80" height="80"
@@ -90,12 +103,12 @@
                                         <td>{{ $item->user->id_user }}</td>
                                         <td>
                                             <div class="d-flex justify-content-center gap-2">
-                                                <a href="{{ route('admin.berita.edit', $item->id_berita) }}"
+                                                <a href="{{ route('admin.berita.edit', Crypt::encrypt($item->id_berita)) }}"
                                                    class="btn btn-sm btn-warning btn-action text-white"
                                                    data-bs-toggle="tooltip" title="Edit">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
-                                                <form action="{{ route('admin.berita.destroy', $item->id_berita) }}" method="post"
+                                                <form action="{{ route('admin.berita.destroy', Crypt::encrypt($item->id_berita)) }}" method="post"
                                                       onsubmit="return confirm('Yakin ingin menghapus data berita ini?')">
                                                     @csrf
                                                     @method('DELETE')
@@ -120,13 +133,36 @@
                     </div>
                 </div>
 
-                <!-- Footer -->
-                <div class="card-footer text-center bg-light">
-                    <small class="text-muted">Total Galeri: {{ count($berita) }}</small>
-                </div>
-            </div>
+        <div class="footer-section text-center">
+            <small class="text-muted">Total Berita: {{ count($berita) }}</small>
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#beritaTable').DataTable({
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            language: {
+                search: "Cari:",
+                lengthMenu: "Tampilkan _MENU_ data",
+                zeroRecords: "Tidak ada data yang cocok",
+                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                infoEmpty: "Tidak ada data",
+                infoFiltered: "(disaring dari _MAX_ total data)",
+                paginate: {
+                    first: "Pertama",
+                    last: "Terakhir",
+                    next: "›",
+                    previous: "‹"
+                }
+            }
+        });
+    });
+</script>
 
 @endsection

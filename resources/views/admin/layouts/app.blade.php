@@ -27,15 +27,31 @@
     }
     .sidebar {
         position: fixed;
-        top: 56px;
+        top: 0;
         left: 0;
         bottom: 0;
         width: 220px;
         padding-top: 1rem;
-        background: linear-gradient(180deg, #4e73df 0%, #224abe 100%);
+        background: linear-gradient(180deg, #33A1E0 0%, #2c2f54 100%);
         color: #fff;
         overflow-y: auto;
         transition: all 0.3s;
+        z-index: 1030;
+    }
+
+    .sidebar.collapsed {
+        width: 70px;
+    }
+
+    .sidebar.collapsed .sidebar-brand-text,
+    .sidebar.collapsed .sidebar-text {
+        display: none;
+    }
+
+    .sidebar.collapsed .nav-link i {
+        margin-right: 0;
+        text-align: center;
+        width: 100%;
     }
 
     .sidebar .nav-link {
@@ -69,9 +85,42 @@
 
     #main-content {
         margin-left: 220px;
-        margin-top: 56px;
+        margin-top: 0;
         padding: 2rem;
-        min-height: calc(100vh - 56px);
+        min-height: 100vh;
+        transition: margin-left 0.3s;
+    }
+
+    .sidebar.collapsed ~ #main-content {
+        margin-left: 70px;
+    }
+
+    .toggle-btn {
+        position: fixed;
+        top: 15px;
+        left: 235px;
+        z-index: 1040;
+        background: linear-gradient(135deg, #33A1E0, #2c2f54);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .sidebar.collapsed ~ .toggle-btn {
+        left: 85px;
+    }
+
+    .toggle-btn:hover {
+        background: linear-gradient(135deg, #2c2f54, #33A1E0);
+        transform: scale(1.1);
     }
 
 
@@ -85,15 +134,12 @@
 </head>
 <body>
     <div class="d-flex">
-
         @include('admin.layouts.sidebar')
-
 
         <main class="flex-grow-1" id="main-content">
             @yield('content')
         </main>
     </div>
-
 </body>
 </html>
 

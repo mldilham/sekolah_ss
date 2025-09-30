@@ -1,21 +1,38 @@
 @extends('admin.layouts.app')
 @section('content')
 
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
 <style>
-    .card-custom {
+    .page-wrapper {
+        padding: 25px;
+    }
+
+    .page-content {
         border: none;
-        border-radius: 12px;
+        border-radius: 14px;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
 
-    .card-header-custom {
+    .header-section {
         background: linear-gradient(135deg, #4e73df, #224abe);
+        padding: 18px 25px;
+        border: none;
         color: white;
-        padding: 15px 20px;
     }
 
-    .table thead th {
+    .header-section h5 {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .content-section {
+        padding: 15px 20px;
+        background: white;
+    }
+
+    table thead th {
         background-color: #f8f9fc;
         font-weight: 600;
         text-transform: uppercase;
@@ -40,93 +57,116 @@
         border-radius: 8px;
         object-fit: cover;
     }
+
+    .footer-section {
+        padding: 12px 15px;
+        background: #f8f9fa;
+    }
 </style>
 
-<div class="container-fluid py-3">
-    <div class="row">
-        <div class="col-12">
-            <div class="card card-custom">
-                <!-- Header -->
-                <div class="card-header card-header-custom d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0 fw-bold">
-                        <i class="fa-solid fa-user-tie me-2"></i> Data Guru
-                    </h5>
-                    <a href="{{ route('admin.guru.create') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
-                        <i class="fa-solid fa-plus"></i> Tambah Guru
-                    </a>
-                </div>
+<div class="page-wrapper">
+    <div class="page-content">
+        <div class="header-section d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold">
+                <i class="fa-solid fa-user-tie me-2"></i> Data Guru
+            </h5>
+            <a href="{{ route('admin.guru.create') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
+                <i class="fa-solid fa-plus"></i> Tambah Guru
+            </a>
+        </div>
 
-                <!-- Body -->
-                <div class="card-body bg-white">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle text-center">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama Guru</th>
-                                    <th>NIP</th>
-                                    <th>Mata Pelajaran</th>
-                                    <th>Foto</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($guru as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td class="fw-semibold">{{ $item->nama_guru }}</td>
-                                        <td>{{ $item->nip }}</td>
-                                        <td>{{ $item->mapel }}</td>
-                                        <td class="text-center">
-                                            @if ($item->foto)
-                                                <img src="{{ asset('uploads/guru/'. $item->foto) }}"
-                                                     alt="foto {{ $item->nama_guru }}"
-                                                     width="60" height="60"
-                                                     class="img-thumbnail shadow-sm">
-                                            @else
-                                                <span class="text-muted">Tidak ada</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-center gap-2">
-                                                <a href="{{ route('admin.guru.edit', $item->id_guru) }}"
-                                                   class="btn btn-sm btn-warning btn-action text-white"
-                                                   data-bs-toggle="tooltip" title="Edit">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                </a>
-
-                                                <form action="{{ route('admin.guru.destroy', $item->id_guru) }}" method="post"
-                                                      onsubmit="return confirm('Yakin ingin menghapus guru ini?')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                            class="btn btn-sm btn-danger btn-action"
-                                                            data-bs-toggle="tooltip" title="Hapus">
-                                                        <i class="fa-solid fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="6" class="text-center text-muted py-3">
-                                            <i class="fa-solid fa-circle-info"></i> Belum ada data guru
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Footer -->
-                <div class="card-footer text-center bg-light">
-                    <small class="text-muted">Total Guru: {{ count($guru) }}</small>
-                </div>
+        <div class="content-section">
+            <div class="table-responsive">
+                <table id="guruTable" class="table table-striped table-hover align-middle ">
+                    <thead class="table-light">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Guru</th>
+                            <th>NIP</th>
+                            <th>Mata Pelajaran</th>
+                            <th>Foto</th>
+                            <th width="120px">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($guru as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td class="fw-semibold">{{ $item->nama_guru }}</td>
+                                <td>{{ $item->nip }}</td>
+                                <td>{{ $item->mapel }}</td>
+                                <td>
+                                    @if ($item->foto)
+                                        <img src="{{ asset('uploads/guru/'. $item->foto) }}"
+                                             alt="foto {{ $item->nama_guru }}"
+                                             width="60" height="60"
+                                             class="img-thumbnail shadow-sm">
+                                    @else
+                                        <span class="text-muted">Tidak ada</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ route('admin.guru.edit', Crypt::encrypt($item->id_guru)) }}"
+                                           class="btn btn-sm btn-warning btn-action text-white"
+                                           data-bs-toggle="tooltip" title="Edit">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <form action="{{ route('admin.guru.destroy', Crypt::encrypt($item->id_guru)) }}" method="post"
+                                              onsubmit="return confirm('Yakin ingin menghapus guru ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                    class="btn btn-sm btn-danger btn-action"
+                                                    data-bs-toggle="tooltip" title="Hapus">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center text-muted py-3">
+                                    <i class="fa-solid fa-circle-info"></i> Belum ada data guru
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
+        </div>
+
+        <div class="footer-section text-center">
+            <small class="text-muted">Total Guru: {{ count($guru) }}</small>
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#guruTable').DataTable({
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            language: {
+                search: "Cari:",
+                lengthMenu: "Tampilkan _MENU_ data",
+                zeroRecords: "Tidak ada data yang cocok",
+                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                infoEmpty: "Tidak ada data",
+                infoFiltered: "(disaring dari _MAX_ total data)",
+                paginate: {
+                    first: "Pertama",
+                    last: "Terakhir",
+                    next: "›",
+                    previous: "‹"
+                }
+            }
+        });
+    });
+</script>
 
 @endsection

@@ -41,7 +41,7 @@
                 <!-- Header -->
                 <div class="card-header card-header-custom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 fw-bold">
-                        <i class="fa-solid fa-image me-2"></i> Tambah Data Berita
+                        <i class="fa-solid fa-image me-2"></i> Tambah Data Ekskul
                     </h5>
                     <a href="{{ route('operator.ekskul') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
                         <i class="fa-solid fa-arrow-left"></i> Kembali

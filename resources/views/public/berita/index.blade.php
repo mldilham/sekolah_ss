@@ -39,7 +39,7 @@
                         {{ Str::limit(strip_tags($berita->isi), 120) }}
                     </p>
                     <div class="text-center mt-3">
-                        <a href="{{ route('public.berita.detail', $berita->id_berita) }}" class="border-link-ekskul">
+                        <a href="{{ route('public.berita.detail', Crypt::encrypt($berita->id_berita)) }}" class="border-link-ekskul">
                             Lihat Selengkapnya
                         </a>
                     </div>

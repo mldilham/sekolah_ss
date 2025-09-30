@@ -45,7 +45,7 @@
 
                 <!-- Body -->
                 <div class="card-body">
-                    <form action="{{ route('operator.berita.update', $berita->id_berita) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('operator.berita.update', Crypt::encrypt($berita->id_berita)) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 

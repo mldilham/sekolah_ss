@@ -9,6 +9,7 @@ use App\Models\Guru;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class OperatorController extends Controller
 {
@@ -57,12 +58,14 @@ class OperatorController extends Controller
 
     public function editBerita($id)
     {
+        $id = Crypt::decrypt($id);
         $berita = Berita::where('id_user', Auth::id())->findOrFail($id);
         return view('operator.berita.edit', compact('berita'));
     }
 
     public function updateBerita(Request $request, $id)
     {
+        $id = Crypt::decrypt($id);
         $request->validate([
             'judul' => 'required|max:50',
             'isi' => 'required|string',
@@ -92,6 +95,7 @@ class OperatorController extends Controller
 
     public function destroyBerita($id)
     {
+        $id = Crypt::decrypt($id);
         $berita = Berita::findOrFail($id);
         $berita->delete();
         return redirect()->route('operator.berita')->with('success', 'Berita berhasil dihapus!');
@@ -138,12 +142,14 @@ class OperatorController extends Controller
 
     public function editGaleri($id)
     {
+        $id = Crypt::decrypt($id);
         $galeri = Galeri::findOrFail($id);
         return view('operator.galeri.edit', compact('galeri'));
     }
 
     public function updateGaleri(Request $request, $id)
     {
+        $id = Crypt::decrypt($id);
         $request->validate([
             'judul' => 'required|max:50',
             'keterangan' => 'nullable|string',
@@ -175,6 +181,7 @@ class OperatorController extends Controller
 
     public function destroyGaleri($id)
     {
+        $id = Crypt::decrypt($id);
         $galeri = Galeri::findOrFail($id);
         $galeri->delete();
         return redirect()->route('operator.galeri')->with('success', 'Galeri berhasil dihapus!');
@@ -221,12 +228,14 @@ class OperatorController extends Controller
 
     public function editEkskul($id)
     {
+        $id = Crypt::decrypt($id);
         $ekskul = Ekstrakulikuler::findOrFail($id);
         return view('operator.ekskul.edit', compact('ekskul'));
     }
 
     public function updateEkskul(Request $request, $id)
     {
+        $id = Crypt::decrypt($id);
         $request->validate([
             'nama_ekskul' => 'required|max:40',
             'pembina' => 'required|max:40',
@@ -291,12 +300,14 @@ class OperatorController extends Controller
 
     public function editSiswa(string $id)
     {
+        $id = Crypt::decrypt($id);
         $siswa = Siswa::findOrFail($id);
         return view('operator.siswa.edit', compact('siswa'));
     }
 
     public function updateSiswa(Request $request, string $id)
     {
+        $id = Crypt::decrypt($id);
         $request->validate([
             'nisn' => 'required|max:10',
             'nama_siswa' => 'required|max:40',
@@ -312,6 +323,7 @@ class OperatorController extends Controller
 
     public function destroySiswa(string $id)
     {
+        $id = Crypt::decrypt($id);
         $siswa = Siswa::findOrFail($id);
         $siswa->delete();
         return redirect()->route('operator.siswa')->with('success','Data berhasil dihapus.');

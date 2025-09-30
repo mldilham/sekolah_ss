@@ -38,14 +38,14 @@
                     <h5 class="mb-0 fw-bold">
                         <i class="fa-solid fa-user-pen me-2"></i> Edit Data Guru
                     </h5>
-                    <a href="{{ route('operator.ekskul') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
+                    <a href="{{ route('admin.ekskul') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
                         <i class="fa-solid fa-arrow-left"></i> Kembali
                     </a>
                 </div>
 
                 <!-- Body -->
                 <div class="card-body">
-                    <form action="{{ route('operator.ekskul.update', $ekskul->id_ekskul) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.ekskul.update', Crypt::encrypt($ekskul->id_ekskul)) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -104,7 +104,7 @@
                             <button type="submit" class="btn btn-primary btn-action">
                                 <i class="fa-solid fa-save"></i> Simpan
                             </button>
-                            <a href="{{ route('operator.ekskul') }}" class="btn btn-danger btn-action">
+                            <a href="{{ route('admin.ekskul') }}" class="btn btn-danger btn-action">
                                 <i class="fa-solid fa-xmark"></i> Batal
                             </a>
                         </div>

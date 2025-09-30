@@ -10,7 +10,7 @@
                 </a>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.user.update', $users->id_user) }}" method="post" >
+                <form action="{{ route('admin.user.update', Crypt::encrypt($users->id_user)) }}" method="post" >
                     @csrf
                     @method('PUT')
 

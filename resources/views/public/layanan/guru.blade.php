@@ -106,7 +106,7 @@
                              class="w-100 guru-img">
                     @endif
 
-                    <a href="{{ route('public.layanan.guru.detail', $guru->id_guru) }}" class="detail-btn">
+                    <a href="{{ route('public.layanan.guru.detail', Crypt::encrypt($guru->id_guru)) }}" class="detail-btn">
                         Lihat Detail >>
                     </a>
                 </div>

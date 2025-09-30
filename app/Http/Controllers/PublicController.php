@@ -9,6 +9,7 @@ use App\Models\Guru;
 use App\Models\Profile;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class PublicController extends Controller
 {
@@ -24,6 +25,7 @@ class PublicController extends Controller
 
     public function detailBerita(string $id)
     {
+        $id = Crypt::decrypt($id);
         $berita = Berita::with('user')->where('id_berita', $id)->firstOrFail();
         $profile = Profile::first();
         return view('public.berita.detail',compact('berita', 'profile'));
@@ -47,6 +49,7 @@ class PublicController extends Controller
 
     public function detailEkskul(string $id)
     {
+        $id = Crypt::decrypt($id);
         $ekskul = Ekstrakulikuler::findorfail($id);
         $profile = Profile::first();
         return view('public.ekskul.detail',compact('ekskul', 'profile'));
@@ -89,6 +92,7 @@ class PublicController extends Controller
 
     public function detailGuru(string $id)
     {
+        $id = Crypt::decrypt($id);
         $guru = Guru::findOrFail($id);
         $profile = Profile::first();
         return view('public.layanan.detail', compact('guru', 'profile'));

@@ -45,7 +45,7 @@
 
                 <!-- Body -->
                 <div class="card-body">
-                    <form action="{{ route('admin.ekskul.update', $ekskul->id_ekskul) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.ekskul.update', Crypt::encrypt($ekskul->id_ekskul)) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 

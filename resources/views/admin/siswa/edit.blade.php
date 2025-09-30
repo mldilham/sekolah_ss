@@ -45,7 +45,7 @@
 
                 <!-- Body -->
                 <div class="card-body">
-                    <form action="{{ route('admin.siswa.update', $siswa->id_siswa) }}" method="post">
+                    <form action="{{ route('admin.siswa.update', Crypt::encrypt($siswa->id_siswa)) }}" method="post">
                         @csrf
                         @method('PUT')
 

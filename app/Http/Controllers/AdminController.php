@@ -11,6 +11,7 @@ use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class AdminController extends Controller
 {
@@ -40,20 +41,30 @@ class AdminController extends Controller
 
     public function editView(string $id)
     {
+        $id = Crypt::decrypt($id);
         $users = User::findOrFail($id);
         return view('admin.user.edit', compact('users'));
     }
 
     public function updateView(Request $request, string $id)
     {
+        $id = Crypt::decrypt($id);
         $validations = $request->validate([
             'name' => 'required|max:255',
             'username' => 'required|max:255',
             'email' => 'required|email',
             'role' => 'required|in:admin,operator',
+            'password' => 'nullable|min:6|confirmed',
         ]);
 
         $users = User::findOrFail($id);
+
+        if ($request->filled('password')) {
+            $validations['password'] = bcrypt($request->password);
+        } else {
+            unset($validations['password']);
+        }
+
         $users->update($validations);
 
         return redirect()->route('admin.user')->with('success','Berhasil Mengubah data.');
@@ -61,6 +72,7 @@ class AdminController extends Controller
 
     public function destroyView(string $id)
     {
+        $id = Crypt::decrypt($id);
         $users = User::findOrFail($id);
         $users->delete();
         return redirect()->route('admin.user')->with('success', 'Data berhasil dihapus.');
@@ -105,12 +117,14 @@ class AdminController extends Controller
 
     public function editGuru(string $id)
     {
+        $id = Crypt::decrypt($id);
         $guru = Guru::findOrFail($id);
         return view('admin.guru.edit', compact('guru'));
     }
 
     public function updateGuru(Request $request, string $id)
     {
+        $id = Crypt::decrypt($id);
         $request->validate([
             'nama_guru' => 'required|max:40',
             'nip' => 'required|max:15',
@@ -141,6 +155,7 @@ class AdminController extends Controller
 
     public function destroyGuru(string $id)
     {
+        $id = Crypt::decrypt($id);
         $guru = Guru::findOrFail($id);
         if($guru->foto && file_exists(public_path('uploads/guru/'.$guru->foto))) {
             unlink(public_path('uploads/guru/'.$guru->foto));
@@ -177,12 +192,14 @@ class AdminController extends Controller
 
     public function editSiswa(string $id)
     {
+        $id = Crypt::decrypt($id);
         $siswa = Siswa::findOrFail($id);
         return view('admin.siswa.edit', compact('siswa'));
     }
 
     public function updateSiswa(Request $request, string $id)
     {
+        $id = Crypt::decrypt($id);
         $request->validate([
             'nisn' => 'required|max:10',
             'nama_siswa' => 'required|max:40',
@@ -198,6 +215,7 @@ class AdminController extends Controller
 
     public function destroySiswa(string $id)
     {
+        $id = Crypt::decrypt($id);
         $siswa = Siswa::findOrFail($id);
         $siswa->delete();
         return redirect()->route('admin.siswa')->with('success','Data berhasil dihapus.');
@@ -244,12 +262,14 @@ class AdminController extends Controller
 
     public function editGaleri(string $id)
     {
+        $id = Crypt::decrypt($id);
         $galeri = Galeri::findOrFail($id);
         return view('admin.galeri.edit', compact('galeri'));
     }
 
     public function updateGaleri(Request $request, string $id)
     {
+        $id = Crypt::decrypt($id);
         $request->validate([
             'judul' => 'required|max:50',
             'keterangan' => 'nullable|string',
@@ -282,6 +302,7 @@ class AdminController extends Controller
 
     public function destroyGaleri(string $id)
     {
+        $id = Crypt::decrypt($id);
         $galeri = Galeri::findOrFail($id);
         if ($galeri->file && file_exists(public_path('uploads/file/'.$galeri->file))) {
             unlink(public_path('uploads/file/'.$galeri->file));
@@ -330,6 +351,7 @@ class AdminController extends Controller
 
     public function editBerita(string $id)
     {
+        $id = Crypt::decrypt($id);
         $berita = Berita::findOrFail($id);
 
         // Operator hanya bisa edit berita miliknya sendiri
@@ -342,6 +364,7 @@ class AdminController extends Controller
 
     public function updateBerita(Request $request, string $id)
     {
+        $id = Crypt::decrypt($id);
         $request->validate([
             'judul' => 'required|max:50',
             'isi' => 'required|string',
@@ -376,6 +399,7 @@ class AdminController extends Controller
 
     public function destroyBerita(string $id)
     {
+        $id = Crypt::decrypt($id);
         $berita = Berita::findOrFail($id);
 
         if(Auth::user()->role !== 'admin' && $berita->id_user !== Auth::id()){
@@ -431,12 +455,14 @@ class AdminController extends Controller
 
     public function editEkskul(string $id)
     {
+        $id = Crypt::decrypt($id);
         $ekskul = Ekstrakulikuler::findOrFail($id);
         return view('admin.ekskul.edit', compact('ekskul'));
     }
 
     public function updateEkskul(Request $request, string $id)
     {
+        $id = Crypt::decrypt($id);
         $request->validate([
             'nama_ekskul' => 'required|max:40',
             'pembina' => 'required|max:40',
@@ -468,6 +494,7 @@ class AdminController extends Controller
 
     public function destroyEkskul(string $id)
     {
+        $id = Crypt::decrypt($id);
         $ekskul = Ekstrakulikuler::findOrFail($id);
         if ($ekskul->gambar && file_exists(public_path('uploads/ekskul/'.$ekskul->gambar))) {
             unlink(public_path('uploads/ekskul/'.$ekskul->gambar));

@@ -70,10 +70,26 @@
     bottom: 0;
     width: 220px;
     padding-top: 1rem;
-    background: linear-gradient(180deg, #4e73df 0%, #224abe 100%);
+    background: linear-gradient(180deg, #33A1E0 0%, #2c2f54 100%);
     font-family: 'Poppins', sans-serif;
     overflow-y: auto;
     z-index: 1030;
+    transition: width 0.3s;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar.collapsed .sidebar-brand-text,
+.sidebar.collapsed .sidebar-text {
+    display: none;
+}
+
+.sidebar.collapsed .nav-link i {
+    margin-right: 0;
+    text-align: center;
+    width: 100%;
 }
 
 /* Compact menu items */

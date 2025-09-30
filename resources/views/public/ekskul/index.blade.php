@@ -36,7 +36,7 @@
                        data-aos="fade-left" data-aos-duration="800">
                         {{ Str::limit(strip_tags($ekskul->deskripsi), 120) }}
                     </p>
-                    <a href="{{ route('public.ekskul.detail', $ekskul->id_ekskul) }}"
+                    <a href="{{ route('public.ekskul.detail', Crypt::encrypt($ekskul->id_ekskul)) }}"
                         class="mt-auto hov fw-semibold border-link-ekskul">
                         Lihat selengkapnya
                     </a>

@@ -1,4 +1,4 @@
-{{-- @php
+@php
     $menus = [
         'admin' => [
             (object) ['title' => 'Dashboard', 'path' => 'admin.dashboard', 'icon' => 'fa-solid fa-gauge'],
@@ -13,9 +13,10 @@
         'operator' => [
             (object) ['title' => 'Dashboard', 'path' => 'operator.dashboard', 'icon' => 'fa-solid fa-gauge'],
             (object) ['title' => 'Siswa', 'path' => 'operator.siswa', 'icon' => 'fa-solid fa-user-graduate'],
-            (object) ['title' => 'Galeri', 'path' => 'operator.galeri', 'icon' => 'fa-regular fa-images'],
             (object) ['title' => 'Berita', 'path' => 'operator.berita', 'icon' => 'fa-regular fa-newspaper'],
             (object) ['title' => 'Ekstrakulikuler', 'path' => 'operator.ekskul', 'icon' => 'fa-solid fa-laptop-code'],
+            (object) ['title' => 'Galeri', 'path' => 'operator.galeri', 'icon' => 'fa-regular fa-images'],
+            (object) ['title' => 'Profile Sekolah', 'path' => 'operator.profile', 'icon' => 'fa-solid fa-id-card'],
         ],
     ];
 
@@ -27,7 +28,7 @@
 
 <ul class="navbar-nav sidebar sidebar-dark accordion">
 
-    <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="{{ route('operator.dashboard') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="{{ route($role . '.dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fa-solid fa-school"></i>
         </div>
@@ -51,7 +52,7 @@
         <li class="nav-item px-3 mb-2">
             <form action="{{ route('auth.logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="btn btn-danger w-100 py-1 rounded" onclick="return confirm('Yakin ingin logout?')">
+                <button type="submit" class="btn btn-outline-danger w-100 py-1 rounded" onclick="return confirm('Yakin ingin logout?')">
                     <i class="fa-solid fa-right-from-bracket me-1"></i> Logout
                 </button>
             </form>
@@ -67,10 +68,26 @@
     bottom: 0;
     width: 220px;
     padding-top: 1rem;
-    background: linear-gradient(180deg, #4e73df 0%, #224abe 100%);
+    background: linear-gradient(180deg, #33A1E0 0%, #2c2f54 100%);
     font-family: 'Poppins', sans-serif;
     overflow-y: auto;
     z-index: 1030;
+    transition: width 0.3s;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar.collapsed .sidebar-brand-text,
+.sidebar.collapsed .sidebar-text {
+    display: none;
+}
+
+.sidebar.collapsed .nav-link i {
+    margin-right: 0;
+    text-align: center;
+    width: 100%;
 }
 
 /* Compact menu items */
@@ -126,4 +143,4 @@
     background-color: #c82333;
     border-color: #bd2130;
 }
-</style> --}}
+</style>
