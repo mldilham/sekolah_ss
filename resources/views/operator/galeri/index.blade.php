@@ -94,7 +94,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="fw-semibold">{{ $item->judul }}</td>
-                                <td>{{ Str::limit(strip_tags($item->keterangan), 120) }}</td>
+                                <td>{{ $item->keterangan ?? '-' }}</td>
                                 <td>
                                     <span class="badge {{ $item->kategori == 'foto' ? 'bg-success' : 'bg-info' }}">
                                         {{ ucfirst($item->kategori) }}
@@ -163,18 +163,3 @@
                 search: "Cari:",
                 lengthMenu: "Tampilkan _MENU_ data",
                 zeroRecords: "Tidak ada data yang cocok",
-                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
-                infoEmpty: "Tidak ada data",
-                infoFiltered: "(disaring dari _MAX_ total data)",
-                paginate: {
-                    first: "Pertama",
-                    last: "Terakhir",
-                    next: "›",
-                    previous: "‹"
-                }
-            }
-        });
-    });
-</script>
-
-@endsection

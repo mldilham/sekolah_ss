@@ -7,63 +7,52 @@
     .page-wrapper {
         padding: 25px;
     }
-
     .page-content {
         border: none;
         border-radius: 14px;
         overflow: hidden;
         box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
-
     .header-section {
         background: linear-gradient(135deg, #4e73df, #224abe);
         padding: 18px 25px;
         border: none;
         color: white;
     }
-
     .header-section h5 {
         font-size: 18px;
         margin: 0;
     }
-
     .content-section {
         padding: 15px 20px;
         background: white;
     }
-
     table thead th {
         background-color: #f8f9fc;
         font-weight: 600;
         text-transform: uppercase;
         font-size: 13px;
     }
-
     .table-hover tbody tr:hover {
         background-color: #f1f5ff;
         transition: 0.2s ease-in-out;
     }
-
     .btn-action {
         border-radius: 8px;
         transition: 0.3s;
     }
-
     .btn-action:hover {
         transform: scale(1.1);
     }
-
     .img-thumbnail {
         border-radius: 8px;
         object-fit: cover;
     }
-
     .badge {
         padding: 6px 10px;
         font-size: 12px;
         border-radius: 6px;
     }
-
     .footer-section {
         padding: 12px 15px;
         background: #f8f9fa;
@@ -83,7 +72,7 @@
 
         <div class="content-section">
             <div class="table-responsive">
-                <table id="galeriTable" class="table table-striped table-hover align-middle">
+                <table id="galeriTable" class="table table-striped table-hover align-middle text-center">
                     <thead class="table-light">
                         <tr>
                             <th>No</th>
@@ -100,7 +89,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="fw-semibold">{{ $item->judul }}</td>
-                                <td>{{ Str::limit(strip_tags($item->keterangan), 120) }}</td>
+                                <td>{{ $item->keterangan ?? '-' }}</td>
                                 <td>
                                     <span class="badge {{ $item->kategori == 'foto' ? 'bg-success text-white' : 'bg-info text-white' }}">
                                         {{ ucfirst($item->kategori) }}
@@ -118,41 +107,28 @@
                                         </video>
                                     @endif
                                 </td>
-                                <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
+                                <td>{{ $item->tanggal }}</td>
                                 <td>
-                                    <div class="d-flex justify-content-center gap-2">
-                                        <a href="{{ route('admin.galeri.edit', Crypt::encrypt($item->id_galeri)) }}"
-                                           class="btn btn-sm btn-warning btn-action text-white"
-                                           data-bs-toggle="tooltip" title="Edit">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                        <form action="{{ route('admin.galeri.destroy', Crypt::encrypt($item->id_galeri)) }}" method="post"
-                                              onsubmit="return confirm('Yakin ingin menghapus data galeri ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                    class="btn btn-sm btn-danger btn-action"
-                                                    data-bs-toggle="tooltip" title="Hapus">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </div>
+                                    <a href="{{ route('admin.galeri.edit', Crypt::encrypt($item->id_galeri)) }}" class="btn btn-warning btn-sm btn-action">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <form action="{{ route('admin.galeri.destroy', Crypt::encrypt($item->id_galeri)) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm btn-action" onclick="return confirm('Hapus data ini?')">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center text-muted py-3">
-                                    <i class="fa-solid fa-circle-info"></i> Belum ada data galeri
-                                </td>
+                                <td colspan="7" class="text-muted">Belum ada data galeri.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
-        </div>
-
-        <div class="footer-section text-center">
-            <small class="text-muted">Total Galeri: {{ count($galeri) }}</small>
         </div>
     </div>
 </div>

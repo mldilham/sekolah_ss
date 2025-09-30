@@ -224,7 +224,7 @@ class AdminController extends Controller
     // ---------------- GALERI ----------------
     public function galeriView()
     {
-        $galeri = Galeri::all();
+        $galeri = Galeri::orderBy('tanggal', 'desc')->get();
         return view('admin.galeri.index', compact('galeri'));
     }
 
@@ -238,7 +238,7 @@ class AdminController extends Controller
         $request->validate([
             'judul' => 'required|max:50',
             'keterangan' => 'nullable|string',
-            'file' => 'nullable|file|mimes:jpg,jpeg,png,mp4|max:20480',
+            'file' => 'nullable|file|mimes:jpg,jpeg,png,mp4|max:204800',
             'kategori' => 'required|in:foto,video',
             'tanggal' => 'required|date',
         ]);
@@ -270,10 +270,11 @@ class AdminController extends Controller
     public function updateGaleri(Request $request, string $id)
     {
         $id = Crypt::decrypt($id);
+
         $request->validate([
             'judul' => 'required|max:50',
             'keterangan' => 'nullable|string',
-            'file' => 'nullable|file|mimes:jpg,jpeg,png,mp4|max:20480',
+            'file' => 'nullable|file|mimes:jpg,jpeg,png,mp4|max:204800', // konsisten 200MB
             'kategori' => 'required|in:foto,video',
             'tanggal' => 'required|date',
         ]);
@@ -285,8 +286,8 @@ class AdminController extends Controller
             if ($filename && file_exists(public_path('uploads/file/'.$filename))) {
                 unlink(public_path('uploads/file/'.$filename));
             }
-            $filename = time().'_'.$request->file->getClientOriginalName();
-            $request->file->move(public_path('uploads/file/'), $filename);
+            $filename = time().'_'.$request->file('file')->getClientOriginalName();
+            $request->file('file')->move(public_path('uploads/file/'), $filename);
         }
 
         $galeri->update([
@@ -299,7 +300,6 @@ class AdminController extends Controller
 
         return redirect()->route('admin.galeri')->with('success','Berhasil Mengupdate data.');
     }
-
     public function destroyGaleri(string $id)
     {
         $id = Crypt::decrypt($id);

@@ -88,11 +88,7 @@
                             <th width="120px">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @forelse ($berita as $item)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td class="fw-semibold">{{ $item->judul }}</td>
+3                      <td class="fw-semibold">{{ $item->judul }}</td>
                                 <td class="">{{ Str::limit(strip_tags($item->isi), 120) }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
                                 <td>
