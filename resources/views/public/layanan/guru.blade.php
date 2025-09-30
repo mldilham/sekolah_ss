@@ -85,9 +85,16 @@
 
 <div class="container py-5">
     <!-- Header -->
-    <div class="text-center mb-5 gradient" data-aos="fade-down" data-aos-duration="1000">
-        <h2 class="fw-bold text-primary">Layanan Guru</h2>
-        <p class="text-muted">Daftar Guru Sekolah Kami</p>
+    <div class="text-center mb-5 position-relative"
+         style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{{ asset('uploads/profile/' . $profile->foto) }}');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                padding: 180px 20px;
+                border-radius: 15px;
+                color: white;"
+         data-aos="fade-down" data-aos-duration="1000">
+        <h2 class="fw-bold text-white">Daftar Guru Sekolah Kami</h2>
     </div>
 
     <!-- Daftar Guru -->

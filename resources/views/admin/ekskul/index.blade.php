@@ -61,8 +61,8 @@
 
 <div class="page-wrapper">
     <div class="page-content">
-        <div class="header-section d-flex justify-content-between align-items-center">
-            <h5 class="mb-0 fw-bold">
+        <div class="header-section d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+            <h5 class="mb-3 mb-md-0 fw-bold">
                 <i class="fa-solid fa-images me-2"></i> Data Ekstrakulikuler
             </h5>
             <a href="{{ route('admin.ekskul.create') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">

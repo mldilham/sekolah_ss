@@ -28,8 +28,12 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-<ul class="navbar-nav sidebar sidebar-dark accordion">
+<input type="checkbox" id="toggleSidebar" hidden>
+<label for="toggleSidebar" class="sidebar-toggle-btn d-lg-none">
+    <i class="fa-solid fa-bars"></i>
+</label>
 
+<ul class="navbar-nav sidebar sidebar-dark accordion">
     <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="{{ route('admin.dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fa-solid fa-school"></i>
@@ -63,86 +67,65 @@
 </ul>
 
 <style>
-.sidebar {
+/* Styling nama sekolah di sidebar */
+.sidebar-brand-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+}
+
+.sidebar-brand-icon i {
+    font-size: 1.8rem;
+    color: #ffffff;
+}
+
+/* ✅ Tombol Toggle hanya di mobile */
+.sidebar-toggle-btn {
     position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 220px;
-    padding-top: 1rem;
-    background: linear-gradient(180deg, #33A1E0 0%, #2c2f54 100%);
-    font-family: 'Poppins', sans-serif;
-    overflow-y: auto;
-    z-index: 1030;
-    transition: width 0.3s;
-}
-
-.sidebar.collapsed {
-    width: 70px;
-}
-
-.sidebar.collapsed .sidebar-brand-text,
-.sidebar.collapsed .sidebar-text {
+    top: 12px;
+    left: 12px;
+    z-index: 1051;
+    background: #2c2f54;
+    padding: 8px 10px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
     display: none;
 }
 
-.sidebar.collapsed .nav-link i {
-    margin-right: 0;
-    text-align: center;
-    width: 100%;
+/* ✅ Sidebar default (desktop) tetap muncul */
+.sidebar {
+    transition: transform 0.3s ease-in-out;
 }
 
-/* Compact menu items */
-.sidebar .nav-item .nav-link {
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 500;
-    font-size: 0.95rem;
-    padding: 0.4rem 1rem;
-    border-radius: 0.5rem;
-    margin: 0.1rem 0;
-    transition: all 0.3s;
+/* ✅ Mobile: sidebar disembunyikan */
+@media (max-width: 991.98px) {
+    .sidebar-toggle-btn {
+        display: block;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        width: 220px;
+        position: fixed;
+        z-index: 1050;
+    }
+
+    /* ✅ Jika checkbox dicentang → sidebar muncul */
+    #toggleSidebar:checked ~ .sidebar {
+        transform: translateX(0);
+    }
+
+    /* ✅ Konten bisa disesuaikan jika ingin ikut terdorong */
+    #toggleSidebar:checked ~ main,
+    #toggleSidebar:checked ~ .content-wrapper {
+        margin-left: 220px;
+    }
 }
 
-.sidebar .nav-item .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: #fff;
-    transform: translateX(3px);
-}
-
-.sidebar .nav-item.active .nav-link {
-    background-color: rgba(255, 255, 255, 0.25);
-    color: #fff;
-    font-weight: 600;
-}
-
-/* Sidebar brand */
-.sidebar .sidebar-brand-icon i {
-    font-size: 1.7rem;
-    color: #fff;
-}
-
-.sidebar .sidebar-brand-text {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #fff;
-}
-
-/* Scrollbar */
-.sidebar::-webkit-scrollbar {
-    width: 6px;
-}
-.sidebar::-webkit-scrollbar-thumb {
-    background-color: rgba(255,255,255,0.3);
-    border-radius: 3px;
-}
-
-/* Logout button */
-.btn-danger {
-    font-size: 0.9rem;
-    padding: 0.35rem 0.5rem;
-}
-.btn-danger:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-}
 </style>

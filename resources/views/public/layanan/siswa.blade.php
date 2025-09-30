@@ -10,7 +10,7 @@
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
-                padding: 100px 20px;
+                padding: 180px 20px;
                 border-radius: 15px;
                 color: white;"
          data-aos="fade-down" data-aos-duration="1000">

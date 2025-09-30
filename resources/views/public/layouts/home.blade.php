@@ -150,20 +150,49 @@
 
             <div class="row g-3 justify-content-center">
                 @forelse($galeris->take(8) as $key => $galeri)
-                <div class="col-sm-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{{ $key * 100 }}">
+                <div class="col-sm-6 col-md-4 col-lg-3"
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                    data-aos-delay="{{ $key * 100 }}">
+
                     <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
-                        <a href="{{ asset('uploads/file/'.$galeri->file) }}" data-lightbox="galeri" data-title="{{ $galeri->judul }}">
-                            <img src="{{ asset('uploads/file/'.$galeri->file) }}" alt="{{ $galeri->judul }}" class="w-100" style="object-fit: cover; height: 250px;">
-                        </a>
-                        <div class="p-2 bg-dark text-white small"  style="background: linear-gradient(135deg, #33A1E0, #2c2f54);">
+                        @php
+                            $extension = pathinfo($galeri->file, PATHINFO_EXTENSION);
+                            $isVideo = in_array(strtolower($extension), ['mp4','webm','ogg']);
+                        @endphp
+
+                        @if($isVideo)
+                            {{-- Jika Video --}}
+                            <video controls
+                                class="w-100"
+                                style="object-fit: cover; height: 250px;">
+                                <source src="{{ asset('uploads/file/'.$galeri->file) }}" type="video/{{ $extension }}">
+                                Browser Anda tidak mendukung video.
+                            </video>
+                        @else
+                            {{-- Jika Gambar --}}
+                            <a href="{{ asset('uploads/file/'.$galeri->file) }}"
+                            data-lightbox="galeri"
+                            data-title="{{ $galeri->judul }}">
+                                <img src="{{ asset('uploads/file/'.$galeri->file) }}"
+                                    alt="{{ $galeri->judul }}"
+                                    class="w-100"
+                                    style="object-fit: cover; height: 250px;">
+                            </a>
+                        @endif
+
+                        <div class="p-2 bg-dark text-white small"
+                            style="background: linear-gradient(135deg, #33A1E0, #2c2f54);">
                             {{ Str::limit($galeri->judul, 30) }}
                         </div>
                     </div>
+
                 </div>
                 @empty
                 <p class="text-center text-muted" data-aos="fade-up">Belum ada galeri.</p>
                 @endforelse
             </div>
+
         </div>
     </section>
 

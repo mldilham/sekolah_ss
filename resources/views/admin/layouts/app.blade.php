@@ -39,6 +39,30 @@
         z-index: 1030;
     }
 
+    /* Toggle sidebar desktop */
+    #sidebarDesktopToggle {
+        display: none;
+    }
+
+    #sidebarDesktopToggle:checked ~ .sidebar {
+        width: 70px;
+    }
+
+    #sidebarDesktopToggle:checked ~ .sidebar .sidebar-brand-text,
+    #sidebarDesktopToggle:checked ~ .sidebar .sidebar-text {
+        display: none;
+    }
+
+    #sidebarDesktopToggle:checked ~ .sidebar .nav-link i {
+        margin-right: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    #sidebarDesktopToggle:checked ~ #main-content {
+        margin-left: 70px;
+    }
+
     .sidebar.collapsed {
         width: 70px;
     }
@@ -82,7 +106,6 @@
         font-size: 1.1rem;
     }
 
-
     #main-content {
         margin-left: 220px;
         margin-top: 0;
@@ -123,12 +146,82 @@
         transform: scale(1.1);
     }
 
-
     .btn-logout {
         width: calc(100% - 3rem);
         margin: 0.5rem 1.5rem;
         border-radius: 0.5rem;
         padding: 0.5rem;
+    }
+
+    /* Responsive untuk mobile */
+    @media (max-width: 768px) {
+        .sidebar {
+            transform: translateX(-100%);
+            width: 250px;
+        }
+
+        .sidebar.show {
+            transform: translateX(0);
+        }
+
+        #main-content {
+            margin-left: 0;
+            padding: 1rem;
+        }
+
+        .sidebar.collapsed ~ #main-content,
+        .sidebar.show ~ #main-content {
+            margin-left: 0;
+        }
+
+        .toggle-btn {
+            left: 15px;
+            display: block !important;
+        }
+
+        .sidebar.collapsed ~ .toggle-btn,
+        .sidebar.show ~ .toggle-btn {
+            left: 15px;
+        }
+
+        .navbar {
+            padding-left: 60px; /* Space for toggle button */
+        }
+    }
+
+    /* Overlay untuk mobile */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1029;
+    }
+
+    /* Checkbox untuk toggle sidebar */
+    #sidebarToggle {
+        display: none;
+    }
+
+    #sidebarToggle:checked ~ .sidebar {
+        transform: translateX(0);
+    }
+
+    #sidebarToggle:checked ~ .sidebar-overlay {
+        display: block;
+    }
+
+    @media (max-width: 768px) {
+        .sidebar-overlay {
+            display: none;
+        }
+
+        #sidebarToggle:checked ~ .sidebar-overlay {
+            display: block;
+        }
     }
 </style>
 </head>

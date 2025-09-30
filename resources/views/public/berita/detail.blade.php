@@ -4,13 +4,7 @@
 @section('content')
 <div class="container py-5">
 
-    <!-- Gambar Berita -->
-    @if($berita->gambar)
-    <img src="{{ asset('uploads/berita/'.$berita->gambar) }}"
-         alt="{{ $berita->judul }}"
-         class="img-fluid rounded mb-4 shadow"
-         data-aos="fade-up" data-aos-duration="800">
-    @endif
+
 
     <!-- Judul -->
     <h1 class="fw-bold mb-3 gradient" data-aos="fade-right" data-aos-duration="800">
@@ -28,6 +22,16 @@
     <!-- Isi Berita -->
     <div class="news-content mb-4" data-aos="fade-up" data-aos-duration="800">
         {!! nl2br(e($berita->isi)) !!}
+    </div>
+
+    <div class="position: relative;">
+        @if($berita->gambar)
+        <img src="{{ asset('uploads/berita/'.$berita->gambar) }}"
+            alt="{{ $berita->judul }}"
+            class="img-fluid w-100 mb-4 shadow"
+            style="display:block;"
+            data-aos="fade-up" data-aos-duration="800">
+        @endif
     </div>
 
     <!-- Tombol Kembali -->
