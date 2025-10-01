@@ -1,87 +1,199 @@
 @extends('admin.layouts.app')
 @section('content')
 
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-
 <style>
     .page-wrapper {
         padding: 25px;
     }
+
     .page-content {
-        border: none;
-        border-radius: 14px;
+        background: white;
+        border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        border: none;
     }
+
     .header-section {
         background: linear-gradient(135deg, #4e73df, #224abe);
         padding: 18px 25px;
-        border: none;
         color: white;
+        border: none;
     }
+
     .header-section h5 {
         font-size: 18px;
         margin: 0;
+        font-weight: 600;
     }
+
     .content-section {
-        padding: 15px 20px;
-        background: white;
+        padding: 20px 25px;
     }
-    table thead th {
+
+    .search-section {
+        margin-bottom: 20px;
+    }
+
+    .search-section .form-control {
+        border-radius: 8px 0 0 8px;
+        border-right: none;
+    }
+
+    .search-section .btn {
+        border-radius: 0 8px 8px 0;
+        border-left: none;
+    }
+
+    .table-responsive {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .table thead th {
         background-color: #f8f9fc;
         font-weight: 600;
         text-transform: uppercase;
         font-size: 13px;
+        border: none;
+        padding: 12px 15px;
     }
+
+    .table tbody td {
+        padding: 12px 15px;
+        border: none;
+        vertical-align: middle;
+    }
+
     .table-hover tbody tr:hover {
         background-color: #f1f5ff;
         transition: 0.2s ease-in-out;
     }
+
     .btn-action {
-        border-radius: 8px;
+        border-radius: 6px;
         transition: 0.3s;
     }
+
     .btn-action:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
+
+    .footer-section {
+        padding: 15px 25px;
+        background: #f8f9fa;
+        border-top: 1px solid #e9ecef;
+        text-align: center;
+    }
+
+    .badge {
+        font-size: 11px;
+        padding: 5px 10px;
+        border-radius: 20px;
+    }
+
     .img-thumbnail {
         border-radius: 8px;
         object-fit: cover;
     }
-    .badge {
-        padding: 6px 10px;
-        font-size: 12px;
-        border-radius: 6px;
+
+    .rounded {
+        border-radius: 8px !important;
     }
-    .footer-section {
-        padding: 12px 15px;
-        background: #f8f9fa;
+
+    @media (max-width: 768px) {
+        .page-wrapper {
+            padding: 15px;
+        }
+
+        .header-section {
+            padding: 15px 20px;
+        }
+
+        .header-section h5 {
+            font-size: 16px;
+        }
+
+        .content-section {
+            padding: 15px 20px;
+        }
+
+        .footer-section {
+            padding: 12px 20px;
+        }
+
+        .table-responsive {
+            font-size: 0.9em;
+        }
+
+        .btn-action {
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .page-wrapper {
+            padding: 10px;
+        }
+
+        .header-section {
+            padding: 12px 15px;
+        }
+
+        .content-section {
+            padding: 12px 15px;
+        }
+
+        .footer-section {
+            padding: 10px 15px;
+        }
+
+        .table thead th, .table tbody td {
+            padding: 8px 10px;
+            font-size: 12px;
+        }
+
+        .btn-action {
+            padding: 4px 8px;
+            font-size: 11px;
+        }
     }
 </style>
 
 <div class="page-wrapper">
     <div class="page-content">
-        <div class="header-section d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
-            <h5 class="mb-3 mb-md-0 fw-bold">
+        <div class="header-section d-flex justify-content-between align-items-center">
+            <h5>
                 <i class="fa-solid fa-images me-2"></i> Data Galeri
             </h5>
-            <a href="{{ route('admin.galeri.create') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
+            <a href="{{ route('admin.galeri.create') }}" class="btn btn-light btn-sm">
                 <i class="fa-solid fa-plus"></i> Tambah Galeri
             </a>
         </div>
 
         <div class="content-section">
+            <div class="search-section">
+                <form method="GET" action="{{ route('admin.galeri') }}" class="d-flex">
+                    <input type="text" name="search" class="form-control" placeholder="Cari judul galeri..." value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-outline-secondary">
+                        <i class="fa-solid fa-search"></i>
+                    </button>
+                </form>
+            </div>
+
             <div class="table-responsive">
-                <table id="galeriTable" class="table table-striped table-hover align-middle text-center">
+                <table class="table table-striped table-hover align-middle">
                     <thead class="table-light">
                         <tr>
                             <th>No</th>
                             <th>Judul</th>
-                            <th>Keterangan</th>
+                            <th class="d-none d-md-table-cell">Keterangan</th>
                             <th>Kategori</th>
-                            <th>File</th>
-                            <th>Tanggal</th>
-                            <th width="120px">Aksi</th>
+                            <th class="d-none d-md-table-cell">File</th>
+                            <th class="d-none d-md-table-cell">Tanggal</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,13 +201,13 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="fw-semibold">{{ $item->judul }}</td>
-                                <td>{{ $item->keterangan ?? '-' }}</td>
+                                <td class="d-none d-md-table-cell">{{ $item->keterangan ?? '-' }}</td>
                                 <td>
                                     <span class="badge {{ $item->kategori == 'foto' ? 'bg-success text-white' : 'bg-info text-white' }}">
                                         {{ ucfirst($item->kategori) }}
                                     </span>
                                 </td>
-                                <td>
+                                <td class="d-none d-md-table-cell">
                                     @if ($item->kategori == 'foto')
                                         <img src="{{ asset('uploads/file/'. $item->file) }}"
                                              alt="foto {{ $item->judul }}"
@@ -107,56 +219,37 @@
                                         </video>
                                     @endif
                                 </td>
-                                <td>{{ $item->tanggal }}</td>
+                                <td class="d-none d-md-table-cell">{{ $item->tanggal }}</td>
                                 <td>
-                                    <a href="{{ route('admin.galeri.edit', Crypt::encrypt($item->id_galeri)) }}" class="btn btn-warning btn-sm btn-action">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </a>
-                                    <form action="{{ route('admin.galeri.destroy', Crypt::encrypt($item->id_galeri)) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm btn-action" onclick="return confirm('Hapus data ini?')">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </form>
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ route('admin.galeri.edit', Crypt::encrypt($item->id_galeri)) }}" class="btn btn-warning btn-sm text-white btn-action">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                        <form action="{{ route('admin.galeri.destroy', Crypt::encrypt($item->id_galeri)) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm btn-action" onclick="return confirm('Hapus data ini?')">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-muted">Belum ada data galeri.</td>
+                                <td colspan="7" class="text-center text-muted py-3">
+                                    <i class="fa-solid fa-circle-info"></i> Belum ada data galeri
+                                </td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
+
+        <div class="footer-section">
+            <small class="text-muted">Total Galeri: {{ count($galeri) }}</small>
+        </div>
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#galeriTable').DataTable({
-            pageLength: 5,
-            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-            language: {
-                search: "Cari:",
-                lengthMenu: "Tampilkan _MENU_ data",
-                zeroRecords: "Tidak ada data yang cocok",
-                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
-                infoEmpty: "Tidak ada data",
-                infoFiltered: "(disaring dari _MAX_ total data)",
-                paginate: {
-                    first: "Pertama",
-                    last: "Terakhir",
-                    next: "›",
-                    previous: "‹"
-                }
-            }
-        });
-    });
-</script>
-
 @endsection

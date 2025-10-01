@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use App\Models\Ekstrakulikuler;
 use App\Models\Galeri;
-use App\Models\Guru;
+use App\Models\Profile;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,13 +15,28 @@ class OperatorController extends Controller
 {
     public function dashboard()
     {
-        return view('operator.dashboard');
+        return view('operator.dashboard', [
+            'siswaCount'   => Siswa::count(),
+            'beritaCount'  => Berita::count(),
+            'galeriCount'  => Galeri::count(),
+            'ekskulCount'  => Ekstrakulikuler::count(),
+            'profile'      => Profile::first(),
+            'latestNews'   => Berita::latest()->take(3)->get(),
+            'latestGaleri' => Galeri::latest()->take(3)->get(),
+            'latestEkskul' => Ekstrakulikuler::latest()->take(3)->get(),
+        ]);
     }
 
     // BERITA
     public function beritaView()
     {
-        $berita = Berita::with('user')->get();
+        $search = request('search');
+        $berita = Berita::with('user')
+            ->when($search, function($query) use ($search) {
+                $query->where('judul', 'like', '%' . $search . '%')
+                      ->orWhere('isi', 'like', '%' . $search . '%');
+            })
+            ->get();
         return view('operator.berita.index', compact('berita'));
     }
 
@@ -104,7 +119,12 @@ class OperatorController extends Controller
     // GALERI
     public function galeriView()
     {
-        $galeri = Galeri::all();
+        $search = request('search');
+        $galeri = Galeri::when($search, function($query) use ($search) {
+                $query->where('judul', 'like', '%' . $search . '%')
+                      ->orWhere('keterangan', 'like', '%' . $search . '%');
+            })
+            ->get();
         return view('operator.galeri.index', compact('galeri'));
     }
 
@@ -190,7 +210,12 @@ class OperatorController extends Controller
     // EKSKUL
     public function ekskulView()
     {
-        $ekskul = Ekstrakulikuler::all();
+        $search = request('search');
+        $ekskul = Ekstrakulikuler::when($search, function($query) use ($search) {
+                $query->where('nama_ekskul', 'like', '%' . $search . '%')
+                      ->orWhere('pembina', 'like', '%' . $search . '%');
+            })
+            ->get();
         return view('operator.ekskul.index', compact('ekskul'));
     }
 
@@ -275,7 +300,12 @@ class OperatorController extends Controller
     // SISWA (opsional, jika operator boleh kelola)
     public function siswaView()
     {
-        $siswa = Siswa::all();
+        $search = request('search');
+        $siswa = Siswa::when($search, function($query) use ($search) {
+                $query->where('nama_siswa', 'like', '%' . $search . '%')
+                      ->orWhere('nisn', 'like', '%' . $search . '%');
+            })
+            ->get();
         return view('operator.siswa.index', compact('siswa'));
     }
 
@@ -327,6 +357,62 @@ class OperatorController extends Controller
         $siswa = Siswa::findOrFail($id);
         $siswa->delete();
         return redirect()->route('operator.siswa')->with('success','Data berhasil dihapus.');
+    }
+
+    // ---------------- PROFILE SEKOLAH ----------------
+    public function profileView()
+    {
+        $profile = Profile::first();
+        return view('operator.profile.index', compact('profile'));
+    }
+
+    public function editProfile()
+    {
+        $profile = Profile::first();
+        return view('operator.profile.edit', compact('profile'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'nama_sekolah'   => 'required|string|max:255',
+            'kepala_sekolah' => 'required|string|max:255',
+            'npsn'           => 'required|string|max:20',
+            'alamat'         => 'required|string',
+            'kontak'         => 'required|string|max:20',
+            'tahun_berdiri'  => 'nullable|numeric',
+            'visi_misi'      => 'nullable|string',
+            'deskripsi'      => 'nullable|string',
+            'logo'           => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto'           => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $profile = Profile::first() ?? new Profile();
+
+        $profile->nama_sekolah   = $request->nama_sekolah;
+        $profile->kepala_sekolah = $request->kepala_sekolah;
+        $profile->npsn           = $request->npsn;
+        $profile->alamat         = $request->alamat;
+        $profile->kontak         = $request->kontak;
+        $profile->tahun_berdiri  = $request->tahun_berdiri;
+        $profile->visi_misi      = $request->visi_misi;
+        $profile->deskripsi      = $request->deskripsi;
+
+        if ($request->hasFile('logo')) {
+            $logo = time().'_logo_'.$request->file('logo')->getClientOriginalName();
+            $request->file('logo')->move(public_path('uploads/profile/'), $logo);
+            $profile->logo = $logo;
+        }
+
+        if ($request->hasFile('foto')) {
+            $foto = time().'_foto_'.$request->file('foto')->getClientOriginalName();
+            $request->file('foto')->move(public_path('uploads/profile/'), $foto);
+            $profile->foto = $foto;
+        }
+
+        $profile->save();
+
+        return redirect()->route('operator.profile')->with('success','Berhasil mengupdate profile sekolah.');
     }
 
 }

@@ -33,9 +33,20 @@ class AdminController extends Controller
     }
 
     // ---------------- USER ----------------
-    public function userView()
+    public function userView(Request $request)
     {
-        $users = User::all();
+        $query = User::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('username', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        $users = $query->get();
         return view('admin.user.index', compact('users'));
     }
 
@@ -79,9 +90,19 @@ class AdminController extends Controller
     }
 
     // ---------------- GURU ----------------
-    public function guruView()
+    public function guruView(Request $request)
     {
-        $guru = Guru::all();
+        $query = Guru::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_guru', 'like', "%{$search}%")
+                  ->orWhere('nip', 'like', "%{$search}%");
+            });
+        }
+
+        $guru = $query->get();
         return view('admin.guru.index', compact('guru'));
     }
 
@@ -165,9 +186,19 @@ class AdminController extends Controller
     }
 
     // ---------------- SISWA ----------------
-    public function siswaView()
+    public function siswaView(Request $request)
     {
-        $siswa = Siswa::all();
+        $query = Siswa::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_siswa', 'like', "%{$search}%")
+                  ->orWhere('nisn', 'like', "%{$search}%");
+            });
+        }
+
+        $siswa = $query->get();
         return view('admin.siswa.index', compact('siswa'));
     }
 
@@ -222,9 +253,16 @@ class AdminController extends Controller
     }
 
     // ---------------- GALERI ----------------
-    public function galeriView()
+    public function galeriView(Request $request)
     {
-        $galeri = Galeri::orderBy('tanggal', 'desc')->get();
+        $query = Galeri::orderBy('tanggal', 'desc');
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where('judul', 'like', "%{$search}%");
+        }
+
+        $galeri = $query->get();
         return view('admin.galeri.index', compact('galeri'));
     }
 
@@ -312,9 +350,16 @@ class AdminController extends Controller
     }
 
     // ---------------- BERITA ----------------
-    public function beritaView()
+    public function beritaView(Request $request)
     {
-        $berita = Berita::with('user')->get();
+        $query = Berita::with('user')->orderBy('tanggal', 'desc');
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where('judul', 'like', "%{$search}%");
+        }
+
+        $berita = $query->get();
         return view('admin.berita.index', compact('berita'));
     }
 
@@ -415,9 +460,19 @@ class AdminController extends Controller
     }
 
     // ---------------- EKSKUL ----------------
-    public function ekskulView()
+    public function ekskulView(Request $request)
     {
-        $ekskul = Ekstrakulikuler::all();
+        $query = Ekstrakulikuler::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_ekskul', 'like', "%{$search}%")
+                  ->orWhere('pembina', 'like', "%{$search}%");
+            });
+        }
+
+        $ekskul = $query->get();
         return view('admin.ekskul.index', compact('ekskul'));
     }
 

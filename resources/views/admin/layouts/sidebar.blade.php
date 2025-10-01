@@ -16,7 +16,7 @@
             (object) ['title' => 'Galeri', 'path' => 'operator.galeri', 'icon' => 'fa-regular fa-images'],
             (object) ['title' => 'Berita', 'path' => 'operator.berita', 'icon' => 'fa-regular fa-newspaper'],
             (object) ['title' => 'Ekstrakulikuler', 'path' => 'operator.ekskul', 'icon' => 'fa-solid fa-laptop-code'],
-            // (object) ['title' => 'Profile Sekolah', 'path' => 'operator.profile', 'icon' => 'fa-solid fa-id-card'],
+            (object) ['title' => 'Profile Sekolah', 'path' => 'operator.profile', 'icon' => 'fa-solid fa-id-card'],
         ],
     ];
 

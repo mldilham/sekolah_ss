@@ -45,7 +45,7 @@
 
                 <!-- Body -->
                 <div class="card-body">
-                    <form action="{{ route('operator.galeri.update', $galeri->id_galeri) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('operator.galeri.update', Crypt::encrypt($galeri->id_galeri)) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 

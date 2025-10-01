@@ -36,7 +36,7 @@
                 <!-- Header -->
                 <div class="card-header card-header-custom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 fw-bold">
-                        <i class="fa-solid fa-user-pen me-2"></i> Edit Data Guru
+                        <i class="fa-solid fa-newspaper me-2"></i> Edit Berita
                     </h5>
                     <a href="{{ route('operator.berita') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
                         <i class="fa-solid fa-arrow-left"></i> Kembali
@@ -52,21 +52,19 @@
                         <div class="mb-3">
                             <label for="judul" class="form-label">Judul</label>
                             <input type="text" name="judul" id="judul"
-                                   value="{{ old('judul',$berita->judul) }}"
+                                   value="{{ old('judul', $berita->judul) }}"
                                    class="form-control" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="isi" class="form-label">Isi</label>
-                            <input type="text" name="isi" id="isi"
-                                   value="{{ old('isi',$berita->isi) }}"
-                                   class="form-control" required>
+                            <textarea name="isi" id="isi" rows="5" class="form-control" required>{{ old('isi', $berita->isi) }}</textarea>
                         </div>
 
                         <div class="mb-3">
                             <label for="tanggal" class="form-label">Tanggal</label>
-                            <input type="text" name="tanggal" id="tanggal"
-                                   value="{{ old('tanggal',$berita->tanggal) }}"
+                            <input type="date" name="tanggal" id="tanggal"
+                                   value="{{ old('tanggal', $berita->tanggal) }}"
                                    class="form-control" required>
                         </div>
 
@@ -87,7 +85,7 @@
                             <div class="d-flex justify-content-between mt-2">
                                 <small class="text-muted">Kosongkan jika tidak ingin mengganti gambar</small>
                                 <small class="text-muted">
-                                    Format diperbolehkan: <span class="text-danger">JPG, JPEG, PNG</span> (maks. 2MB)
+                                    Format diperbolehkan: <span class="text-danger">JPG, JPEG, PNG</span> (maks. 5MB)
                                 </small>
                             </div>
                         </div>

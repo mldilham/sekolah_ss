@@ -125,4 +125,9 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/operator/siswa/edit/{id}', [OperatorController::class, 'editSiswa'])->name('operator.siswa.edit');
     Route::put('/operator/siswa/edit/{id}', [OperatorController::class, 'updateSiswa'])->name('operator.siswa.update');
     Route::delete('/operator/siswa/{id}', [OperatorController::class, 'destroySiswa'])->name('operator.siswa.destroy');
+
+    // Profile
+    Route::get('/operator/profile', [OperatorController::class, 'profileView'])->name('operator.profile');
+    Route::get('/operator/profile/edit/', [OperatorController::class, 'editProfile'])->name('operator.profile.edit');
+    Route::put('/operator/profile/edit/', [OperatorController::class, 'updateProfile'])->name('operator.profile.update');
 });

@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('operator.layouts.app')
 
 @section('content')
 
@@ -45,7 +45,7 @@
                     <h5 class="mb-0 fw-bold">
                         <i class="fa-solid fa-user-pen me-2"></i> Edit Profil Sekolah
                     </h5>
-                    <a href="{{ route('admin.profile') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
+                    <a href="{{ route('operator.profile') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
                         <i class="fa-solid fa-arrow-left"></i> Kembali
                     </a>
                 </div>
@@ -53,7 +53,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
 
-                    <form action="{{ route('admin.profile.update', $profile->id_profile) }}"
+                    <form action="{{ route('operator.profile.update', $profile->id_profile) }}"
                           method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -152,7 +152,7 @@
                             <button type="submit" class="btn btn-primary btn-action">
                                 <i class="fa-solid fa-save"></i> Simpan
                             </button>
-                            <a href="{{ route('admin.profile') }}" class="btn btn-danger btn-action">
+                            <a href="{{ route('operator.profile') }}" class="btn btn-danger btn-action">
                                 <i class="fa-solid fa-xmark"></i> Batal
                             </a>
                         </div>
