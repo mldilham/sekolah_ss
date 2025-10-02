@@ -37,16 +37,16 @@
                             <video controls
                                    class="w-100"
                                    style="object-fit: cover; height: 250px;">
-                                <source src="{{ asset('uploads/file/'.$galeri->file) }}"
+                                <source src="{{ asset('storage/'.$galeri->file) }}"
                                         type="video/{{ $extension }}">
                                 Browser Anda tidak mendukung video.
                             </video>
                         @else
                             {{-- Tampilkan Gambar --}}
-                            <a href="{{ asset('uploads/file/'.$galeri->file) }}"
+                            <a href="{{ asset('storage/'.$galeri->file) }}"
                                data-lightbox="galeri"
                                data-title="{{ $galeri->judul }}">
-                                <img src="{{ asset('uploads/file/'.$galeri->file) }}"
+                                <img src="{{ asset('storage/'.$galeri->file) }}"
                                      alt="{{ $galeri->judul }}"
                                      class="w-100"
                                      style="object-fit: cover; height: 250px;">

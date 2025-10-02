@@ -34,6 +34,16 @@
         <div class="col-lg-8 mx-auto">
             <div class="card card-custom">
                 <!-- Header -->
+                @if($errors->any())
+                        <div class="alert alert-danger">
+                            <strong>Terjadi kesalahan:</strong>
+                            <ul class="mb-0">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 <div class="card-header card-header-custom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 fw-bold">
                         <i class="fa-solid fa-user-pen me-2"></i> Edit Data Guru
@@ -81,7 +91,7 @@
                         <div class="mb-3">
                             <label class="form-label">Gambar Sebelumnya</label><br>
                             @if ($ekskul->gambar)
-                                <img src="{{ asset('uploads/ekskul/'.$ekskul->gambar) }}"
+                                <img src="{{ asset('storage/'.$ekskul->gambar) }}"
                                      alt="Foto {{ $ekskul->judul }}"
                                      class="img-thumbnail mb-2" width="120">
                             @else

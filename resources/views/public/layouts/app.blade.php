@@ -15,7 +15,7 @@
     .hero {
         position: relative;
         min-height: 100vh;
-        background-image: url('asset/foto.png');
+        background-image: url('asset/sekolah.jpg');
         background-repeat: no-repeat;   /* Supaya tidak diulang */
         background-size: cover;         /* Biar menutupi seluruh layar */
         background-position: center;

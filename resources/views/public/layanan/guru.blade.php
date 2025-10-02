@@ -86,7 +86,7 @@
 <div class="container py-5">
     <!-- Header -->
     <div class="text-center mb-5 position-relative"
-         style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{{ asset('uploads/profile/' . $profile->foto) }}');
+         style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{{ asset('storage/' . $profile->foto) }}');
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
@@ -104,7 +104,7 @@
             <div class="card guru-card shadow-sm border-0">
                 <div class="img-wrapper">
                     @if($guru->foto)
-                        <img src="{{ asset('uploads/guru/'.$guru->foto) }}"
+                        <img src="{{ asset('storage/'.$guru->foto) }}"
                              alt="{{ $guru->nama_guru }}"
                              class="w-100 guru-img">
                     @else

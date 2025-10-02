@@ -39,7 +39,7 @@
         <div class="row g-0">
             <div class="col-md-5">
                 @if($guru->foto)
-                <img src="{{ asset('uploads/guru/'.$guru->foto) }}" class="guru-photo" alt="{{ $guru->nama_guru }}">
+                <img src="{{ asset('storage/'.$guru->foto) }}" class="guru-photo" alt="{{ $guru->nama_guru }}">
                 @else
                 <img src="{{ asset('asset/foto.png') }}" class="guru-photo" alt="{{ $guru->nama_guru }}">
                 @endif
@@ -57,7 +57,7 @@
                     {{-- Email --}}
                     <div class="info-item d-flex">
                         <span class="info-label">Email :</span>
-                        <span>{{ $guru->email ?? '-' }}</span>
+                        <span>{{ $guru->nip ?? '-' }}</span>
                     </div>
 
                     {{-- Kontak / HP --}}

@@ -209,13 +209,13 @@
                                 </td>
                                 <td class="d-none d-md-table-cell">
                                     @if ($item->kategori == 'foto')
-                                        <img src="{{ asset('uploads/file/'. $item->file) }}"
+                                        <img src="{{ asset('storage/'. $item->file) }}"
                                              alt="foto {{ $item->judul }}"
                                              width="80" height="60"
                                              class="img-thumbnail shadow-sm">
                                     @else
                                         <video width="120" height="80" class="rounded shadow-sm" controls>
-                                            <source src="{{ asset('uploads/file/'. $item->file) }}" type="video/mp4">
+                                            <source src="{{ asset('storage/file/'. $item->file) }}" type="video/mp4">
                                         </video>
                                     @endif
                                 </td>

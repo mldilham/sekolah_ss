@@ -17,7 +17,7 @@
     <!-- Foto Sekolah -->
     <div class="text-center mb-5" data-aos="zoom-in" data-aos-duration="1000">
         @if($profile->foto)
-            <img src="{{ asset('uploads/profile/'.$profile->foto) }}"
+            <img src="{{ asset('storage/'.$profile->foto) }}"
                  alt="Foto Sekolah"
                  class="img-fluid rounded shadow-sm"
                  style="max-height: 400px; object-fit: cover; width: 100%;">

@@ -200,7 +200,7 @@
                                 <td>{{ $item->mapel }}</td>
                                 <td class="d-none d-md-table-cell">
                                     @if ($item->foto)
-                                        <img src="{{ asset('uploads/guru/'. $item->foto) }}"
+                                        <img src="{{ asset('storage/'. $item->foto) }}"
                                              alt="foto {{ $item->nama_guru }}"
                                              width="60" height="60"
                                              class="img-thumbnail shadow-sm">

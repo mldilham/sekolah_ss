@@ -20,7 +20,7 @@
             <div class="card mb-4 shadow-sm border-0 h-100 d-flex flex-column">
                 <div class="position-relative">
                     @if($ekskul->gambar)
-                    <img src="{{ asset('uploads/ekskul/'.$ekskul->gambar) }}"
+                    <img src="{{ asset('storage/'.$ekskul->gambar) }}"
                          alt="{{ $ekskul->nama_ekskul }}"
                          class="w-100"
                          style="object-fit: cover; height: 250px;">

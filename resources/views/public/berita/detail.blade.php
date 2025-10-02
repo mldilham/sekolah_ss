@@ -26,7 +26,7 @@
 
     <div class="position: relative;">
         @if($berita->gambar)
-        <img src="{{ asset('uploads/berita/'.$berita->gambar) }}"
+        <img src="{{ asset('storage/'.$berita->gambar) }}"
             alt="{{ $berita->judul }}"
             class="img-fluid w-100 mb-4 shadow"
             style="display:block;"

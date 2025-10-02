@@ -10,9 +10,9 @@
                 <h1 class="display-4 fw-bold" data-aos="fade-down" data-aos-duration="1000">
                     {{ $profile->nama_sekolah }}
                 </h1>
-                <p class="lead" data-aos="fade-up" data-aos-duration="1000">
+                {{-- <p class="lead" data-aos="fade-up" data-aos-duration="1000">
                     {{ $profile->deskripsi ? Str::limit($profile->deskripsi, 350) : 'Belum ada deskripsi tentang sekolah.' }}
-                </p>
+                </p> --}}
             </div>
         </div>
     </div>
@@ -29,13 +29,12 @@
             <h1 class="fw-bold mb-5 text-center gradient" style="font-size: 2rem;" data-aos="fade-down" data-aos-duration="1000">
                 <span class="text-primary">Profile Sekolah</span>
             </h1>
-            <hr style="width: 200px; height: 3px; background-color: #33A1E0; margin: -30px auto 30px auto; border: none; border-radius: 5px;" data-aos="fade-down" data-aos-duration="1000">
 
             <div class="row align-items-center g-5">
                 {{-- FOTO SEKOLAH --}}
                 <div class="col-lg-5" data-aos="fade-right" data-aos-duration="1000">
                     <div class="position-relative rounded-2 overflow-hidden shadow-lg">
-                        <img src="{{ asset('uploads/profile/'.$profile->logo) }}" alt="Logo Sekolah" class="img-fluid w-100" style="object-fit: cover; height: 350px;">
+                        <img src="{{ asset('storage/'.$profile->logo) }}" alt="Logo Sekolah" class="img-fluid w-100" style="object-fit: cover; height: 350px;">
                         <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(to bottom right, rgba(0,0,0,0.25), rgba(0,0,0,0.05));"></div>
                     </div>
                 </div>
@@ -86,7 +85,6 @@
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="fw-bold text-white" data-aos="fade-down" data-aos-duration="1000">Berita Terbaru</h2>
-                <hr style="width: 200px; height: 3px; background-color: white; margin: 10px auto 30px auto; border: none; border-radius: 5px;" data-aos="fade-down" data-aos-duration="1000">
             </div>
 
             <div class="row g-4 justify-content-center">
@@ -94,7 +92,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{{ $key * 150 }}">
                     <div class="card shadow-sm border-0 h-100 berita-card">
                         @if($berita->gambar)
-                        <img src="{{ asset('uploads/berita/'.$berita->gambar) }}" alt="{{ $berita->judul }}" class="w-100 berita-img" style="object-fit: cover; height: 250px;">
+                        <img src="{{ asset('storage/'.$berita->gambar) }}" alt="{{ $berita->judul }}" class="w-100 berita-img" style="object-fit: cover; height: 250px;">
                         @endif
                         <div class="p-3 d-flex flex-column">
                             <h5 class="fw-semibold mb-2 text-white">{{ Str::limit($berita->judul, 60) }}</h5>
@@ -145,7 +143,6 @@
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="fw-bold text-white" data-aos="fade-down" data-aos-duration="1000">Galeri</h2>
-                <hr style="width: 80px; height: 3px; background-color: white; margin: 10px auto 30px auto; border: none; border-radius: 5px;" data-aos="fade-down" data-aos-duration="1000">
             </div>
 
             <div class="row g-3 justify-content-center">
@@ -166,15 +163,15 @@
                             <video controls
                                 class="w-100"
                                 style="object-fit: cover; height: 250px;">
-                                <source src="{{ asset('uploads/file/'.$galeri->file) }}" type="video/{{ $extension }}">
+                                <source src="{{ asset('storage/'.$galeri->file) }}" type="video/{{ $extension }}">
                                 Browser Anda tidak mendukung video.
                             </video>
                         @else
                             {{-- Jika Gambar --}}
-                            <a href="{{ asset('uploads/file/'.$galeri->file) }}"
+                            <a href="{{ asset('storage/'.$galeri->file) }}"
                             data-lightbox="galeri"
                             data-title="{{ $galeri->judul }}">
-                                <img src="{{ asset('uploads/file/'.$galeri->file) }}"
+                                <img src="{{ asset('storage/'.$galeri->file) }}"
                                     alt="{{ $galeri->judul }}"
                                     class="w-100"
                                     style="object-fit: cover; height: 250px;">
@@ -201,7 +198,6 @@
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="fw-bold gradient" data-aos="fade-down" data-aos-duration="1000">Ekstrakurikuler</h2>
-                <hr style="width: 210px; height: 3px; background-color: #33A1E0; margin: 10px auto 30px auto; border: none; border-radius: 5px;" data-aos="fade-down" data-aos-duration="1000">
             </div>
 
             <div class="row g-4 justify-content-center">
@@ -210,7 +206,7 @@
                     <div class="card shadow-sm border-0 h-100 berita-card">
                         <div class="position-relative">
                             @if($ekskul->gambar)
-                            <img src="{{ asset('uploads/ekskul/'.$ekskul->gambar) }}" alt="{{ $ekskul->nama_ekskul }}" class="w-100 berita-img" style="object-fit: cover; height: 250px;">
+                            <img src="{{ asset('storage/'.$ekskul->gambar) }}" alt="{{ $ekskul->nama_ekskul }}" class="w-100 berita-img" style="object-fit: cover; height: 250px;">
                             @endif
                         </div>
                         <div class="p-3 d-flex flex-column">

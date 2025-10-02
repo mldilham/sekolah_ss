@@ -6,7 +6,7 @@
 <div class="container py-5" style="max-width: 1200px">
     <!-- Header dengan background foto sekolah -->
     <div class="text-center mb-5 position-relative"
-         style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{{ asset('uploads/profile/' . $profile->foto) }}');
+         style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{{ asset('storage/' . $profile->foto) }}');
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;

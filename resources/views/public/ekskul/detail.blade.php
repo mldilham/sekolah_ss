@@ -23,7 +23,7 @@
 
     <div class="position: relative;">
         @if($ekskul->gambar)
-        <img src="{{ asset('uploads/ekskul/'.$ekskul->gambar) }}"
+        <img src="{{ asset('storage/'.$ekskul->gambar) }}"
             alt="{{ $ekskul->nama_ekskul }}"
             class="img-fluid w-100 mb-4 shadow"
             style="display:block;"

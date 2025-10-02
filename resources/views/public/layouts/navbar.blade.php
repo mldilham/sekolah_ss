@@ -108,7 +108,7 @@ main {
 <nav class="navbar navbar-expand-lg shadow fixed-top">
   <div class="container">
     <a class="navbar-brand" href="#">
-      <img src="{{ asset('asset/foto.png') }}" alt="Logo" />
+      <img src="{{ asset('asset/logo_sekolah.png') }}" alt="Logo" />
       <span>{{ $profile->nama_sekolah ?? 'Nama Sekolah' }}</span>
     </a>
 

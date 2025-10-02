@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -122,8 +123,7 @@ class AdminController extends Controller
 
         $fotoname = null;
         if ($request->hasFile('foto')) {
-            $fotoname = time() . '_' . $request->foto->getClientOriginalName();
-            $request->foto->move(public_path('uploads/guru/'), $fotoname);
+            $fotoname = Storage::disk('public')->putFile('guru', $request->file('foto'));
         }
 
         Guru::create([
@@ -157,11 +157,10 @@ class AdminController extends Controller
         $fotoname = $guru->foto;
 
         if ($request->hasFile('foto')) {
-            if ($fotoname && file_exists(public_path('uploads/guru/'.$fotoname))) {
-                unlink(public_path('uploads/guru/'.$fotoname));
+            if ($fotoname) {
+                Storage::disk('public')->delete($fotoname);
             }
-            $fotoname = time() . '_' . $request->foto->getClientOriginalName();
-            $request->foto->move(public_path('uploads/guru/'), $fotoname);
+            $fotoname = Storage::disk('public')->putFile('guru', $request->file('foto'));
         }
 
         $guru->update([
@@ -178,8 +177,8 @@ class AdminController extends Controller
     {
         $id = Crypt::decrypt($id);
         $guru = Guru::findOrFail($id);
-        if($guru->foto && file_exists(public_path('uploads/guru/'.$guru->foto))) {
-            unlink(public_path('uploads/guru/'.$guru->foto));
+        if($guru->foto) {
+            Storage::disk('public')->delete($guru->foto);
         }
         $guru->delete();
         return redirect()->route('admin.guru')->with('success','Berhasil menghapus data.');
@@ -283,8 +282,7 @@ class AdminController extends Controller
 
         $filename = null;
         if ($request->hasFile('file')) {
-            $filename = time().'_'.$request->file->getClientOriginalName();
-            $request->file->move(public_path('uploads/file/'), $filename);
+            $filename = Storage::disk('public')->putFile('file', $request->file('file'));
         }
 
         Galeri::create([
@@ -321,11 +319,10 @@ class AdminController extends Controller
         $filename = $galeri->file;
 
         if ($request->hasFile('file')) {
-            if ($filename && file_exists(public_path('uploads/file/'.$filename))) {
-                unlink(public_path('uploads/file/'.$filename));
+            if ($filename) {
+                Storage::disk('public')->delete($filename);
             }
-            $filename = time().'_'.$request->file('file')->getClientOriginalName();
-            $request->file('file')->move(public_path('uploads/file/'), $filename);
+            $filename = Storage::disk('public')->putFile('file', $request->file('file'));
         }
 
         $galeri->update([
@@ -342,8 +339,8 @@ class AdminController extends Controller
     {
         $id = Crypt::decrypt($id);
         $galeri = Galeri::findOrFail($id);
-        if ($galeri->file && file_exists(public_path('uploads/file/'.$galeri->file))) {
-            unlink(public_path('uploads/file/'.$galeri->file));
+        if ($galeri->file) {
+            Storage::disk('public')->delete($galeri->file);
         }
         $galeri->delete();
         return redirect()->route('admin.galeri')->with('success','Berhasil menghapus data');
@@ -379,8 +376,7 @@ class AdminController extends Controller
 
         $filename = null;
         if ($request->hasFile('gambar')) {
-            $filename = time().'_'.$request->file('gambar')->getClientOriginalName();
-            $request->file('gambar')->move(public_path('uploads/berita/'), $filename);
+            $filename = Storage::disk('public')->putFile('berita', $request->file('gambar'));
         }
 
         Berita::create([
@@ -391,7 +387,7 @@ class AdminController extends Controller
             'id_user' => Auth::id(),
         ]);
 
-        return redirect()->route('admin.berita')->with('success','Berita berhasil ditambahkan!');
+        return redirect()->route('admin.berita')->with('success', 'Berita berhasil ditambahkan!');
     }
 
     public function editBerita(string $id)
@@ -426,11 +422,10 @@ class AdminController extends Controller
         $oldFile = $berita->gambar;
 
         if ($request->hasFile('gambar')) {
-            if ($oldFile && file_exists(public_path('uploads/berita/'.$oldFile))) {
-                unlink(public_path('uploads/berita/'.$oldFile));
+            if ($oldFile) {
+                Storage::disk('public')->delete($oldFile);
             }
-            $berita->gambar = time().'_'.$request->file('gambar')->getClientOriginalName();
-            $request->file('gambar')->move(public_path('uploads/berita/'), $berita->gambar);
+            $berita->gambar = Storage::disk('public')->putFile('berita', $request->file('gambar'));
         }
 
         $berita->update([
@@ -451,8 +446,8 @@ class AdminController extends Controller
             return redirect()->route('admin.berita')->with('error','Anda tidak punya akses untuk menghapus berita ini.');
         }
 
-        if ($berita->gambar && file_exists(public_path('uploads/berita/'.$berita->gambar))) {
-            unlink(public_path('uploads/berita/'.$berita->gambar));
+        if ($berita->gambar) {
+            Storage::disk('public')->delete($berita->gambar);
         }
         $berita->delete();
 
@@ -493,8 +488,7 @@ class AdminController extends Controller
 
         $filename = null;
         if ($request->hasFile('gambar')) {
-            $filename = time().'_'.$request->file('gambar')->getClientOriginalName();
-            $request->file('gambar')->move(public_path('uploads/ekskul/'), $filename);
+            $filename = Storage::disk('public')->putFile('ekskul', $request->file('gambar'));
         }
 
         Ekstrakulikuler::create([
@@ -530,11 +524,10 @@ class AdminController extends Controller
         $oldFile = $ekskul->gambar;
 
         if ($request->hasFile('gambar')) {
-            if ($oldFile && file_exists(public_path('uploads/ekskul/'.$oldFile))) {
-                unlink(public_path('uploads/ekskul/'.$oldFile));
+            if ($oldFile) {
+                Storage::disk('public')->delete($oldFile);
             }
-            $ekskul->gambar = time().'_'.$request->file('gambar')->getClientOriginalName();
-            $request->file('gambar')->move(public_path('uploads/ekskul/'), $ekskul->gambar);
+            $ekskul->gambar = Storage::disk('public')->putFile('ekskul', $request->file('gambar'));
         }
 
         $ekskul->update([
@@ -551,8 +544,8 @@ class AdminController extends Controller
     {
         $id = Crypt::decrypt($id);
         $ekskul = Ekstrakulikuler::findOrFail($id);
-        if ($ekskul->gambar && file_exists(public_path('uploads/ekskul/'.$ekskul->gambar))) {
-            unlink(public_path('uploads/ekskul/'.$ekskul->gambar));
+        if ($ekskul->gambar) {
+            Storage::disk('public')->delete($ekskul->gambar);
         }
         $ekskul->delete();
         return redirect()->route('admin.ekskul')->with('success','Data ekskul berhasil dihapus!');
@@ -598,15 +591,11 @@ class AdminController extends Controller
         $profile->deskripsi      = $request->deskripsi;
 
         if ($request->hasFile('logo')) {
-            $logo = time().'_logo_'.$request->file('logo')->getClientOriginalName();
-            $request->file('logo')->move(public_path('uploads/profile/'), $logo);
-            $profile->logo = $logo;
+            $profile->logo = Storage::disk('public')->putFile('profile', $request->file('logo'));
         }
 
         if ($request->hasFile('foto')) {
-            $foto = time().'_foto_'.$request->file('foto')->getClientOriginalName();
-            $request->file('foto')->move(public_path('uploads/profile/'), $foto);
-            $profile->foto = $foto;
+            $profile->foto = Storage::disk('public')->putFile('profile', $request->file('foto'));
         }
 
         $profile->save();

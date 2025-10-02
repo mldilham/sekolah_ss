@@ -201,7 +201,7 @@
                                 <td class="d-none d-md-table-cell">{{ $item->tanggal }}</td>
                                 <td class="d-none d-md-table-cell">
                                     @if ($item->gambar)
-                                        <img src="{{ asset('uploads/berita/'. $item->gambar) }}"
+                                        <img src="{{ asset('storage/'. $item->gambar) }}"
                                              alt="foto {{ $item->judul }}" width="80" height="80"
                                              class="img-thumbnail shadow-sm">
                                     @else

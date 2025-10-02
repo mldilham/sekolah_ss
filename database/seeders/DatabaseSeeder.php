@@ -32,17 +32,16 @@ class DatabaseSeeder extends Seeder
             'role' => 'operator',
         ]);
         Profile::create([
-            'nama_sekolah'   => 'SMA Negeri 1 Contoh',
-            'kepala_sekolah' => 'Drs. Budi Santoso',
-            'foto'           => 'logo.png', // bisa diganti dengan file default
-            'logo'           => 'foto_sekolah1.jpg', // bisa diganti dengan file default
-            'npsn'           => '12345678',
-            'alamat'         => 'Jl. Pendidikan No. 45, Jakarta',
-            'kontak'         => '081234567890',
-            'visi_misi'      => 'Visi: Menjadi sekolah unggul.
- Misi: Meningkatkan kualitas pembelajaran, membentuk karakter siswa, dan mengembangkan potensi.',
-            'tahun_berdiri'  => 1990,
-            'deskripsi'      => 'Sekolah ini berfokus pada pengembangan akademik dan non-akademik siswa agar siap menghadapi tantangan global.',
+            'nama_sekolah'   => 'SMAN 1 CIAWI ',
+            'kepala_sekolah' => 'Drs. H. Aang Dohiri, M.Ag',
+            'foto'           => 'upinipin.jpg', // bisa diganti dengan file default
+            'logo'           => 'sekolah1.jpg', // bisa diganti dengan file default
+            'npsn'           => '20210768',
+            'alamat'         => 'Jl. Pasirhuni No.10, Pasirhuni, Kec. Ciawi, Kabupaten Tasikmalaya, Jawa Barat 46156',
+            'kontak'         => '0265455222',
+            'visi_misi'      => 'Terwujudnya peserta didik yang berakhlak mulia, bermutu, menghasilkan lulusan yang cerdas, kreatif, inovatif dan berbudaya yang mampu bersaing di era globalisasi.',
+            'tahun_berdiri'  => 1980,
+            'deskripsi'      => 'Dirintis oleh pemerintah dan tokoh pendidikan masyarakat Ciawi , awal berdiri tahun 1979 merupakan SMA Filial dari SMA Negeri 1 Kota Tasikmalaya Merupakan SMA Negeri tertua di Kabupaten Tasikmalaya, kurun waktu 1979  s.d. Sekarang telah dipimpin oleh 10 orang kepala sekolah, yang sekarang menjabat adalah Drs.H.Nandang, M.Pd. (Sebelumnya sukses menghantarkan/mengelola SMAN Manonjaya menjadi Sekolah RSBI). Telah meluluskan kurang lebih  33 angkatan  yang alumninya sukses berkarir diberbagai bidang profesi/pekerjaan',
             'created_at'     => now(),
             'updated_at'     => now(),
         ]);

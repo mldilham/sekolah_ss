@@ -34,6 +34,16 @@
         <div class="col-lg-8 mx-auto">
             <div class="card card-custom">
                 <!-- Header -->
+                @if($errors->any())
+                        <div class="alert alert-danger">
+                            <strong>Terjadi kesalahan:</strong>
+                            <ul class="mb-0">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 <div class="card-header card-header-custom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 fw-bold">
                         <i class="fa-solid fa-pen-to-square me-2"></i> Edit Data Siswa

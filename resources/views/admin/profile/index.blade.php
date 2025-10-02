@@ -160,7 +160,7 @@
                     <div class="col-lg-4 col-md-5 profile-images">
                         <h6 class="text-primary mb-3">Logo Sekolah</h6>
                         @if($profile->logo)
-                            <img src="{{ asset('uploads/profile/'.$profile->logo) }}"
+                            <img src="{{ asset('storage/'.$profile->logo) }}"
                                  alt="Logo" class="img-fluid"
                                  style="max-height:120px;">
                         @else
@@ -172,7 +172,7 @@
 
                         <h6 class="text-primary mb-3 mt-4">Foto Sekolah</h6>
                         @if($profile->foto)
-                            <img src="{{ asset('uploads/profile/'.$profile->foto) }}"
+                            <img src="{{ asset('storage/'.$profile->foto) }}"
                                  alt="Foto Sekolah" class="img-fluid"
                                  style="max-height:120px;">
                         @else

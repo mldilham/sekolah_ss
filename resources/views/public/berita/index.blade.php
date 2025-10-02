@@ -16,7 +16,7 @@
             <div class="card border-0 shadow-sm overflow-hidden h-100">
                 <div class="position-relative">
                     @if($berita->gambar)
-                    <img src="{{ asset('uploads/berita/'.$berita->gambar) }}"
+                    <img src="{{ asset('storage/'.$berita->gambar) }}"
                          alt="{{ $berita->judul }}"
                          class="w-100"
                          style="object-fit: cover; height: 250px;">
