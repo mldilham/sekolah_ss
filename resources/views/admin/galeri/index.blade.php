@@ -201,7 +201,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="fw-semibold">{{ $item->judul }}</td>
-                                <td class="d-none d-md-table-cell">{{ $item->keterangan ?? '-' }}</td>
+                                <td class="d-none d-md-table-cell">{{ Str::limit(strip_tags($item->keterangan), 80) }}</td>
                                 <td>
                                     <span class="badge {{ $item->kategori == 'foto' ? 'bg-success text-white' : 'bg-info text-white' }}">
                                         {{ ucfirst($item->kategori) }}

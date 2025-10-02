@@ -33,7 +33,7 @@
                     </thead>
                     <tbody>
                         @forelse($siswas as $key => $siswa)
-                        <tr data-aos="fade-up" data-aos-duration="800" data-aos-delay="{{ $key * 50 }}">
+                        <tr data-aos="fade-up" data-aos-duration="800">
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $siswa->nisn }}</td>
                             <td class="fw-semibold">{{ $siswa->nama_siswa }}</td>

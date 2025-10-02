@@ -78,7 +78,7 @@
                         <a href="{{ route('public.layanan.guru') }}" class="btn btn-outline-primary">
                             &laquo; Kembali ke daftar
                         </a>
-                        <a href="#" class="btn btn-primary">Lihat Jadwal</a>
+                        {{-- <a href="#" class="btn btn-primary">Lihat Jadwal</a> --}}
                     </div>
                 </div>
             </div>

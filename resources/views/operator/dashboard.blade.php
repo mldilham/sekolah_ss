@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('operator.layouts.app')
 @section('title', 'Dashboard')
 @section('content')
 <div class="container-fluid py-3" style="min-height:100vh; display:flex; flex-direction:column; justify-content:space-between;">
@@ -19,7 +19,7 @@
             @php
                 $cards = [
                     ['title' => 'Siswa', 'count' => $siswaCount, 'icon' => 'fa-user-graduate', 'color' => 'primary'],
-                    ['title' => 'Guru', 'count' => $guruCount, 'icon' => 'fa-chalkboard-user', 'color' => 'success'],
+                    // ['title' => 'Guru', 'count' => $guruCount, 'icon' => 'fa-chalkboard-user', 'color' => 'success'],
                     ['title' => 'Berita', 'count' => $beritaCount, 'icon' => 'fa-newspaper', 'color' => 'info'],
                     ['title' => 'Galeri', 'count' => $galeriCount, 'icon' => 'fa-images', 'color' => 'warning'],
                     ['title' => 'Ekskul', 'count' => $ekskulCount, 'icon' => 'fa-laptop-code', 'color' => 'danger'],
@@ -48,11 +48,11 @@
         <div class="row g-4 justify-content-start">
             @php
                 $quickActions = [
-                    ['title'=>'Siswa','icon'=>'fa-user-graduate','color'=>'primary','route'=>'admin.siswa'],
-                    ['title'=>'Guru','icon'=>'fa-chalkboard-user','color'=>'success','route'=>'admin.guru'],
-                    ['title'=>'Berita','icon'=>'fa-newspaper','color'=>'info','route'=>'admin.berita'],
-                    ['title'=>'Galeri','icon'=>'fa-images','color'=>'warning','route'=>'admin.galeri'],
-                    ['title'=>'Ekskul','icon'=>'fa-laptop-code','color'=>'danger','route'=>'admin.ekskul'],
+                    ['title'=>'Siswa','icon'=>'fa-user-graduate','color'=>'primary','route'=>'operator.siswa'],
+                    // ['title'=>'Guru','icon'=>'fa-chalkboard-user','color'=>'success','route'=>'operator.guru'],
+                    ['title'=>'Berita','icon'=>'fa-newspaper','color'=>'info','route'=>'operator.berita'],
+                    ['title'=>'Galeri','icon'=>'fa-images','color'=>'warning','route'=>'operator.galeri'],
+                    ['title'=>'Ekskul','icon'=>'fa-laptop-code','color'=>'danger','route'=>'operator.ekskul'],
                 ];
             @endphp
 

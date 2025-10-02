@@ -45,7 +45,7 @@
 
                 <!-- Body -->
                 <div class="card-body">
-                    <form action="{{ route('admin.guru.update', $guru->id_guru) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.guru.update', Crypt::encrypt($guru->id_guru)) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 

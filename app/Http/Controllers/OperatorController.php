@@ -237,7 +237,7 @@ class OperatorController extends Controller
         $filename = null;
         if ($request->hasFile('gambar')) {
             $filename = time() . '_' . $request->file('gambar')->getClientOriginalName();
-            $request->file->move(public_path('uploads/ekskul/'), $filename);
+            $request->file('gambar')->move(public_path('uploads/ekskul/'), $filename);
         }
 
         Ekstrakulikuler::create([

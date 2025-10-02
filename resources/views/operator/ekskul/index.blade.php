@@ -199,7 +199,7 @@
                                 <td class="fw-semibold">{{ $item->nama_ekskul }}</td>
                                 <td>{{ $item->pembina }}</td>
                                 <td class="d-none d-md-table-cell">{{ $item->jadwal_latihan }}</td>
-                                <td class="d-none d-md-table-cell">{{ Str::limit(strip_tags($item->deskripsi), 50) }}</td>
+                                <td class="d-none d-md-table-cell">{{ Str::limit(strip_tags($item->deskripsi), 80) }}</td>
                                 <td class="d-none d-md-table-cell">
                                     @if ($item->gambar)
                                         <img src="{{ asset('uploads/ekskul/'. $item->gambar) }}"

@@ -161,6 +161,14 @@
         object-fit: cover;
     }
 
+    .news-content {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        white-space: normal;
+        line-height: 1.6;
+    }
+
     .ekskul-card {
         overflow: hidden;
         border-radius: 5px;

@@ -34,13 +34,12 @@
 </label>
 
 <ul class="navbar-nav sidebar sidebar-dark accordion">
-    <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="{{ route('admin.dashboard') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="{{ route('operator.dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fa-solid fa-school"></i>
         </div>
         <div class="sidebar-brand-text mx-2">KitaSchool</div>
     </a>
-
     <hr class="sidebar-divider my-1 border-light">
 
     @auth

@@ -197,7 +197,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="fw-semibold">{{ $item->judul }}</td>
-                                <td class="d-none d-md-table-cell">{{ Str::limit(strip_tags($item->isi),120) }}</td>
+                                <td class="d-none d-md-table-cell">{{ Str::limit(strip_tags($item->isi),80) }}</td>
                                 <td class="d-none d-md-table-cell">{{ $item->tanggal }}</td>
                                 <td class="d-none d-md-table-cell">
                                     @if ($item->gambar)
