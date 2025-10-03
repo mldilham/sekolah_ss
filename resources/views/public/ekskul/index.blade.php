@@ -47,6 +47,9 @@
         <p class="text-center text-muted" data-aos="fade-up">Belum ada ekstrakurikuler.</p>
         @endforelse
     </div>
+    <div class="d-flex justify-content-center mt-4" data-aos="fade-up">
+        {{ $ekskuls->links('pagination::bootstrap-4') }}
+    </div>
 </div>
 
 @endsection

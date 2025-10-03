@@ -13,33 +13,19 @@
       scroll-behavior: smooth;
     }
     .hero {
-        position: relative;
-        min-height: 100vh;
-        background-image: url('asset/sekolah.jpg');
-        background-repeat: no-repeat;   /* Supaya tidak diulang */
-        background-size: cover;         /* Biar menutupi seluruh layar */
-        background-position: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        color: white;
-        text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    background: url('asset/sekolah.jpg') center/cover no-repeat fixed;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
     }
 
     .hero::before {
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(30, 33, 64, 0.3), rgba(44, 47, 84, 0.3));
+        inset: 0;
+        background: linear-gradient(135deg, rgba(30, 33, 64, 0.35), rgba(44, 47, 84, 0.35));
         z-index: 1;
     }
 
-    .hero > * {
-        position: relative;
+    .z-2 {
         z-index: 2;
     }
     .card {
@@ -129,38 +115,45 @@
         margin: 0;
     }
 
-    #galeri .card img {
-    transition: transform 0.4s ease;
+
+    /* Background gradient reusable */
+    .bg-gradient-custom {
+        background: linear-gradient(135deg, #33A1E0, #2c2f54);
     }
 
-    #galeri .card:hover img {
+    /* Ukuran gambar/video */
+    .objek-galeri {
+        object-fit: cover;
+        height: 250px;
+        transition: transform 0.4s ease;
+    }
+
+    /* Hover efek */
+    .galeri-card:hover .objek-galeri {
         transform: scale(1.1);
     }
 
-    #galeri .overlay {
-        position: absolute;
-        inset: 0;
-        background: rgba(0,0,0,0.6);
-        opacity: 0;
-        transition: 0.4s;
+
+    /* Background reusable (galeri + berita + lainnya) */
+    .bg-gradient-custom {
+        background: linear-gradient(135deg, #33A1E0, #2c2f54);
     }
 
-    #galeri .card:hover .overlay {
-        opacity: 1;
-    }
-
+    /* Kartu berita */
     .berita-card {
         overflow: hidden;
         border-radius: 5px;
-        background:  rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.15);
     }
 
+    /* Gambar berita */
     .berita-img {
         width: 100%;
-        height: 220px;
+        height: 250px;
         object-fit: cover;
     }
 
+    /* Pembungkus isi agar responsif */
     .news-content {
         word-wrap: break-word;
         overflow-wrap: break-word;
@@ -168,6 +161,7 @@
         white-space: normal;
         line-height: 1.6;
     }
+
 
     .ekskul-card {
         overflow: hidden;
@@ -186,14 +180,30 @@
         padding: 10px 20px;
         color: white;
         text-decoration: none;
-        border-radius: 8px;
+        /* border-radius: 8px; */
         border: 2px solid white;
         transition: all 0.3s ease;
     }
 
     .custom-tampilan:hover {
         color: white;
-        background: linear-gradient(135deg, #124170  , #26667F);
+        background: linear-gradient(135deg, #2F5755  , #5A9690);
+        border: 2px solid #E6D8C3;
+    }
+
+    .custom-tampilan-eks {
+        display: inline-block;
+        padding: 10px 20px;
+        color: grey;
+        text-decoration: none;
+        /* border-radius: 8px; */
+        border: 2px solid grey;
+        transition: all 0.3s ease;
+    }
+
+    .custom-tampilan-eks:hover {
+        color: white;
+        background: linear-gradient(135deg, #2F5755  , #5A9690);
         border: 2px solid #E6D8C3;
     }
 
@@ -264,13 +274,13 @@
 
     .lihat-selengkapnya {
         font-size: 0.95rem;
-        font-weight: 600;
+        font-weight: 500;
         padding: 8px 18px;
         border-radius: 8px;
         text-decoration: none;
         display: inline-block;
         color: white;
-        border: 2px solid white;
+        border: 1px solid white;
         transition: all 0.3s ease;
     }
 

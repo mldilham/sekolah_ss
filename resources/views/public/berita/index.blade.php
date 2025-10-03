@@ -6,39 +6,41 @@
 <div class="container py-5">
     <!-- Header -->
     <div class="text-center mb-5 gradient" data-aos="fade-down" data-aos-duration="1000">
-        <h2 class="fw-bold text-primary">Berita Terbaru</h2>
+        <h2 class="fw-bold text-primary">Berita</h2>
         <p class="text-muted">Update informasi terkini dari sekolah kami</p>
     </div>
 
-    <div class="row">
-        @forelse($beritas->take(2) as $berita)
-        <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+    <div class="row justify-content-center">
+        @forelse($beritas as $berita)
+        <div class="col-lg-3 col-md-5 mb-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
             <div class="card border-0 shadow-sm overflow-hidden h-100">
                 <div class="position-relative">
                     @if($berita->gambar)
                     <img src="{{ asset('storage/'.$berita->gambar) }}"
                          alt="{{ $berita->judul }}"
                          class="w-100"
-                         style="object-fit: cover; height: 250px;">
+                         style="object-fit: cover; height: 200px;">
                     @endif
 
-                    <div class="position-absolute bottom-0 start-0 text-white p-3"
-                         style="width: 80px; text-align: center;">
-                        <h4 class="mb-0" style="font-size: 1.2rem;">
+                    <div class="position-absolute bottom-0 start-0 text-white p-2"
+                         style="width: 70px; text-align: center;">
+                        <h4 class="mb-0" style="font-size: 1rem;">
                             {{ date('d', strtotime($berita->tanggal)) }}
                         </h4>
-                        <small>{{ date('M, Y', strtotime($berita->tanggal)) }}</small>
+                        <small style="font-size: 0.75rem;">
+                            {{ date('M, Y', strtotime($berita->tanggal)) }}
+                        </small>
                     </div>
                 </div>
 
-                <div class="p-4 d-flex flex-column">
-                    <h3 class="fw-bold text-dark mb-3" style="font-size: 1.2rem;">
+                <div class="p-3 d-flex flex-column">
+                    <h3 class="fw-bold text-dark mb-2" style="font-size: 1rem;">
                         {{ $berita->judul }}
                     </h3>
-                    <p class="text-muted flex-grow-1" style="text-align: justify;">
+                    <p class="text-muted flex-grow-1" style="font-size: 0.9rem; text-align: justify;">
                         {{ Str::limit(strip_tags($berita->isi), 120) }}
                     </p>
-                    <div class="text-center mt-3">
+                    <div class="mt-2">
                         <a href="{{ route('public.berita.detail', Crypt::encrypt($berita->id_berita)) }}" class="border-link-ekskul">
                             Lihat Selengkapnya
                         </a>

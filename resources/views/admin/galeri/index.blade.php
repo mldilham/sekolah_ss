@@ -223,7 +223,7 @@
                                 <td>
                                     <div class="d-flex gap-2">
                                         <a href="{{ route('admin.galeri.edit', Crypt::encrypt($item->id_galeri)) }}" class="btn btn-warning btn-sm text-white btn-action">
-                                            <i class="fa-solid fa-pen"></i>
+                                            <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                         <form action="{{ route('admin.galeri.destroy', Crypt::encrypt($item->id_galeri)) }}" method="POST" class="d-inline">
                                             @csrf

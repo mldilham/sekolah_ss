@@ -163,7 +163,7 @@
 
   <!-- Footer -->
   <footer>
-    &copy; {{ date('Y') }} KitaSchool. All Rights Reserved.
+    &copy; {{ date('Y') }} SMAN1C. All Rights Reserved.
   </footer>
 
 </body>

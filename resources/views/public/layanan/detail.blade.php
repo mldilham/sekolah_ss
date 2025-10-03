@@ -56,7 +56,7 @@
 
                     {{-- Email --}}
                     <div class="info-item d-flex">
-                        <span class="info-label">Email :</span>
+                        <span class="info-label">NIP :</span>
                         <span>{{ $guru->nip ?? '-' }}</span>
                     </div>
 

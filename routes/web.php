@@ -15,6 +15,9 @@ Route::get('/profile', [Controller::class, 'profile'])->name('profile');
 Route::get('/berita', [PublicController::class, 'berita'])->name('public.berita');
 Route::get('/berita/detail/{id}', [PublicController::class, 'detailBerita'])->name('public.berita.detail');
 Route::get('/galeri', [PublicController::class, 'galeri'])->name('public.galeri');
+Route::get('/galeri/foto', [PublicController::class, 'foto'])->name('public.galeri.foto');
+Route::get('/galeri/video', [PublicController::class, 'video'])->name('public.galeri.video');
+
 
 // Route::get('/layanan', [PublicController::class, 'layanan'])->name('public.layanan');
 Route::get('/layanan/guru', [PublicController::class, 'guru'])->name('public.layanan.guru');

@@ -3,12 +3,12 @@
 @section('title', 'Beranda - ' . ($profile->nama_sekolah))
 
 @section('hero')
-<section class="hero">
-    <div class="container">
+<section class="hero d-flex flex-column justify-content-center align-items-center text-white text-center min-vh-100 position-relative">
+    <div class="container position-relative z-2">
         <div class="row justify-content-center">
-            <div class="col-md-7 text-center">
+            <div class="col-md-7">
                 <h1 class="display-4 fw-bold" data-aos="fade-down" data-aos-duration="1000">
-                    {{ $profile->nama_sekolah }}
+                    Selamat Datang Di Website {{ $profile->nama_sekolah }}
                 </h1>
                 {{-- <p class="lead" data-aos="fade-up" data-aos-duration="1000">
                     {{ $profile->deskripsi ? Str::limit($profile->deskripsi, 350) : 'Belum ada deskripsi tentang sekolah.' }}
@@ -18,6 +18,7 @@
     </div>
 </section>
 @endsection
+
 
 @section('content')
 <div class="container-fluid p-0">
@@ -34,8 +35,10 @@
                 {{-- FOTO SEKOLAH --}}
                 <div class="col-lg-5" data-aos="fade-right" data-aos-duration="1000">
                     <div class="position-relative rounded-2 overflow-hidden shadow-lg">
-                        <img src="{{ asset('storage/'.$profile->logo) }}" alt="Logo Sekolah" class="img-fluid w-100" style="object-fit: cover; height: 350px;">
-                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(to bottom right, rgba(0,0,0,0.25), rgba(0,0,0,0.05));"></div>
+                        <img src="{{ asset('storage/'.$profile->logo) }}"
+                             alt="Logo Sekolah"
+                             class="w-100"
+                             style="height: 350px; object-fit: cover; display: block;">
                     </div>
                 </div>
 
@@ -44,7 +47,6 @@
                     <p class="text-muted lh-lg" style="text-align: justify;">
                         {{ $profile->deskripsi ? Str::limit($profile->deskripsi, 450) : 'Belum ada deskripsi tentang sekolah.' }}
                     </p>
-
                     <div class="row mt-4 g-3">
                         <div class="col-12 col-md-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
                             <div class="rounded-4 p-3 shadow-sm bg-white h-100 text-center">
@@ -81,7 +83,7 @@
     @endif
 
     {{-- Berita --}}
-    <section id="berita" class="py-5" style="background: linear-gradient(135deg, #33A1E0, #2c2f54);">
+    <section id="berita" class="py-5 bg-gradient-custom">
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="fw-bold text-white" data-aos="fade-down" data-aos-duration="1000">Berita Terbaru</h2>
@@ -89,17 +91,26 @@
 
             <div class="row g-4 justify-content-center">
                 @forelse($beritas->take(3) as $key => $berita)
-                <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{{ $key * 150 }}">
+                <div class="col-lg-4 col-md-6 col-sm-12"
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                    data-aos-delay="{{ $key * 150 }}">
+
                     <div class="card shadow-sm border-0 h-100 berita-card">
                         @if($berita->gambar)
-                        <img src="{{ asset('storage/'.$berita->gambar) }}" alt="{{ $berita->judul }}" class="w-100 berita-img" style="object-fit: cover; height: 250px;">
+                            <img src="{{ asset('storage/'.$berita->gambar) }}"
+                                alt="{{ $berita->judul }}"
+                                class="w-100 berita-img">
                         @endif
+
                         <div class="p-3 d-flex flex-column">
-                            <h5 class="fw-semibold mb-2 text-white">{{ Str::limit($berita->judul, 60) }}</h5>
-                            <p class="text-light flex-grow-1" style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">
+                            <h5 class="fw-semibold mb-2 text-white">
+                                {{ Str::limit($berita->judul, 60) }}
+                            </h5>
+                            <p class="text-light flex-grow-1 news-content">
                                 {{ Str::limit(strip_tags($berita->isi), 120) }}
                             </p>
-                            <div class="text-center mt-4" data-aos="fade-up" data-aos-duration="1000">
+                            <div class=" mt-4" data-aos="fade-up" data-aos-duration="1000">
                                 <a href="{{ route('public.berita') }}" class="lihat-selengkapnya">
                                     Lihat Selengkapnya
                                 </a>
@@ -112,7 +123,7 @@
                 @endforelse
             </div>
 
-            <div class="text-center mt-4" data-aos="fade-up" data-aos-duration="1000">
+            <div class="text-center mt-5" data-aos="fade-up" data-aos-duration="1000">
                 <a href="{{ route('public.berita') }}" class="custom-tampilan">
                     Tampilkan semua berita
                 </a>
@@ -135,61 +146,208 @@
                     <p class="gradient">Tenaga Pendidik</p>
                 </div>
             </div>
+
         </div>
+
     </section>
 
-    {{-- Galeri --}}
-    <section id="galeri" class="py-5 bg-light" style="background: linear-gradient(135deg, #33A1E0, #2c2f54);">
+    {{-- <section id="galeri" class="py-5 bg-gradient-custom">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="fw-bold text-white" data-aos="fade-down" data-aos-duration="1000">Galeri</h2>
+                <h2 class="fw-bold text-white"
+                    data-aos="fade-down"
+                    data-aos-duration="1000">
+                    Galeri
+                </h2>
             </div>
 
-            <div class="row g-3 justify-content-center">
-                @forelse($galeris->take(8) as $key => $galeri)
-                <div class="col-sm-6 col-md-4 col-lg-3"
-                    data-aos="fade-up"
-                    data-aos-duration="800"
-                    data-aos-delay="{{ $key * 100 }}">
-
-                    <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+            <!-- Galeri -->
+            <div class="row">
+                <div class="col-lg-8 col-md-12 mb-4">
+                    <div class="row g-3">
                         @php
-                            $extension = pathinfo($galeri->file, PATHINFO_EXTENSION);
-                            $isVideo = in_array(strtolower($extension), ['mp4','webm','ogg']);
+                            $fotos = $galeris->filter(function($galeri){
+                                $ext = strtolower(pathinfo($galeri->file, PATHINFO_EXTENSION));
+                                return !in_array($ext, ['mp4', 'webm', 'ogg']);
+                            })->take(4);
                         @endphp
 
-                        @if($isVideo)
-                            {{-- Jika Video --}}
-                            <video controls
-                                class="w-100"
-                                style="object-fit: cover; height: 250px;">
-                                <source src="{{ asset('storage/'.$galeri->file) }}" type="video/{{ $extension }}">
-                                Browser Anda tidak mendukung video.
-                            </video>
-                        @else
-                            {{-- Jika Gambar --}}
-                            <a href="{{ asset('storage/'.$galeri->file) }}"
-                            data-lightbox="galeri"
-                            data-title="{{ $galeri->judul }}">
-                                <img src="{{ asset('storage/'.$galeri->file) }}"
-                                    alt="{{ $galeri->judul }}"
-                                    class="w-100"
-                                    style="object-fit: cover; height: 250px;">
-                            </a>
-                        @endif
-
-                        <div class="p-2 bg-dark text-white small"
-                            style="background: linear-gradient(135deg, #33A1E0, #2c2f54);">
-                            {{ Str::limit($galeri->judul, 30) }}
-                        </div>
+                        @forelse($fotos as $key => $foto)
+                            <div class="col-6 col-md-6"
+                                data-aos="zoom-in"
+                                data-aos-duration="800"
+                                data-aos-delay="{{ $key * 100 }}">
+                                <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+                                    <a href="{{ asset('storage/'.$foto->file) }}"
+                                    data-lightbox="galeri"
+                                    data-title="{{ $foto->judul }}">
+                                        <img src="{{ asset('storage/'.$foto->file) }}"
+                                            alt="{{ $foto->judul }}"
+                                            class="w-100"
+                                            style="object-fit: cover; height: 250px;">
+                                    </a>
+                                    <div class="p-2 text-white small bg-gradient-custom">
+                                        {{ Str::limit($foto->judul, 30) }}
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <p class="text-center text-light">Belum ada foto.</p>
+                        @endforelse
                     </div>
-
                 </div>
-                @empty
-                <p class="text-center text-muted" data-aos="fade-up">Belum ada galeri.</p>
-                @endforelse
+
+                <div class="col-lg-4 col-md-12">
+                    <div class="row g-3">
+                        @php
+                            $videos = $galeris->filter(function($galeri){
+                                $ext = strtolower(pathinfo($galeri->file, PATHINFO_EXTENSION));
+                                return in_array($ext, ['mp4', 'webm', 'ogg']);
+                            })->take(2);
+                        @endphp
+
+                        @forelse($videos as $key => $video)
+                            <div class="col-12"
+                                data-aos="zoom-in"
+                                data-aos-duration="800"
+                                data-aos-delay="{{ $key * 100 }}">
+                                <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+                                    <video controls
+                                        class="w-100"
+                                        style="object-fit: cover; height: 250px;">
+                                        <source src="{{ asset('storage/'.$video->file) }}"
+                                                type="video/{{ pathinfo($video->file, PATHINFO_EXTENSION) }}">
+                                        Browser Anda tidak mendukung video.
+                                    </video>
+                                    <div class="p-2 text-white small bg-gradient-custom">
+                                        {{ Str::limit($video->judul, 30) }}
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <p class="text-center text-light">Belum ada video.</p>
+                        @endforelse
+                    </div>
+                </div>
             </div>
 
+            <!-- Button -->
+            <div class="text-center mt-5" data-aos="fade-up" data-aos-duration="1000">
+                <a href="{{ route('public.galeri.foto') }}" class="custom-tampilan">
+                    Tampilkan semua galeri
+                </a>
+            </div>
+        </div>
+    </section> --}}
+
+    <section id="galeri" class="py-5 bg-gradient-custom">
+        <div class="container">
+            <!-- Header -->
+            <h2 class="text-center fw-bold text-white mb-3 "
+                data-aos="fade-down"
+                data-aos-duration="1000">
+                Galeri
+            </h2>
+            <!-- FOTO SAJA -->
+            <div class="row mb-4">
+                <h4 class="mb-4 fw-bold text-white"
+                    data-aos="fade-right"
+                    data-aos-duration="800">
+                    Foto Kegiatan
+                </h4>
+                <div class="col-12">
+                    <div class="row g-3">
+                        @forelse($galeris as $key => $media)
+                            @php
+                                $extension = pathinfo($media->file, PATHINFO_EXTENSION);
+                            @endphp
+
+                            @if(in_array(strtolower($extension), ['jpg','jpeg','png','webp']))
+                                <div class="col-lg-3 col-md-4 mb-4"
+                                    data-aos="zoom-in"
+                                    data-aos-duration="800"
+                                    data-aos-delay="{{ $key * 100 }}">
+
+                                    <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+                                        <a href="{{ asset('storage/'.$media->file) }}"
+                                           data-lightbox="galeri"
+                                           data-title="{{ $media->judul }}">
+                                            <img src="{{ asset('storage/'.$media->file) }}"
+                                                alt="{{ $media->judul }}"
+                                                class="w-100"
+                                                style="object-fit: cover; height: 250px;">
+                                        </a>
+                                        <div class="p-2 text-white small"
+                                            style="background: linear-gradient(135deg, #33A1E0, #2c2f54);">
+                                            {{ Str::limit($media->judul, 30) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @empty
+                            <p class="text-center text-muted">Belum ada foto.</p>
+                        @endforelse
+                    </div>
+                    <div class="text-center mt-4" data-aos="fade-up" data-aos-duration="1000">
+                        <a href="{{ route('public.galeri.foto') }}" class="custom-tampilan">
+                            Tampilkan semua Foto
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIDEO SAJA -->
+            <div class="row mb-4">
+                <h4 class="mb-4 fw-bold text-white"
+                    data-aos="fade-right"
+                    data-aos-duration="800">
+                    Video Kegiatan
+                </h4>
+                <div class="col-12">
+                    <div class="row g-3">
+                        @php
+                            $videos = $galeris->filter(function($galeri){
+                                $ext = strtolower(pathinfo($galeri->file, PATHINFO_EXTENSION));
+                                return in_array($ext, ['mp4', 'webm', 'ogg']);
+                            });
+                        @endphp
+
+                        @forelse($videos->take(4) as $key => $video)
+                            <div class="col-lg-3 col-md-4 mb-4"
+                                data-aos="flip-left"
+                                data-aos-easing="ease-out-cubic"
+                                data-aos-duration="2000"
+                                data-aos-delay="{{ $key * 100 }}">
+                                <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+                                    <video controls
+                                        class="w-100"
+                                        style="object-fit: cover; height: 250px;">
+                                        <source src="{{ asset('storage/'.$video->file) }}"
+                                                type="video/{{ pathinfo($video->file, PATHINFO_EXTENSION) }}">
+                                        Browser Anda tidak mendukung video.
+                                    </video>
+                                    <div class="p-2 text-white small"
+                                        style="background: linear-gradient(135deg, #33A1E0, #2c2f54);">
+                                        {{ Str::limit($video->judul, 30) }}
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <p class="text-center text-muted">Belum ada video.</p>
+                        @endforelse
+                    </div>
+                    <div class="text-center mt-4" data-aos="fade-up" data-aos-duration="1000">
+                        <a href="{{ route('public.galeri.video') }}" class="custom-tampilan">
+                            Tampilkan semua video
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGINATION -->
+            {{-- <div class="d-flex justify-content-center mt-4" data-aos="fade-up">
+                {{ $galeris->links('pagination::bootstrap-4') }}
+            </div> --}}
         </div>
     </section>
 
@@ -201,7 +359,7 @@
             </div>
 
             <div class="row g-4 justify-content-center">
-                @forelse($ekstrakulis->take(6) as $key => $ekskul)
+                @forelse($ekstrakulis->take(3) as $key => $ekskul)
                 <div class="col-lg-4 col-md-6 col-sm-12" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{{ $key * 150 }}">
                     <div class="card shadow-sm border-0 h-100 berita-card">
                         <div class="position-relative">
@@ -224,6 +382,11 @@
                 @empty
                 <p class="text-center text-light" data-aos="fade-up">Belum ada ekstrakurikuler.</p>
                 @endforelse
+            </div>
+            <div class="text-center mt-4" data-aos="fade-up" data-aos-duration="1000">
+                <a href="{{ route('public.ekskul') }}" class="custom-tampilan-eks">
+                    Tampilkan semua ekskul
+                </a>
             </div>
         </div>
     </section>

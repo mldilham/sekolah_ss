@@ -368,7 +368,7 @@ class AdminController extends Controller
     public function storeBerita(Request $request)
     {
         $request->validate([
-            'judul' => 'required|max:50',
+            'judul' => 'required|max:80',
             'isi' => 'required|string',
             'tanggal' => 'required|date',
             'gambar' => 'nullable|file|mimes:jpg,jpeg,png,mp4|max:5120',
@@ -407,7 +407,7 @@ class AdminController extends Controller
     {
         $id = Crypt::decrypt($id);
         $request->validate([
-            'judul' => 'required|max:50',
+            'judul' => 'required|max:80',
             'isi' => 'required|string',
             'tanggal' => 'required|date',
             'gambar' => 'nullable|file|mimes:jpg,jpeg,png,mp4|max:5120',

@@ -17,8 +17,8 @@ class PublicController extends Controller
     public function berita()
     {
         $beritas = Berita::orderBy('tanggal', 'desc')
-                    ->paginate(2)
-                    ->onEachSide(2);
+                    ->paginate(4)
+                    ->onEachSide(3);
         $profile = Profile::first();
         return view('public.berita.index', compact('beritas', 'profile'));
     }
@@ -35,14 +35,39 @@ class PublicController extends Controller
     public function galeri()
     {
         $profile = Profile::first();
+        // $galeris = Galeri::orderBy('tanggal', 'desc')
+        //             ->paginate(5)
+        //             ->onEachSide(3);
         $galeris = Galeri::all();
         return view('public.galeri.index', compact('galeris','profile'));
+    }
+
+    public function foto()
+    {
+        $profile = Profile::first();
+        // $galeris = Galeri::orderBy('tanggal', 'desc')
+        //             ->paginate(5)
+        //             ->onEachSide(3);
+        $galeris = Galeri::all();
+        return view('public.galeri.foto', compact('galeris','profile'));
+    }
+
+    public function video()
+    {
+        $profile = Profile::first();
+        // $galeris = Galeri::orderBy('tanggal', 'desc')
+        //             ->paginate(5)
+        //             ->onEachSide(3);
+        $galeris = Galeri::all();
+        return view('public.galeri.video', compact('galeris','profile'));
     }
 
     // ---------------- EKSKUL ----------------
     public function ekskul()
     {
-        $ekskuls = Ekstrakulikuler::all();
+        $ekskuls = Ekstrakulikuler::orderBy('jadwal_latihan', 'desc')
+                    ->paginate(3)
+                    ->onEachSide(2);
         $profile = Profile::first();
         return view('public.ekskul.index', compact('ekskuls','profile'));
     }
