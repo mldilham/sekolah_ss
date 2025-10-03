@@ -26,7 +26,7 @@
             </h4>
             <div class="col-12">
                 <div class="row g-3">
-                    @forelse($galeris->take(4) as $key => $media)
+                    @forelse($galeris as $key => $media)
                         @php
                             $extension = pathinfo($media->file, PATHINFO_EXTENSION);
                         @endphp
@@ -61,9 +61,6 @@
         </div>
 
         <!-- PAGINATION -->
-        {{-- <div class="d-flex justify-content-center mt-4" data-aos="fade-up">
-            {{ $galeris->links('pagination::bootstrap-4') }}
-        </div> --}}
     </div>
 </section>
 @endsection

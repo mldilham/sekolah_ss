@@ -36,6 +36,7 @@ class AdminController extends Controller
     // ---------------- USER ----------------
     public function userView(Request $request)
     {
+        $profile = Profile::first();
         $query = User::query();
 
         if ($request->has('search') && $request->search != '') {

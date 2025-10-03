@@ -28,12 +28,12 @@
     <section id="tentang-kami" class="py-5">
         <div class="container">
             <h1 class="fw-bold mb-5 text-center gradient" style="font-size: 2rem;" data-aos="fade-down" data-aos-duration="1000">
-                <span class="text-primary">Profile Sekolah</span>
+                <span class="text-primary">Seputar Sekolah</span>
             </h1>
 
             <div class="row align-items-center g-5">
                 {{-- FOTO SEKOLAH --}}
-                <div class="col-lg-5" data-aos="fade-right" data-aos-duration="1000">
+                <div class="col-lg-3" data-aos="fade-right" data-aos-duration="1000">
                     <div class="position-relative rounded-2 overflow-hidden shadow-lg">
                         <img src="{{ asset('storage/'.$profile->logo) }}"
                              alt="Logo Sekolah"
@@ -43,7 +43,7 @@
                 </div>
 
                 {{-- DESKRIPSI --}}
-                <div class="col-lg-7" data-aos="fade-left" data-aos-duration="1000">
+                <div class="col-lg-9" data-aos="fade-left" data-aos-duration="1000">
                     <p class="text-muted lh-lg" style="text-align: justify;">
                         {{ $profile->deskripsi ? Str::limit($profile->deskripsi, 450) : 'Belum ada deskripsi tentang sekolah.' }}
                     </p>

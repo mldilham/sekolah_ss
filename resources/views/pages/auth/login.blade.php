@@ -137,8 +137,8 @@
   <div class="login-wrapper">
     <div class="card card-login p-4">
       <div class="card-header-login">
-        <h3>Login</h3>
-        <p>Masuk ke akun Anda</p>
+        <img src="{{ asset('asset/logos.png') }}" alt="" width="80px" height="80px">
+        <h3 class="mt-3">Masukan Akun Anda</h3>
       </div>
       <div class="card-body">
         @if(session('error'))

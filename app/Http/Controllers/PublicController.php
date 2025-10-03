@@ -45,9 +45,6 @@ class PublicController extends Controller
     public function foto()
     {
         $profile = Profile::first();
-        // $galeris = Galeri::orderBy('tanggal', 'desc')
-        //             ->paginate(5)
-        //             ->onEachSide(3);
         $galeris = Galeri::all();
         return view('public.galeri.foto', compact('galeris','profile'));
     }

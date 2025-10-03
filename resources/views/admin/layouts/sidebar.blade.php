@@ -36,9 +36,9 @@
 <ul class="navbar-nav sidebar sidebar-dark accordion">
     <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="{{ route('admin.dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fa-solid fa-school"></i>
+            <img src="{{ asset('asset/logos.png') }}" alt="" width="40px" height="40px">
         </div>
-        <div class="sidebar-brand-text mx-2">KitaSchool</div>
+        <div class="sidebar-brand-text mx-2">SMAN 1 CIAWI</div>
     </a>
 
     <hr class="sidebar-divider my-1 border-light">
