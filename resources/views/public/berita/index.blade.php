@@ -1,13 +1,28 @@
 @extends('public.layouts.app')
 @section('title', 'Berita - ' . ($profile->nama_sekolah ?? 'Sekolah'))
-
+@section('hero')
+<section class="hero d-flex flex-column justify-content-center align-items-center text-white text-center min-vh-100 position-relative">
+    <div class="container position-relative z-2">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <h1 class="display-4 fw-bold" data-aos="fade-down" data-aos-duration="1000">
+                    Seputar Berita Tentang <br> {{ $profile->nama_sekolah }}
+                </h1>
+                {{-- <p class="lead" data-aos="fade-up" data-aos-duration="1000">
+                    {{ $profile->deskripsi ? Str::limit($profile->deskripsi, 350) : 'Belum ada deskripsi tentang sekolah.' }}
+                </p> --}}
+            </div>
+        </div>
+    </div>
+</section>
+@endsection
 @section('content')
 
 <div class="container py-5">
     <!-- Header -->
     <div class="text-center mb-5 gradient" data-aos="fade-down" data-aos-duration="1000">
         <h2 class="fw-bold text-primary">Berita</h2>
-        <p class="text-muted">Update informasi terkini dari sekolah kami</p>
+        <p class="text-muted">Update informasi  dari sekolah kami</p>
     </div>
 
     <div class="row justify-content-center">

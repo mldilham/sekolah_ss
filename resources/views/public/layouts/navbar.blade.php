@@ -43,7 +43,7 @@ main {
 
     <!-- Menu -->
     <div class="collapse navbar-collapse" id="navbarContent">
-      <ul class="navbar-nav ms-auto gap-lg-2">
+      <ul class="navbar-nav ms-auto gap-lg-1">
 
         <li class="nav-item">
           <a class="nav-link" href="/">Beranda</a>

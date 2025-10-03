@@ -1,6 +1,5 @@
 @extends('public.layouts.app')
 @section('title', 'Galeri - ' . ($profile->nama_sekolah ?? 'Sekolah'))
-
 @section('content')
 <section id="galeri" class="py-5 bg-light">
     <div class="container">

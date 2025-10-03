@@ -8,381 +8,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    .hero {
-    background: url('asset/sekolah.jpg') center/cover no-repeat fixed;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-    }
-
-    .hero::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(30, 33, 64, 0.35), rgba(44, 47, 84, 0.35));
-        z-index: 1;
-    }
-
-    .z-2 {
-        z-index: 2;
-    }
-    .card {
-        transition: transform 0.2s;
-        /* background: transparent !important; */
-    }
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    .card .card-detail a{
-        text-decoration: none;
-    }
-
-    footer {
-        background: linear-gradient(135deg, #1C6EA4, #2c2f54);
-        color: white;
-        padding: 40px 0 20px;
-    }
-    .footer-bottom {
-        text-align: center;
-        padding: 10px 0;
-        margin-top: 20px;
-        border-top: 1px solid #2c2f54;
-    }
-
-    /* Navbar Styles */
-    .navbar-custom {
-        background: linear-gradient(135deg, #33A1E0 0%, #2c2f54 100%);
-        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        transition: all 0.3s ease;
-        z-index: 1030;
-    }
-    .navbar-custom .navbar-brand {
-        color: white !important;
-        font-weight: bold;
-    }
-    .navbar-custom .navbar-brand:hover {
-        color: #e0e0e0 !important;
-    }
-    .navbar-custom .nav-link {
-        color: white !important;
-        margin: 0 10px;
-        transition: color 0.3s ease;
-    }
-    .navbar-custom .nav-link:hover {
-        color: #ccc !important;
-    }
-    .navbar-custom .btn-outline-light {
-        border-color: white;
-        color: white;
-    }
-    .navbar-custom .btn-outline-light:hover {
-        background-color: white;
-        color: #1e2140;
-    }
-
-    .nav-toggle-checkbox {
-        display: none;
-    }
-    .hamburger {
-        display: none;
-        flex-direction: column;
-        cursor: pointer;
-        padding: 5px;
-    }
-    .hamburger span {
-        width: 25px;
-        height: 3px;
-        background: #2c2f54;
-        margin: 3px 0;
-        transition: 0.3s;
-    }
-
-    .navbar-menu {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-    }
-    .navbar-nav {
-        display: flex;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-    .navbar-nav .nav-item {
-        margin: 0;
-    }
-
-
-    /* Background gradient reusable */
-    .bg-gradient-custom {
-        background: linear-gradient(135deg, #33A1E0, #2c2f54);
-    }
-
-    /* Ukuran gambar/video */
-    .objek-galeri {
-        object-fit: cover;
-        height: 250px;
-        transition: transform 0.4s ease;
-    }
-
-    /* Hover efek */
-    .galeri-card:hover .objek-galeri {
-        transform: scale(1.1);
-    }
-
-
-    /* Background reusable (galeri + berita + lainnya) */
-    .bg-gradient-custom {
-        background: linear-gradient(135deg, #33A1E0, #2c2f54);
-    }
-
-    /* Kartu berita */
-    .berita-card {
-        overflow: hidden;
-        border-radius: 5px;
-        background: rgba(255, 255, 255, 0.15);
-    }
-
-    /* Gambar berita */
-    .berita-img {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-    }
-
-    /* Pembungkus isi agar responsif */
-    .news-content {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        word-break: break-word;
-        white-space: normal;
-        line-height: 1.6;
-    }
-
-
-    .ekskul-card {
-        overflow: hidden;
-        border-radius: 5px;
-        background: rgba(255, 255, 255, 0.2) !important; /* Transparan */
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .ekskul-card:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    }
-
-    .custom-tampilan {
-        display: inline-block;
-        padding: 10px 20px;
-        color: white;
-        text-decoration: none;
-        /* border-radius: 8px; */
-        border: 2px solid white;
-        transition: all 0.3s ease;
-    }
-
-    .custom-tampilan:hover {
-        color: white;
-        background: linear-gradient(135deg, #2F5755  , #5A9690);
-        border: 2px solid #E6D8C3;
-    }
-
-    .custom-tampilan-eks {
-        display: inline-block;
-        padding: 10px 20px;
-        color: grey;
-        text-decoration: none;
-        /* border-radius: 8px; */
-        border: 2px solid grey;
-        transition: all 0.3s ease;
-    }
-
-    .custom-tampilan-eks:hover {
-        color: white;
-        background: linear-gradient(135deg, #2F5755  , #5A9690);
-        border: 2px solid #E6D8C3;
-    }
-
-    /* Overlay tanggal */
-    .tanggal-overlay {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background-color: rgba(0,0,0,0.7);
-        color: white;
-        padding: 0.4rem 0.6rem;
-        border-radius: 8px;
-        min-width: 50px;
-    }
-
-    .tanggal-overlay h5 {
-        font-size: 1rem;
-        line-height: 1rem;
-        margin: 0;
-    }
-
-    .tanggal-overlay small {
-        font-size: 0.7rem;
-        display: block;
-    }
-
-
-    .gradient {
-        background: linear-gradient(135deg, #33A1E0  , #2c2f54);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .border-link {
-        font-size: 0.9rem;
-        text-decoration: none;
-        display: inline-block;
-        padding: 5px 10px;
-        border-radius: 5px;
-        border: 2px solid;
-        border-image-slice: 1;
-        border-width: 2px;
-        border-image-source: linear-gradient(135deg, #1e2140, #2c2f54);
-    }
-
-    .border-link:hover {
-        border-image-source: linear-gradient(135deg, #2c2f54, #1e2140);
-    }
-
-    .border-link-ekskul {
-        font-size: 0.9rem;
-        text-decoration: none;
-        display: inline-block;
-        padding: 4px 8px; /* padding lebih kecil agar lebar sesuai kata */
-        border: 1px solid #33A1E0;
-        border-radius: 5px;
-        color: #33A1E0;
-        transition: all 0.3s ease;
-        width: fit-content;
-        }
-
-    .border-link-ekskul:hover {
-        background: linear-gradient(135deg, #2c2f54, #33A1E0);
-        color: white;
-        border-color: #ffffff;
-        /* box-shadow: 0 4px 12px rgba(0,0,0,0.25); */
-    }
-
-    .lihat-selengkapnya {
-        font-size: 0.95rem;
-        font-weight: 500;
-        padding: 8px 18px;
-        border-radius: 8px;
-        text-decoration: none;
-        display: inline-block;
-        color: white;
-        border: 1px solid white;
-        transition: all 0.3s ease;
-    }
-
-    .lihat-selengkapnya:hover {
-        background: linear-gradient(135deg, #2c2f54, #33A1E0); /* hover background gradient */
-        color: white; /* teks tetap kontras */
-        border-color: #ffffff; /* bisa pakai gradient juga kalau mau */
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* efek hover */
-    }
-
-    .border-btn {
-        font-size: 0.95rem;
-        font-weight: 600;
-        padding: 8px 18px;
-        border-radius: 8px;
-        text-decoration: none;
-        display: inline-block;
-        color: white;
-        border: 2px solid white; /* border putih */
-        transition: all 0.3s ease;
-    }
-
-    .border-btn:hover {
-        background: linear-gradient(135deg, #2c2f54, #33A1E0); /* background gradient saat hover */
-        color: white;
-        border-color: #ffffff; /* border tetap putih */
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* efek shadow */
-    }
-
-    /* Responsive */
-    @media (max-width: 991px)
-    {
-        .hamburger {
-            display: flex;
-        }
-        .navbar-menu {
-            position: fixed;
-            top: 60px; /* Adjust based on navbar height */
-            right: -100%;
-            width: 250px;
-            height: calc(100vh - 60px);
-            background: linear-gradient(135deg, #33A1E0 0%, #2c2f54 100%);
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
-            padding: 20px;
-            transition: right 0.3s ease;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.3);
-            z-index: 1029;
-            .nav-toggle-checkbox:checked ~ .navbar-menu {
-                right: 0;
-            }
-            .navbar-nav {
-                flex-direction: column;
-                width: 100%;
-            }
-            .navbar-nav .nav-item {
-                width: 100%;
-                margin: 10px 0;
-            }
-            .navbar-nav .nav-link {
-                display: block;
-                padding: 10px 0;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
-            .navbar-menu .btn {
-                margin-top: 20px;
-                width: 100%;
-            }
-            /* Hamburger animation */
-            .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(1) {
-                transform: rotate(-45deg) translate(-5px, 6px);
-            }
-            .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(2) {
-                opacity: 0;
-            }
-            .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(3) {
-                transform: rotate(45deg) translate(-5px, -6px);
-            }
-        }
-    }
-
-  </style>
-  {{-- <style>
-    #ekskul .card {
-        background: rgba(255, 255, 255, 0.15) !important;
-        border-radius: 10px !important;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
-        overflow: hidden !important;
-        transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-    }
-
-    #ekskul .card:hover {
-        transform: translateY(-6px) scale(1.02) !important;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
-        background: rgba(255, 255, 255, 0.25) !important;
-    }
-
-    #ekskul .card .p-3 {
-        background: transparent !important;
-    }
-</style> --}}
 </head>
 <body>
     {{-- Navbar --}}
@@ -410,3 +35,366 @@
     </script>
 </body>
 </html>
+<style>
+    html {
+  scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+body {
+    overflow: hidden;
+}
+.hero {
+    position: relative;
+    background: url('asset/sekolah.jpg') center/cover no-repeat fixed;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    min-height: 100vh;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(30, 33, 64, 0.35), rgba(44, 47, 84, 0.35));
+    z-index: 1;
+}
+
+.z-2 {
+    z-index: 2;
+}
+.card {
+    transition: transform 0.2s;
+    /* background: transparent !important; */
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.card .card-detail a{
+    text-decoration: none;
+}
+
+footer {
+    background: linear-gradient(135deg, #1C6EA4, #2c2f54);
+    color: white;
+    padding: 40px 0 20px;
+}
+.footer-bottom {
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    border-top: 1px solid #2c2f54;
+}
+
+/* Navbar Styles */
+.navbar-custom {
+    background: linear-gradient(135deg, #33A1E0 0%, #2c2f54 100%);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    z-index: 1030;
+}
+.navbar-custom .navbar-brand {
+    color: white !important;
+    font-weight: bold;
+}
+.navbar-custom .navbar-brand:hover {
+    color: #e0e0e0 !important;
+}
+.navbar-custom .nav-link {
+    color: white !important;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+.navbar-custom .nav-link:hover {
+    color: #ccc !important;
+}
+.navbar-custom .btn-outline-light {
+    border-color: white;
+    color: white;
+}
+.navbar-custom .btn-outline-light:hover {
+    background-color: white;
+    color: #1e2140;
+}
+
+.nav-toggle-checkbox {
+    display: none;
+}
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+}
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #2c2f54;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.navbar-nav .nav-item {
+    margin: 0;
+}
+
+
+/* Background gradient reusable */
+.bg-gradient-custom {
+    background: linear-gradient(135deg, #33A1E0, #2c2f54);
+}
+
+/* Ukuran gambar/video */
+.objek-galeri {
+    object-fit: cover;
+    height: 250px;
+    transition: transform 0.4s ease;
+}
+
+/* Hover efek */
+.galeri-card:hover .objek-galeri {
+    transform: scale(1.1);
+}
+
+
+/* Background reusable (galeri + berita + lainnya) */
+.bg-gradient-custom {
+    background: linear-gradient(135deg, #33A1E0, #2c2f54);
+}
+
+/* Kartu berita */
+.berita-card {
+    overflow: hidden;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Gambar berita */
+.berita-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+/* Pembungkus isi agar responsif */
+.news-content {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    line-height: 1.6;
+}
+
+
+.ekskul-card {
+    overflow: hidden;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2) !important; /* Transparan */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ekskul-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.custom-tampilan {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    /* border-radius: 8px; */
+    border: 2px solid white;
+    transition: all 0.3s ease;
+}
+
+.custom-tampilan:hover {
+    color: white;
+    background: linear-gradient(135deg, #2F5755  , #5A9690);
+    border: 2px solid #E6D8C3;
+}
+
+.custom-tampilan-eks {
+    display: inline-block;
+    padding: 10px 20px;
+    color: grey;
+    text-decoration: none;
+    /* border-radius: 8px; */
+    border: 2px solid grey;
+    transition: all 0.3s ease;
+}
+
+.custom-tampilan-eks:hover {
+    color: white;
+    background: linear-gradient(135deg, #2F5755  , #5A9690);
+    border: 2px solid #E6D8C3;
+}
+
+/* Overlay tanggal */
+.tanggal-overlay {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+    min-width: 50px;
+}
+
+.tanggal-overlay h5 {
+    font-size: 1rem;
+    line-height: 1rem;
+    margin: 0;
+}
+
+.tanggal-overlay small {
+    font-size: 0.7rem;
+    display: block;
+}
+
+
+.gradient {
+    background: linear-gradient(135deg, #33A1E0  , #2c2f54);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.border-link {
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 2px solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    border-image-source: linear-gradient(135deg, #1e2140, #2c2f54);
+}
+
+.border-link:hover {
+    border-image-source: linear-gradient(135deg, #2c2f54, #1e2140);
+}
+
+.border-link-ekskul {
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-block;
+    padding: 4px 8px; /* padding lebih kecil agar lebar sesuai kata */
+    border: 1px solid #33A1E0;
+    border-radius: 5px;
+    color: #33A1E0;
+    transition: all 0.3s ease;
+    width: fit-content;
+    }
+
+.border-link-ekskul:hover {
+    background: linear-gradient(135deg, #2c2f54, #33A1E0);
+    color: white;
+    border-color: #ffffff;
+    /* box-shadow: 0 4px 12px rgba(0,0,0,0.25); */
+}
+
+.lihat-selengkapnya {
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    border: 1px solid white;
+    transition: all 0.3s ease;
+}
+
+.lihat-selengkapnya:hover {
+    background: linear-gradient(135deg, #2c2f54, #33A1E0); /* hover background gradient */
+    color: white; /* teks tetap kontras */
+    border-color: #ffffff; /* bisa pakai gradient juga kalau mau */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* efek hover */
+}
+
+.border-btn {
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    border: 2px solid white; /* border putih */
+    transition: all 0.3s ease;
+}
+
+.border-btn:hover {
+    background: linear-gradient(135deg, #2c2f54, #33A1E0); /* background gradient saat hover */
+    color: white;
+    border-color: #ffffff; /* border tetap putih */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* efek shadow */
+}
+
+/* Responsive */
+@media (max-width: 991px)
+{
+    .hamburger {
+        display: flex;
+    }
+    .navbar-menu {
+        position: fixed;
+        top: 60px; /* Adjust based on navbar height */
+        right: -100%;
+        width: 250px;
+        height: calc(100vh - 60px);
+        background: linear-gradient(135deg, #33A1E0 0%, #2c2f54 100%);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 20px;
+        transition: right 0.3s ease;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+        z-index: 1029;
+        .nav-toggle-checkbox:checked ~ .navbar-menu {
+            right: 0;
+        }
+        .navbar-nav {
+            flex-direction: column;
+            width: 100%;
+        }
+        .navbar-nav .nav-item {
+            width: 100%;
+            margin: 10px 0;
+        }
+        .navbar-nav .nav-link {
+            display: block;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .navbar-menu .btn {
+            margin-top: 20px;
+            width: 100%;
+        }
+        /* Hamburger animation */
+        .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+    }
+}
+
+</style>
