@@ -1,5 +1,5 @@
 @extends('operator.layouts.app')
-@section('title', 'Dashboard')
+@section('title', 'Dashboard - SMAN 1 CIAWI')
 @section('content')
 <div class="container-fluid py-3" style="min-height:100vh; display:flex; flex-direction:column; justify-content:space-between;">
 

@@ -36,7 +36,7 @@
 
     <!-- Tombol Kembali -->
     <div class="mt-3" data-aos="fade-up" data-aos-duration="800">
-        <a href="{{ route('public.berita') }}" class="btn btn-outline-primary">
+        <a href="{{ route('public.berita') }}" class="border-link-ekskul">
             <i class="fa-solid fa-arrow-left"></i> Kembali ke Berita
         </a>
     </div>

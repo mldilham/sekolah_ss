@@ -18,14 +18,14 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::create([
-            'name' => 'Admin KitaSchool',
+            'name' => 'Admin SMAN 1 CIAWI',
             'username' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('123456'),
             'role' => 'admin',
         ]);
         User::create([
-            'name' => 'Operator KitaSchool',
+            'name' => 'Operator SMAN 1 CIAWI',
             'username' => 'Operator',
             'email' => 'operator@gmail.com',
             'password' => Hash::make('123456'),

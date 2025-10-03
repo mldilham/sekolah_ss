@@ -33,6 +33,22 @@
     <div class="row">
         <div class="col-lg-8 mx-auto">
             <div class="card card-custom">
+                @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>Terjadi kesalahan:</strong>
+                        <ul class="mb-0">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <!-- Header -->
                 <div class="card-header card-header-custom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 fw-bold">
@@ -77,12 +93,12 @@
                         <div class="mb-3">
                             <label class="form-label">File Sebelumnya</label><br>
                             @if ($galeri->kategori == 'foto')
-                                <img src="{{ asset('uploads/file/'.$galeri->file) }}"
+                                <img src="{{ asset('storage/'.$galeri->file) }}"
                                      alt="{{ $galeri->judul }}"
                                      class="img-thumbnail mb-2" width="150">
                             @elseif ($galeri->kategori == 'video')
                                 <video width="200" controls>
-                                    <source src="{{ asset('uploads/file/'.$galeri->file) }}" type="video/mp4">
+                                    <source src="{{ asset('storage/'.$galeri->file) }}" type="video/mp4">
                                     Browser Anda tidak mendukung video.
                                 </video>
                             @else

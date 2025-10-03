@@ -38,20 +38,25 @@
     <div class="row">
         <div class="col-lg-8 mx-auto">
             <div class="card card-custom">
-                <!-- Header -->
+                @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 @if($errors->any())
-                        <div class="alert alert-danger">
-                            <strong>Terjadi kesalahan:</strong>
-                            <ul class="mb-0">
-                                @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                    <div class="alert alert-danger">
+                        <strong>Terjadi kesalahan:</strong>
+                        <ul class="mb-0">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card-header card-header-custom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 fw-bold">
-                        <i class="fa-solid fa-image me-2"></i> Tambah Data Berita
+                        <i class="fa-solid fa-image me-2"></i> Tambah Data Ekskul
                     </h5>
                     <a href="{{ route('admin.ekskul') }}" class="btn btn-light btn-sm fw-semibold shadow-sm">
                         <i class="fa-solid fa-arrow-left"></i> Kembali
@@ -72,12 +77,13 @@
 
                         <div class="mb-3">
                             <label for="pembina" class="form-label">Pembina</label>
-                            <input type="text" name="pembina" id="pembina" rows="3"
-                                      class="form-control" required>{{ old('pembina') }}</input>
+                            <input type="text" name="pembina" id="pembina"
+                                   value="{{ old('pembina') }}"
+                                   class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="jadwal_latihan" class="form-label">Jadwal_latihan</label>
+                            <label for="jadwal_latihan" class="form-label">Jadwal Latihan</label>
                             <input type="text" name="jadwal_latihan" id="jadwal_latihan"
                                    value="{{ old('jadwal_latihan') }}"
                                    class="form-control" required>
@@ -85,10 +91,8 @@
 
                         <div class="mb-3">
                             <label for="deskripsi" class="form-label">Deskripsi</label>
-                            <textarea  name="deskripsi" id="deskripsi"
-                                   value="{{ old('deskripsi') }}"
-                                   class="form-control" required>
-                            </textarea>
+                            <textarea name="deskripsi" id="deskripsi" rows="3"
+                                      class="form-control" required>{{ old('deskripsi') }}</textarea>
                         </div>
 
                         <div class="mb-3">

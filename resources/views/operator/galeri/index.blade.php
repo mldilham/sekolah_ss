@@ -1,4 +1,5 @@
 @extends('operator.layouts.app')
+@section('title', 'GALERI - ' . ($profile->nama_sekolah ?? 'SMAN 1 CIAWI'))
 @section('content')
 
 <style>
@@ -201,7 +202,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="fw-semibold">{{ $item->judul }}</td>
-                                <td class="d-none d-md-table-cell">{{ Str::limit(strip_tags($item->keterangan), 80) }}</td>
+                                <td class="d-none d-md-table-cell">{{ Str::limit(strip_tags($item->keterangan), 50) }}</td>
                                 <td>
                                     <span class="badge {{ $item->kategori == 'foto' ? 'bg-success text-white' : 'bg-info text-white' }}">
                                         {{ ucfirst($item->kategori) }}
@@ -209,13 +210,13 @@
                                 </td>
                                 <td class="d-none d-md-table-cell">
                                     @if ($item->kategori == 'foto')
-                                        <img src="{{ asset('uploads/file/'. $item->file) }}"
+                                        <img src="{{ asset('storage/'. $item->file) }}"
                                              alt="foto {{ $item->judul }}"
                                              width="80" height="60"
                                              class="img-thumbnail shadow-sm">
                                     @else
                                         <video width="120" height="80" class="rounded shadow-sm" controls>
-                                            <source src="{{ asset('uploads/file/'. $item->file) }}" type="video/mp4">
+                                            <source src="{{ asset('storage/'. $item->file) }}" type="video/mp4">
                                         </video>
                                     @endif
                                 </td>

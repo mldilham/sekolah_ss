@@ -25,7 +25,7 @@
 
     {{-- Tentang Kami --}}
     @if($profile)
-    <section id="tentang-kami" class="py-5">
+    <section id="seputar sekolah" class="py-5">
         <div class="container">
             <h1 class="fw-bold mb-5 text-center gradient" style="font-size: 2rem;" data-aos="fade-down" data-aos-duration="1000">
                 <span class="text-primary">Seputar Sekolah</span>

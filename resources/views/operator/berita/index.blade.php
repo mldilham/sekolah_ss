@@ -1,4 +1,5 @@
 @extends('operator.layouts.app')
+@section('title', 'Berita - ' . ($profile->nama_sekolah ?? 'Sekolah'))
 @section('content')
 
 <style>
@@ -169,6 +170,13 @@
             </a>
         </div>
 
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        
         <div class="content-section">
             <div class="search-section">
                 <form method="GET" action="{{ route('operator.berita') }}" class="d-flex">
@@ -201,7 +209,7 @@
                                 <td class="d-none d-md-table-cell">{{ $item->tanggal }}</td>
                                 <td class="d-none d-md-table-cell">
                                     @if ($item->gambar)
-                                        <img src="{{ asset('uploads/berita/'. $item->gambar) }}"
+                                        <img src="{{ asset('storage/'. $item->gambar) }}"
                                              alt="foto {{ $item->judul }}" width="80" height="80"
                                              class="img-thumbnail shadow-sm">
                                     @else

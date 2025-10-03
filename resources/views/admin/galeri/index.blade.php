@@ -1,4 +1,5 @@
 @extends('admin.layouts.app')
+@section('title', 'GALERI - ' . ($profile->nama_sekolah ?? 'SMAN 1 CIAWI'))
 @section('content')
 
 <style>
@@ -201,7 +202,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="fw-semibold">{{ $item->judul }}</td>
-                                <td class="d-none d-md-table-cell">{{ Str::limit(strip_tags($item->keterangan), 80) }}</td>
+                                <td class="d-none d-md-table-cell">{{ Str::limit(strip_tags($item->keterangan), 50) }}</td>
                                 <td>
                                     <span class="badge {{ $item->kategori == 'foto' ? 'bg-success text-white' : 'bg-info text-white' }}">
                                         {{ ucfirst($item->kategori) }}

@@ -34,11 +34,11 @@
 </label>
 
 <ul class="navbar-nav sidebar sidebar-dark accordion">
-    <a class="sidebar-brand d-flex align-items-center justify-content-center py-3" href="{{ route('operator.dashboard') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center py-3 text-decoration-none" href="{{ route('operator.dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fa-solid fa-school"></i>
+            <img src="{{ asset('asset/logos.png') }}" alt="" width="40px" height="40px">
         </div>
-        <div class="sidebar-brand-text mx-2">KitaSchool</div>
+        <div class="sidebar-brand-text mx-2 ">SMAN 1 CIAWI</div>
     </a>
     <hr class="sidebar-divider my-1 border-light">
 
@@ -54,14 +54,18 @@
 
         <hr class="sidebar-divider mt-2 border-light">
 
-        <li class="nav-item px-3 mb-2">
-            <form action="{{ route('auth.logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-outline-danger w-100 py-1 rounded" onclick="return confirm('Yakin ingin logout?')">
-                    <i class="fa-solid fa-right-from-bracket me-1"></i> Logout
-                </button>
-            </form>
+        <li class="nav-item">
+            <a href="#"
+            class="nav-link d-flex align-items-center px-3 py-2"
+            onclick="event.preventDefault(); if(confirm('Yakin ingin logout?')) { document.getElementById('logout-form').submit(); }">
+                <i class="fa-solid fa-right-from-bracket me-2" style="width:20px;text-align:center;"></i>
+                <span class="sidebar-text">Logout</span>
+            </a>
         </li>
+
+        <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
     @endauth
 </ul>
 

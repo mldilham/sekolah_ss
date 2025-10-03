@@ -1,4 +1,5 @@
 @extends('admin.layouts.app')
+@section('title', 'SISWA - ' . ($profile->nama_sekolah ?? 'SMAN 1 CIAWI'))
 @section('content')
 
 <style>

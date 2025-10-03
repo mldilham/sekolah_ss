@@ -57,7 +57,7 @@ class OperatorController extends Controller
         $filename = null;
         if ($request->hasFile('gambar')) {
             $filename = time() . '_' . $request->file('gambar')->getClientOriginalName();
-            $request->file('gambar')->move(public_path('uploads/berita/'), $filename);
+            $request->file('gambar')->move(public_path('storage/'), $filename);
         }
 
         Berita::create([
@@ -75,6 +75,9 @@ class OperatorController extends Controller
     {
         $id = Crypt::decrypt($id);
         $berita = Berita::where('id_user', Auth::id())->findOrFail($id);
+        if(Auth::user()->role !== 'operator' && $berita->id_user !== Auth::id()){
+            return redirect()->route('operator.berita')->with('error','Anda tidak punya akses untuk mengedit berita ini.');
+        }
         return view('operator.berita.edit', compact('berita'));
     }
 
@@ -92,11 +95,11 @@ class OperatorController extends Controller
         $oldFile = $berita->gambar;
 
         if ($request->hasFile('gambar')) {
-            if ($oldFile && file_exists(public_path('uploads/berita/' . $oldFile))) {
-                unlink(public_path('uploads/berita/' . $oldFile));
+            if ($oldFile && file_exists(public_path('storage/' . $oldFile))) {
+                unlink(public_path('storage/' . $oldFile));
             }
             $newFileName = time() . '_' . $request->file('gambar')->getClientOriginalName();
-            $request->file('gambar')->move(public_path('uploads/berita/'), $newFileName);
+            $request->file('gambar')->move(public_path('storage/'), $newFileName);
             $berita->gambar = $newFileName;
         }
 
@@ -146,7 +149,7 @@ class OperatorController extends Controller
         $filename = null;
         if ($request->hasFile('file')) {
             $filename = time() . '_' . $request->file('file')->getClientOriginalName();
-            $request->file->move(public_path('uploads/file/'), $filename);
+            $request->file->move(public_path('storage/'), $filename);
         }
 
         Galeri::create([
@@ -182,11 +185,11 @@ class OperatorController extends Controller
         $oldFile = $galeri->file;
 
         if ($request->hasFile('file')) {
-            if ($oldFile && file_exists(public_path('uploads/file/' . $oldFile))) {
-                unlink(public_path('uploads/file/' . $oldFile));
+            if ($oldFile && file_exists(public_path('storage/' . $oldFile))) {
+                unlink(public_path('storage/' . $oldFile));
             }
             $newFileName = time() . '_' . $request->file('file')->getClientOriginalName();
-            $request->file->move(public_path('uploads/file/'), $newFileName);
+            $request->file->move(public_path('storage/'), $newFileName);
             $galeri->file = $newFileName;
         }
 
@@ -237,7 +240,7 @@ class OperatorController extends Controller
         $filename = null;
         if ($request->hasFile('gambar')) {
             $filename = time() . '_' . $request->file('gambar')->getClientOriginalName();
-            $request->file('gambar')->move(public_path('uploads/ekskul/'), $filename);
+            $request->file('gambar')->move(public_path('storage/'), $filename);
         }
 
         Ekstrakulikuler::create([
@@ -273,11 +276,11 @@ class OperatorController extends Controller
         $oldFile = $ekskul->gambar;
 
         if ($request->hasFile('gambar')) {
-            if ($oldFile && file_exists(public_path('uploads/ekskul/' . $oldFile))) {
-                unlink(public_path('uploads/ekskul/' . $oldFile));
+            if ($oldFile && file_exists(public_path('storage' . $oldFile))) {
+                unlink(public_path('storage' . $oldFile));
             }
             $newFileName = time() . '_' . $request->file('gambar')->getClientOriginalName();
-            $request->file->move(public_path('uploads/ekskul/'), $newFileName);
+            $request->file->move(public_path('storage'), $newFileName);
             $ekskul->gambar = $newFileName;
         }
 
@@ -400,13 +403,13 @@ class OperatorController extends Controller
 
         if ($request->hasFile('logo')) {
             $logo = time().'_logo_'.$request->file('logo')->getClientOriginalName();
-            $request->file('logo')->move(public_path('uploads/profile/'), $logo);
+            $request->file('logo')->move(public_path('storage'), $logo);
             $profile->logo = $logo;
         }
 
         if ($request->hasFile('foto')) {
             $foto = time().'_foto_'.$request->file('foto')->getClientOriginalName();
-            $request->file('foto')->move(public_path('uploads/profile/'), $foto);
+            $request->file('foto')->move(public_path('storage'), $foto);
             $profile->foto = $foto;
         }
 

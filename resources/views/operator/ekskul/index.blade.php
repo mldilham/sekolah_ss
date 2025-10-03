@@ -1,4 +1,5 @@
 @extends('operator.layouts.app')
+@section('title', 'Ekskul - ' . ($profile->nama_sekolah ?? 'SMAN 1 CIAWI'))
 @section('content')
 
 <style>
@@ -202,7 +203,7 @@
                                 <td class="d-none d-md-table-cell">{{ Str::limit(strip_tags($item->deskripsi), 80) }}</td>
                                 <td class="d-none d-md-table-cell">
                                     @if ($item->gambar)
-                                        <img src="{{ asset('uploads/ekskul/'. $item->gambar) }}"
+                                        <img src="{{ asset('storage/'. $item->gambar) }}"
                                              alt="foto {{ $item->nama_ekskul }}" width="80" height="80"
                                              class="img-thumbnail shadow-sm">
                                     @else
