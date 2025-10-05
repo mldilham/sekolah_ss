@@ -111,7 +111,7 @@
                                 {{ Str::limit(strip_tags($berita->isi), 120) }}
                             </p>
                             <div class=" mt-4" data-aos="fade-up" data-aos-duration="1000">
-                                <a href="{{ route('public.berita') }}" class="lihat-selengkapnya">
+                                <a href="{{ route('public.berita.detail', Crypt::encrypt($berita->id_berita)) }}" class="lihat-selengkapnya">
                                     Lihat Selengkapnya
                                 </a>
                             </div>
@@ -125,7 +125,7 @@
 
             <div class="text-center mt-5" data-aos="fade-up" data-aos-duration="1000">
                 <a href="{{ route('public.berita') }}" class="custom-tampilan">
-                    Tampilkan semua berita
+                    <i class="fa-solid fa-eye"></i> Tampilkan semua berita
                 </a>
             </div>
         </div>
@@ -290,7 +290,7 @@
                     </div>
                     <div class="text-center mt-4" data-aos="fade-up" data-aos-duration="1000">
                         <a href="{{ route('public.galeri.foto') }}" class="custom-tampilan">
-                            Tampilkan semua Foto
+                            <i class="fa-solid fa-eye"></i> Tampilkan semua Foto
                         </a>
                     </div>
                 </div>
@@ -338,7 +338,7 @@
                     </div>
                     <div class="text-center mt-4" data-aos="fade-up" data-aos-duration="1000">
                         <a href="{{ route('public.galeri.video') }}" class="custom-tampilan">
-                            Tampilkan semua video
+                            <i class="fa-solid fa-eye"></i> Tampilkan semua video
                         </a>
                     </div>
                 </div>
@@ -385,7 +385,7 @@
             </div>
             <div class="text-center mt-4" data-aos="fade-up" data-aos-duration="1000">
                 <a href="{{ route('public.ekskul') }}" class="custom-tampilan-eks">
-                    Tampilkan semua ekskul
+                    <i class="fa-solid fa-eye"></i> Tampilkan semua ekskul
                 </a>
             </div>
         </div>
