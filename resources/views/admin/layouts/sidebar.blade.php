@@ -36,9 +36,9 @@
 <ul class="navbar-nav sidebar sidebar-dark accordion">
     <a class="sidebar-brand d-flex align-items-center justify-content-center py-3 text-decoration-none" href="{{ route('admin.dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">
-            <img src="{{ asset('asset/logos.png') }}" alt="" width="40px" height="40px">
+            <img src="{{ asset('asset/LOG.png') }}" alt="" width="40px" height="40px">
         </div>
-        <div class="sidebar-brand-text mx-2 ">SMAN 1 CIAWI</div>
+        <div class="sidebar-brand-text mx-2 ">BINA ALEXA</div>
     </a>
 
     <hr class="sidebar-divider my-1 border-light">

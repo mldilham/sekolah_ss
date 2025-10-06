@@ -46,7 +46,7 @@ body {
 }
 .hero {
     position: relative;
-    background: url('asset/sekolah.jpg') center/cover no-repeat fixed;
+    background: url('asset/BG.jpg') center/cover no-repeat fixed;
     text-shadow: 0 2px 6px rgba(0,0,0,0.6);
     min-height: 100vh;
 }

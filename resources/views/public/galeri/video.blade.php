@@ -19,13 +19,13 @@
 
         <!-- VIDEO SAJA -->
         <div class="row mb-4">
-            <h4 class="mb-4 fw-bold gradient"
+            {{-- <h4 class="mb-4 fw-bold gradient"
                 data-aos="fade-right"
                 data-aos-duration="800">
                 Video Kegiatan
-            </h4>
+            </h4> --}}
             <div class="col-12">
-                <div class="row g-3">
+                <div class="row g-3 justify-content-center">
                     @php
                         $videos = $galeris->filter(function($galeri){
                             $ext = strtolower(pathinfo($galeri->file, PATHINFO_EXTENSION));

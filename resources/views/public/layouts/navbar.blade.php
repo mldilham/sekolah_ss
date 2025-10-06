@@ -19,8 +19,8 @@ main {
 }
 
 .navbar-brand img {
-    width: 42px;
-    height: 42px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
     border-radius: 50%;
 }
@@ -31,8 +31,8 @@ main {
   <div class="container">
 
     <!-- Brand -->
-    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-      <img src="{{ asset('asset/logo_sekolah.png') }}" alt="Logo">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+      <img src="{{ asset('asset/LOG.png') }}" alt="Logo">
       <span class="fw-bold fs-5">{{ $profile->nama_sekolah ?? 'Nama Sekolah' }}</span>
     </a>
 
@@ -58,8 +58,8 @@ main {
             Layanan
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ route('public.layanan.guru') }}">Tenaga Pendidik</a></li>
-            <li><a class="dropdown-item" href="{{ route('public.layanan.siswa') }}">Tenaga Peserta</a></li>
+            <li><a class="dropdown-item" href="{{ route('public.layanan.guru') }}">Guru</a></li>
+            <li><a class="dropdown-item" href="{{ route('public.layanan.siswa') }}">Siswa</a></li>
           </ul>
         </li>
 

@@ -18,13 +18,13 @@
 
         <!-- FOTO SAJA -->
         <div class="row mb-4">
-            <h4 class="mb-4 fw-bold gradient"
+            {{-- <h4 class="mb-4 fw-bold gradient"
                 data-aos="fade-right"
                 data-aos-duration="800">
                 Foto Kegiatan
-            </h4>
+            </h4> --}}
             <div class="col-12">
-                <div class="row g-3">
+                <div class="row g-3 justify-content-center">
                     @forelse($galeris as $key => $media)
                         @php
                             $extension = pathinfo($media->file, PATHINFO_EXTENSION);

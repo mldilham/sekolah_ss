@@ -143,7 +143,7 @@
                 <div class="col-md-6" data-aos="zoom-in-left" data-aos-duration="1000">
                     <i class="fas fa-chalkboard-teacher fa-3x mb-3 gradient"></i>
                     <h2 class="fw-bold gradient">{{ $gurus->count() }}</h2>
-                    <p class="gradient">Tenaga Pendidik</p>
+                    <p class="gradient">Guru</p>
                 </div>
             </div>
 
@@ -250,13 +250,13 @@
             </h2>
             <!-- FOTO SAJA -->
             <div class="row mb-4">
-                <h4 class="mb-4 fw-bold text-white"
+                <h4 class="mb-4 fw-bold text-white text-center"
                     data-aos="fade-right"
                     data-aos-duration="800">
-                    Foto Kegiatan
+                    Foto 
                 </h4>
                 <div class="col-12">
-                    <div class="row g-3">
+                    <div class="row g-3 justify-content-center">
                         @forelse($galeris as $key => $media)
                             @php
                                 $extension = pathinfo($media->file, PATHINFO_EXTENSION);
@@ -298,13 +298,13 @@
 
             <!-- VIDEO SAJA -->
             <div class="row mb-4">
-                <h4 class="mb-4 fw-bold text-white"
+                <h4 class="mb-4 fw-bold text-white text-center"
                     data-aos="fade-right"
                     data-aos-duration="800">
-                    Video Kegiatan
+                    Video 
                 </h4>
                 <div class="col-12">
-                    <div class="row g-3">
+                    <div class="row g-3 justify-content-center">
                         @php
                             $videos = $galeris->filter(function($galeri){
                                 $ext = strtolower(pathinfo($galeri->file, PATHINFO_EXTENSION));
