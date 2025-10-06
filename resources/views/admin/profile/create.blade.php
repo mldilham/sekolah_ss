@@ -38,6 +38,22 @@
     <div class="row">
         <div class="col-lg-8 mx-auto">
             <div class="card card-custom">
+                @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>Terjadi kesalahan:</strong>
+                        <ul class="mb-0">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <!-- Header -->
                 <div class="card-header card-header-custom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 fw-bold">

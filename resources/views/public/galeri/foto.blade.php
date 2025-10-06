@@ -75,4 +75,5 @@
             easing: 'ease-in-out',
         });
     </script>
+
 @endsection

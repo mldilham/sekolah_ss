@@ -138,7 +138,7 @@
     <div class="card card-login p-4">
       <div class="card-header-login">
         <img src="{{ asset('asset/logos.png') }}" alt="" width="80px" height="80px">
-        <h3 class="mt-3">Silahkan Login</h3>
+        <h3 class="mt-3">SMA Negeri 1 Ciawi</h3>
       </div>
       <div class="card-body">
         @if(session('error'))
