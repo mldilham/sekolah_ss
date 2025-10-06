@@ -1,0 +1,32 @@
+{
+  "resources/css/admin-layout.css": {
+    "file": "assets/admin-layout-B6eHPlar.css",
+    "src": "resources/css/admin-layout.css",
+    "isEntry": true,
+    "names": [
+      "admin-layout.css"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-BCuL_5xA.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/css/public-layout.css": {
+    "file": "assets/public-layout-XhAJm5DL.css",
+    "src": "resources/css/public-layout.css",
+    "isEntry": true,
+    "names": [
+      "public-layout.css"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-Bj43h_rG.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
