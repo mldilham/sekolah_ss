@@ -92,7 +92,7 @@
                         <div class="mb-3">
                             <label class="form-label">File Sebelumnya</label><br>
                             @if ($galeri->kategori == 'foto')
-                                <img src="{{ asset('storage/file/'.$galeri->file) }}"
+                                <img src="{{ asset('storage/'.$galeri->file) }}"
                                      alt="{{ $galeri->judul }}"
                                      class="img-thumbnail mb-2" width="150">
                             @elseif ($galeri->kategori == 'video')
