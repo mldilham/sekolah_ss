@@ -158,7 +158,7 @@
         }
     }
 </style>
-
+{{-- berita --}}
 <div class="page-wrapper">
     <div class="page-content">
         <div class="header-section d-flex justify-content-between align-items-center">

@@ -38,7 +38,7 @@
                     @endif
 
                     <div class="position-absolute bottom-0 start-0 text-white p-2"
-                         style="width: 70px; text-align: center;">
+                         style="width: 70px; text-align: center; background: rgba(0,0,0,0.5);">
                         <h4 class="mb-0" style="font-size: 1rem;">
                             {{ date('d', strtotime($berita->tanggal)) }}
                         </h4>

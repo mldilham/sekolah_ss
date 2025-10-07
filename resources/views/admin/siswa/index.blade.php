@@ -174,7 +174,6 @@
                     </button>
                 </form>
             </div>
-
             <div class="table-responsive">
                 <table class="table table-striped table-hover align-middle">
                     <thead class="table-light">

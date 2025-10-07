@@ -117,9 +117,11 @@ class AdminController extends Controller
     {
         $request->validate([
             'nama_guru' => 'required|max:40',
-            'nip' => 'required|max:15',
+            'nip' => 'required|max:15|string|unique:guru,nip',
             'mapel' => 'required|max:40',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ],[
+            'nip.unique' => 'NIP sudah terdaftar, silakan gunakan NIP lain.',
         ]);
 
         $fotoname = null;
@@ -210,15 +212,22 @@ class AdminController extends Controller
     public function storeSiswa(Request $request)
     {
         $request->validate([
-            'nisn' => 'required|max:10',
+            'nisn' => 'required|string|max:10|unique:siswa,nisn',
             'nama_siswa' => 'required|max:40',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'tahun_masuk' => 'required|numeric',
+        ], [
+            'nisn.unique' => 'NISN sudah terdaftar, silakan gunakan NISN lain.',
         ]);
 
-        Siswa::create($request->only('nisn','nama_siswa','jenis_kelamin','tahun_masuk'));
+        Siswa::create([
+            'nisn' => $request->nisn,
+            'nama_siswa' => $request->nama_siswa,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'tahun_masuk' => $request->tahun_masuk,
+        ]);
 
-        return redirect()->route('admin.siswa')->with('success','Berhasil Menambah Data.');
+        return redirect()->route('admin.siswa')->with('success','Berhasil menambah data.');
     }
 
     public function editSiswa(string $id)
@@ -232,7 +241,7 @@ class AdminController extends Controller
     {
         $id = Crypt::decrypt($id);
         $request->validate([
-            'nisn' => 'required|max:10',
+            'nisn' => 'required|string|max:10|unique:siswa,nisn'. $id,
             'nama_siswa' => 'required|max:40',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'tahun_masuk' => 'required|numeric',

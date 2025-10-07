@@ -36,7 +36,7 @@
 </body>
 </html>
 <style>
-    html {
+html {
   scroll-behavior: smooth;
   max-width: 100%;
   overflow-x: hidden;
@@ -55,10 +55,22 @@ body {
     content: '';
     position: absolute;
     inset: 0;
+    width: 100%; height: 100%;
+    background: url('asset/BG.jpg') cente/cover no-repeat fixed;
     background: linear-gradient(135deg, rgba(30, 33, 64, 0.35), rgba(44, 47, 84, 0.35));
-    z-index: 1;
+    z-index: 0;
+    filter: blur(10px) brightness(0,7);
 }
 
+/* .hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('asset/BG.jpg') center/cover no-repeat fixed;
+    filter: blur(10px) brightness(0.7);
+    z-index: 0;
+} */
 .z-2 {
     z-index: 2;
 }

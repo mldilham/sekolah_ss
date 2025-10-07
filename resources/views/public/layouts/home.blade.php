@@ -3,7 +3,7 @@
 @section('title', 'Beranda - ' . ($profile->nama_sekolah))
 
 @section('hero')
-<section class="hero d-flex flex-column justify-content-center align-items-center text-white text-center min-vh-100 position-relative">
+<section class="hero d-flex flex-column justify-content-center align-items-center text-white text-center min-vh-100 position-relative ">
     <div class="container position-relative z-2">
         <div class="row justify-content-center">
             <div class="col-md-7">
@@ -96,12 +96,26 @@
                     data-aos-duration="800"
                     data-aos-delay="{{ $key * 150 }}">
 
-                    <div class="card shadow-sm border-0 h-100 berita-card">
-                        @if($berita->gambar)
-                            <img src="{{ asset('storage/'.$berita->gambar) }}"
-                                alt="{{ $berita->judul }}"
-                                class="w-100 berita-img">
-                        @endif
+                    <div class="card shadow-sm border-0 h-100 berita-card overflow-hidden">
+                        <div class="position-relative">
+                            @if($berita->gambar)
+                                <img src="{{ asset('storage/'.$berita->gambar) }}"
+                                    alt="{{ $berita->judul }}"
+                                    class="w-100 berita-img"
+                                    style="object-fit: cover; height: 220px;">
+                            @endif
+
+                            <!-- Tanggal di dalam foto -->
+                            <div class="position-absolute bottom-0 start-0 text-white p-2"
+                                style="width: 70px; text-align: center; background: rgba(0,0,0,0.5);">
+                                <h4 class="mb-0" style="font-size: 1rem;">
+                                    {{ date('d', strtotime($berita->tanggal)) }}
+                                </h4>
+                                <small style="font-size: 0.75rem;">
+                                    {{ date('M, Y', strtotime($berita->tanggal)) }}
+                                </small>
+                            </div>
+                        </div>
 
                         <div class="p-3 d-flex flex-column">
                             <h5 class="fw-semibold mb-2 text-white">
@@ -110,7 +124,7 @@
                             <p class="text-light flex-grow-1 news-content">
                                 {{ Str::limit(strip_tags($berita->isi), 120) }}
                             </p>
-                            <div class=" mt-4" data-aos="fade-up" data-aos-duration="1000">
+                            <div class="mt-4" data-aos="fade-up" data-aos-duration="1000">
                                 <a href="{{ route('public.berita.detail', Crypt::encrypt($berita->id_berita)) }}" class="lihat-selengkapnya">
                                     Lihat Selengkapnya
                                 </a>
@@ -130,6 +144,7 @@
             </div>
         </div>
     </section>
+
 
     {{-- Statistik --}}
     <section id="statistik" class="py-5 text-dark">

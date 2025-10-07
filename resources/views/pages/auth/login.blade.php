@@ -164,7 +164,7 @@
 
   <!-- Footer -->
   <footer>
-    &copy; {{ date('Y') }} SMAN1C. All Rights Reserved.
+    &copy; {{ date('Y') }} BINA ALEXA. All Rights Reserved.
   </footer>
 
 </body>

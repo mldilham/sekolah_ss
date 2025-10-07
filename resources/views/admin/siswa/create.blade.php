@@ -28,12 +28,7 @@
         transform: scale(1.05);
     }
 </style>
-
-<div class="container-fluid py-3">
-    <div class="row">
-        <div class="col-lg-8 mx-auto">
-            <div class="card card-custom">
-                @if(session('success'))
+@if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -49,6 +44,11 @@
                         </ul>
                     </div>
                 @endif
+<div class="container-fluid py-3">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card card-custom">
+                
                 <div class="card-header card-header-custom d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 fw-bold">
                         <i class="fa-solid fa-user-plus me-2"></i> Tambah Data Siswa

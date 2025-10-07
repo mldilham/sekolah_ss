@@ -123,7 +123,9 @@ class PublicController extends Controller
     // ---------------- SISWA ----------------
     public function siswa()
     {
-        $siswas = Siswa::all();
+        $siswas = Siswa::orderBy('created_at', 'desc')
+                    ->paginate(2)
+                    ->onEachSide(3);
         $profile = Profile::first();
         return view('public.layanan.siswa', compact('profile','siswas'));
     }

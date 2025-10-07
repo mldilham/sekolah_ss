@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'operator',
         ]);
         Profile::create([
-            'nama_sekolah'   => 'SMAN 1 CIAWI ',
+            'nama_sekolah'   => 'BINA ALEXA ',
             'kepala_sekolah' => 'Drs. H. Aang Dohiri, M.Ag',
             'foto'           => 'upinipin.jpg', // bisa diganti dengan file default
             'logo'           => 'sekolah1.jpg', // bisa diganti dengan file default
